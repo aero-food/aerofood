@@ -3,6 +3,7 @@ package com.codeup.aerofood.models;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Restaurant {
 
     @Id
@@ -28,23 +29,33 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "INT(10)")
     private String phone_number;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<Order> orders;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
 
     public Restaurant(){
 
     }
 
-    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number) {
+    public Restaurant(String name,
+                      String thumbnail,
+                      String picture_url,
+                      String gate,
+                      String airport,
+                      String phone_number,
+                      List<Order> orders,
+                      List<MenuItem> menu_items) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.picture_url = picture_url;
         this.gate = gate;
         this.airport = airport;
         this.phone_number = phone_number;
+        this.orders = orders;
+        this.menu_items = menu_items;
     }
 
     public long getId() {

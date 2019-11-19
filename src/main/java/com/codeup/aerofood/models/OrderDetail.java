@@ -4,7 +4,7 @@ package com.codeup.aerofood.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="order_details")
+@Table(name = "order_details")
 public class OrderDetail {
 
     @Id
@@ -24,19 +24,19 @@ public class OrderDetail {
     @Column(nullable = false, columnDefinition = "INT")
     private Integer dish_type;
 
+    @Column (nullable = false, columnDefinition = "INT")
+    private Integer menuItem;
 
-    @OneToOne
-    private MenuItem menuItem;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order")
     private Order order;
 
-    public OrderDetail(){
+    public OrderDetail() {
 
     }
 
-    public OrderDetail(Integer quantity, String description, Float price, Integer dish_type, MenuItem menuItem, Order order) {
+    public OrderDetail(Integer quantity, String description, Float price, Integer dish_type, Integer menuItem, Order order) {
         this.quantity = quantity;
         this.description = description;
         this.price = price;
@@ -85,13 +85,13 @@ public class OrderDetail {
         this.dish_type = dish_type;
     }
 
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
+//    public MenuItem getMenuItem() {
+//        return menuItem;
+//    }
+//
+//    public void setMenuItem(MenuItem menuItem) {
+//        this.menuItem = menuItem;
+//    }
 
     public Order getOrder() {
         return order;
@@ -101,19 +101,5 @@ public class OrderDetail {
         this.order = order;
     }
 
-    //  `menu_item_id` INT NOT NULL,
-//            `order_id` INT NOT NULL,
-//    PRIMARY KEY (`id`, `menu_item_id`, `order_id`),
-//    INDEX `fk_order_details_Menu_items1_idx` (`menu_item_id` ASC) VISIBLE,
-//    INDEX `fk_order_details_orders1_idx` (`order_id` ASC) VISIBLE,
-//    CONSTRAINT `fk_order_details_Menu_items1`
-//    FOREIGN KEY (`menu_item_id`)
-//    REFERENCES `aero_food`.`menu_item` (`id`)
-//    ON DELETE NO ACTION
-//    ON UPDATE NO ACTION,
-//    CONSTRAINT `fk_order_details_orders1`
-//    FOREIGN KEY (`order_id`)
-//    REFERENCES `aero_food`.`order` (`id`)
-//    ON DELETE NO ACTION
-//    ON UPDATE NO ACTION)
+
 }

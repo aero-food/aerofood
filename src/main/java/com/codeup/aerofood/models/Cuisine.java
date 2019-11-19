@@ -10,14 +10,14 @@ public class Cuisine {
     private long id;
 
     @Column(nullable = false)
-    private String type;
+    private String description;
 
 
     public Cuisine() {
     }
 
-    public Cuisine(String type) {
-        this.type = type;
+    public Cuisine(String description) {
+        this.description = description;
     }
 
     public long getId() {
@@ -28,11 +28,11 @@ public class Cuisine {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
