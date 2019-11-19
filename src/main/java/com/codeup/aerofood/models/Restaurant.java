@@ -20,10 +20,10 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String picture_url;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(3)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String gate;
 
-    @Column(nullable = false, unique=true,  columnDefinition = "VARCHAR(3)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String airport;
 
     @Column(nullable = false, columnDefinition = "INT(10)")
@@ -31,7 +31,7 @@ public class Restaurant {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
-    private List<Order> orders;
+    private List<Orders> orders;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
@@ -46,7 +46,7 @@ public class Restaurant {
                       String gate,
                       String airport,
                       String phone_number,
-                      List<Order> orders,
+                      List<Orders> orders,
                       List<MenuItem> menu_items) {
         this.name = name;
         this.thumbnail = thumbnail;
@@ -114,11 +114,11 @@ public class Restaurant {
         this.phone_number = phone_number;
     }
 
-    public List<Order> getOrders() {
+    public List<Orders> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }
 

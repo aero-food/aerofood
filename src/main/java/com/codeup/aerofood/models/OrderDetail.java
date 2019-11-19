@@ -29,20 +29,20 @@ public class OrderDetail {
 
 
     @ManyToOne
-    @JoinColumn(name = "order")
-    private Order order;
+    @JoinColumn(name = "orders")
+    private Orders orders;
 
     public OrderDetail() {
 
     }
 
-    public OrderDetail(Integer quantity, String description, Float price, Integer dish_type, Integer menuItem, Order order) {
+    public OrderDetail(Integer quantity, String description, Float price, Integer dish_type, Integer menuItem, Orders orders) {
         this.quantity = quantity;
         this.description = description;
         this.price = price;
         this.dish_type = dish_type;
         this.menuItem = menuItem;
-        this.order = order;
+        this.orders = orders;
     }
 
     public long getId() {
@@ -93,12 +93,12 @@ public class OrderDetail {
 //        this.menuItem = menuItem;
 //    }
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
 

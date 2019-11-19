@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, columnDefinition = "int(11) UNSIGNED")
@@ -33,22 +33,22 @@ public class Order {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
     private List<OrderDetail> orderDetails;
 
-    public Order(){
+    public Orders(){
 
     }
 
-    public Order(String gate,
-                 String delivery_time,
-                 String ordered_time,
-                 Float total,
-                 int restaurant_id,
-                 String ordered_status,
-                 User user,
-                 Restaurant restaurant,
-                 List<OrderDetail> orderDetails) {
+    public Orders(String gate,
+                  String delivery_time,
+                  String ordered_time,
+                  Float total,
+                  int restaurant_id,
+                  String ordered_status,
+                  User user,
+                  Restaurant restaurant,
+                  List<OrderDetail> orderDetails) {
         this.gate = gate;
         this.delivery_time = delivery_time;
         this.ordered_time = ordered_time;
