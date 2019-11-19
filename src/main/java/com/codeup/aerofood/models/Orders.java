@@ -44,7 +44,6 @@ public class Orders {
                   String delivery_time,
                   String ordered_time,
                   Float total,
-                  int restaurant_id,
                   String ordered_status,
                   User user,
                   Restaurant restaurant,
