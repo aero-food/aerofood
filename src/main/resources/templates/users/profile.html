@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+    <div class="container">
+        <h1>Welcome, </h1>
+        <h2>Recently Posted Ads</h2>
+        <br>
+<!--        <c:forEach var="ad" items="${ads}">-->
+<!--            <div class="col-md-6">-->
+<!--                <p class="card-title"><strong>Title</strong>: ${ad.title}</p>-->
+<!--                <p><strong>Description</strong>: ${ad.description}</p>-->
+<!--                <p><strong>MenuCategory</strong>: ${ad.category}</p>-->
+<!--            </div>-->
+<!--        </c:forEach>-->
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Show posts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<section class="container">
+    <h1 class="page_title">Create a new Category</h1>
+    <form th:action="@{/category/add}" th:method="post" th:object="${category}" class="form-group">
+        <label for="description">Description</label>
+        <br>
+        <textarea id="description" th:field="*{description}"/>
+        <br>
+        <input type="submit"/>
+
+    </form>
+</section>
+
+</body>
+</html>

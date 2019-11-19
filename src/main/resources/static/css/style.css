@@ -1,0 +1,71 @@
+body {
+    font-family: 'Indie Flower', cursive;
+    background-color: #eef2db;
+    /*color: #A0522D;*/
+    /*font-family: 'Source Code Pro', monospace;*/
+}
+
+h1 {
+    color: #1a3f13 ;
+}
+
+
+ h2, h3, h4, h5, h6 {
+    color: #656d29;
+ /*#a8a660;*/
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    list-style: none;
+
+}
+li{
+
+    margin-right: 2em;
+}
+
+
+.btn-delete{
+    width: 5em;
+}
+.card {
+    display: flex;
+    align-content: center;
+    padding: .25em;
+    margin: 1em;
+    /*height: 400px;*/
+    box-shadow: .2em .2em .2em .2em #888888;
+}
+
+.card-title {
+    /*color: #3F3C3C;*/
+    text-shadow: .1em .1em lightgrey;
+}
+
+.card-body{
+    color: #a8a660;
+}
+
+.lightgreen {
+    color:#dadfbc;
+}
+.orange {
+    color:#e88e01;
+}
+
+#buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#postList {
+    display: flex;
+    flex-direction: column;
+    /*flex-wrap: wrap;*/
+    /*max-height: 100vh;*/
+    justify-content: space-around;
+    overflow: auto;
+}

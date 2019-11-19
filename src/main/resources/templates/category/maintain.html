@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show posts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<section class="container">
+
+    <div class="container">
+        <div class="form-group">
+            <h1 class="page_title"> Category</h1>
+
+            <div class="card" th:each="category : ${categories}">
+                <a th:href="@{'category/' + ${category.id} + '/edit'}">
+                    <h1 class="card-title  text-center" th:text="${category.description}"></h1>
+                </a>
+
+                <div id="buttons">
+                    <form th:action="'/category/' + ${category.id} + '/edit'" method="get">
+                        <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                    </form>
+                    <form th:action="'/category/' + ${category.id} + '/delete'" method="post">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>
