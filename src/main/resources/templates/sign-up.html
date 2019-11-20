@@ -8,6 +8,11 @@
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <div class="container">
     <h1>Create an account</h1>
+    <div th:if="${error}">
+        <br>
+        <div th:text="${error}"></div>
+        <br>
+    </div>
 
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
         <table>
@@ -28,8 +33,6 @@
                 <td><input id="password" type="password" th:field="*{password}" /></td>
             </tr>
         </table>
-
-
         <br>
         <input value="Sign me up!" type="submit"/>
     </form>
