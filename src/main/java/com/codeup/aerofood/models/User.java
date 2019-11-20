@@ -1,6 +1,8 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -17,6 +19,11 @@ public class User {
     @Column(nullable = false, unique=true,  columnDefinition = "VARCHAR(50)")
     private String email;
 
+    @Column(nullable = false, unique=true, columnDefinition = "VARCHAR(10)")
+    @Size(min=10, max=10)
+    @Pattern(regexp="(^$|[0-9]{10})")
+    private String phone_number;
+
     @Column(nullable = false, columnDefinition = "VARCHAR(255)")
     private String password;
 
@@ -30,12 +37,20 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        this.phone_number = copy.phone_number;
+        this.orders = copy.orders;
     }
 
-    public User(String username, String email, String password) {
+    public User(String username,
+                String email,
+                String phone_number,
+                String password,
+                List<Orders> orders) {
         this.username = username;
         this.email = email;
+        this.phone_number = phone_number;
         this.password = password;
+        this.orders = orders;
     }
 
     public long getId() {
@@ -68,6 +83,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public List<Orders> getOrders() {
