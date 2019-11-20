@@ -2,9 +2,9 @@ package com.codeup.aerofood.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="menu_item")
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,20 +27,28 @@ public class MenuItem {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToOne(mappedBy = "menuitem")
-    private MenuItem menuItem;
+//    @OneToOne(mappedBy = "menuItem")
+//    private OrderDetail orderDetail;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
+    private List<OrderDetail> orderDetails;
 
     public MenuItem() {
 
     }
 
-    public MenuItem(String title, String description, Float price, Integer dish_type, Restaurant restaurant, MenuItem menuItem) {
+    public MenuItem(String title,
+                    String description,
+                    Float price,
+                    Integer dish_type,
+                    Restaurant restaurant,
+                    List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.dish_type = dish_type;
         this.restaurant = restaurant;
-        this.menuItem = menuItem;
+        this.orderDetails = orderDetails;
     }
 
     public long getId() {
@@ -91,42 +99,12 @@ public class MenuItem {
         this.restaurant = restaurant;
     }
 
-    public MenuItem getMenuItem() {
-        return menuItem;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
-//            `dish_type_id` INT NOT NULL,
-//
-//    INDEX `fk_Menu_items_Restaurants1_idx` (`restaurant_id` ASC) VISIBLE,
-//    INDEX `fk_Menu_items_dish_type1_idx` (`dish_type_id` ASC) VISIBLE,
-//    CONSTRAINT `fk_Menu_items_Restaurants1`
-//    FOREIGN KEY (`restaurant_id`)
-//    REFERENCES `aero_food`.`restaurant` (`id`)
-//    ON DELETE NO ACTION
-//    ON UPDATE NO ACTION,
-//    CONSTRAINT `fk_Menu_items_dish_type1`
-//    FOREIGN KEY (`dish_type_id`)
-//    REFERENCES `aero_food`.`menu_category` (`id`)
 }
 
-//
-//`id` INT NOT NULL AUTO_INCREMENT,
-//        `title` VARCHAR(255) NOT NULL,
-//        `description` TEXT NOT NULL,
-//        `price` DECIMAL(4,2) UNSIGNED NOT NULL,
-//        `restaurant_id` INT NOT NULL,
-//        `dish_type_id` INT NOT NULL,
-//        PRIMARY KEY (`id`),
-//        INDEX `fk_Menu_items_Restaurants1_idx` (`restaurant_id` ASC) VISIBLE,
-//        INDEX `fk_Menu_items_dish_type1_idx` (`dish_type_id` ASC) VISIBLE,
-//        CONSTRAINT `fk_Menu_items_Restaurants1`
-//        FOREIGN KEY (`restaurant_id`)
-//        REFERENCES `aero_food`.`restaurant` (`id`)
-//        ON DELETE NO ACTION
-//        ON UPDATE NO ACTION,
-//        CONSTRAINT `fk_Menu_items_dish_type1`
-//        FOREIGN KEY (`dish_type_id`)
-//        REFERENCES `aero_food`.`menu_category` (`id`)
