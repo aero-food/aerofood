@@ -37,6 +37,13 @@ public class MenuItem {
 
     }
 
+    public MenuItem(String title, Float price, List<OrderDetail> orderDetails1) {
+        this.title = title;
+        this.price = price;
+        this.orderDetails = orderDetails;
+
+    }
+
     public MenuItem(String title,
                     String description,
                     Float price,
