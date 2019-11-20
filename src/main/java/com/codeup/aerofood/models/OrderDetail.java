@@ -24,25 +24,34 @@ public class OrderDetail {
     @Column(nullable = false, columnDefinition = "INT")
     private Integer dish_type;
 
-    @Column (nullable = false, columnDefinition = "INT")
-    private Integer menuItem;
+//    @OneToOne
+//   private MenuItem menuItem;
 
 
     @ManyToOne
     @JoinColumn(name = "orders")
     private Orders orders;
 
+    @ManyToOne
+    @JoinColumn(name = "MenuItem")
+    private MenuItem menuItem;
+
     public OrderDetail() {
 
     }
 
-    public OrderDetail(Integer quantity, String description, Float price, Integer dish_type, Integer menuItem, Orders orders) {
+    public OrderDetail(Integer quantity,
+                       String description,
+                       Float price,
+                       Integer dish_type,
+                       Orders orders,
+                       MenuItem menuItem) {
         this.quantity = quantity;
         this.description = description;
         this.price = price;
         this.dish_type = dish_type;
-        this.menuItem = menuItem;
         this.orders = orders;
+        this.menuItem = menuItem;
     }
 
     public long getId() {
@@ -85,14 +94,6 @@ public class OrderDetail {
         this.dish_type = dish_type;
     }
 
-//    public MenuItem getMenuItem() {
-//        return menuItem;
-//    }
-//
-//    public void setMenuItem(MenuItem menuItem) {
-//        this.menuItem = menuItem;
-//    }
-
     public Orders getOrders() {
         return orders;
     }
@@ -101,5 +102,11 @@ public class OrderDetail {
         this.orders = orders;
     }
 
+    public MenuItem getMenuItem() {
+        return menuItem;
+    }
 
+    public void setMenuItem(MenuItem menuItem) {
+        this.menuItem = menuItem;
+    }
 }

@@ -2,6 +2,7 @@ package com.codeup.aerofood.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class MenuItem {
@@ -26,23 +27,28 @@ public class MenuItem {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-//    @OneToOne
-//    private MenuItem menuItem;
-//
-//    @OneToOne(mappedBy = "menuitem")
+//    @OneToOne(mappedBy = "menuItem")
 //    private OrderDetail orderDetail;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
+    private List<OrderDetail> orderDetails;
 
     public MenuItem() {
 
     }
 
-    public MenuItem(String title, String description, Float price, Integer dish_type, Restaurant restaurant, OrderDetail orderDetail) {
+    public MenuItem(String title,
+                    String description,
+                    Float price,
+                    Integer dish_type,
+                    Restaurant restaurant,
+                    List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.dish_type = dish_type;
         this.restaurant = restaurant;
-        //this.orderDetail = orderDetail;
+        this.orderDetails = orderDetails;
     }
 
     public long getId() {
@@ -93,12 +99,12 @@ public class MenuItem {
         this.restaurant = restaurant;
     }
 
-//    public OrderDetail getOrderDetail() {
-//        return this.orderDetail;
-//    }
-//
-//    public void setOrderDetail(OrderDetail orderDetail) {
-//        this.orderDetail = orderDetail;
-//    }
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 }
 
