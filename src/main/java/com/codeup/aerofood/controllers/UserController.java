@@ -24,22 +24,22 @@ public class UserController {
     @GetMapping("/register")
     public String registerUser(Model viewModel) {
         viewModel.addAttribute("user", new User());
-        return "/register";
+        return "sign-up";
     }
 
     @GetMapping("/login")
     public String loginUser(Model viewModel) {
         viewModel.addAttribute("user", new User());
-        return "/users/login";
+        return "users/login";
     }
 
     @PostMapping("/login")
     public String redirectUser(Model viewModel) {
         viewModel.addAttribute("user", new User());
-        return "/home";
+        return "home";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User newUser, Model viewModel) {
         String regexUS = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
         String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
@@ -63,7 +63,7 @@ public class UserController {
             matcher = pattern.matcher(newUser.getPhone_number());
             if (!matcher.matches()) {
                 viewModel.addAttribute("error", "Please valid phone number");
-                return "/sign-up";
+                return "sign-up";
             }
         }
 
@@ -75,7 +75,7 @@ public class UserController {
 
         if (!matcher.matches()) {
             viewModel.addAttribute("error", "Please provide a correct email format");
-            return "/sign-up";
+            return "sign-up";
         }
 
         // Check for duplicates
@@ -84,15 +84,15 @@ public class UserController {
         for (User user : userList) {
             if (user.getUsername().equalsIgnoreCase(newUser.getUsername())) {
                 viewModel.addAttribute("error", "The user id exists in the system");
-                return "/sign-up";
+                return "sign-up";
             }
             if (user.getEmail().equalsIgnoreCase(newUser.getEmail())) {
                 viewModel.addAttribute("error", "The email exists in the system");
-                return "/sign-up";
+                return "sign-up";
             }
             if (user.getPhone_number().equalsIgnoreCase(newUser.getPhone_number())) {
                 viewModel.addAttribute("error", "The phone number exists in the system");
-                return "/sign-up";
+                return "sign-up";
 
             }
         }
