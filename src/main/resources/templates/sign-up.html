@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <th:block th:replace="fragments/header :: main-header"/>
@@ -11,26 +11,26 @@
     <div th:if="${error}">
         <br>
         <div th:text="${error}"></div>
+
         <br>
     </div>
-
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
         <table>
             <tr>
                 <td><label for="username">Username</label></td>
-                <td><input id="username" th:field="*{username}" /></td>
+                <td><input id="username" th:field="*{username}" th:required="required"/></td>
             </tr>
             <tr>
                 <td><label for="email">Email</label></td>
-                <td><input id="email" th:field="*{email}" /></td>
+                <td><input id="email" th:field="*{email}" th:required="required"/></td>
             </tr>
             <tr>
                 <td><label for="phone_number">Phone Number</label></td>
-                <td><input id="phone_number" th:field="*{phone_number}" /></td>
+                <td><input id="phone_number" th:field="*{phone_number}" th:required="required"/></td>
             </tr>
             <tr>
                 <td><label for="password">Password</label></td>
-                <td><input id="password" type="password" th:field="*{password}" /></td>
+                <td><input id="password" type="password" th:field="*{password}" th:required="required"/></td>
             </tr>
         </table>
         <br>

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class UserController {
@@ -43,14 +44,45 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User newUser, Model viewModel) {
+        String regexUS = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+        String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
 //        String hash = passwordEncoder.encode(newUser.getPassword());
 //        newUser.setPassword(hash);
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
-        if (newUser.getPassword() == null || newUser.getPassword().isEmpty() || newUser.getPassword().isBlank()) {
-            viewModel.addAttribute("error", "Please provide a password");
+
+
+        // Verify the phone number format
+
+        Pattern pattern = Pattern.compile(regexUS);
+
+        Matcher matcher = pattern.matcher(newUser.getPhone_number());
+
+        if (!matcher.matches()) {
+            pattern = Pattern.compile(regexInternational);
+
+            matcher = pattern.matcher(newUser.getPhone_number());
+            if (!matcher.matches()) {
+                viewModel.addAttribute("error", "Please valid phone number");
+                return "/sign-up";
+            }
+        }
+
+        // Verify the email format
+
+        pattern = Pattern.compile(regexEmail);
+
+        matcher = pattern.matcher(newUser.getEmail());
+
+        if (!matcher.matches()) {
+            viewModel.addAttribute("error", "Please provide a correct email format");
             return "/sign-up";
         }
+
+        // Check for duplicates
+
         List<User> userList = userDao.findAll();
         for (User user : userList) {
             if (user.getUsername().equalsIgnoreCase(newUser.getUsername())) {
@@ -67,6 +99,8 @@ public class UserController {
 
             }
         }
+
+
 
         userDao.save(newUser);
         return "redirect:login";

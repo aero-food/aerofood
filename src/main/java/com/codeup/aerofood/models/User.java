@@ -19,9 +19,8 @@ public class User {
     @Column(nullable = false, unique=true,  columnDefinition = "VARCHAR(50)")
     private String email;
 
-    @Column(nullable = false, unique=true, columnDefinition = "VARCHAR(10)")
-    @Size(min=10, max=10)
-    @Pattern(regexp="(^$|[0-9]{10})")
+    @Column(nullable = false, unique=true, columnDefinition = "VARCHAR(25)")
+    @Size(max=25)
     private String phone_number;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(255)")
