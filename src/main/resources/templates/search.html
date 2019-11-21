@@ -16,7 +16,9 @@
         <div th:each="restaurants : ${restaurants}">
             <br>
                 <h3 th:text="${restaurants.name}"></h3>
+            <img th:src="${restaurants.thumbnail}" alt="">
                 <p> Gate <span th:text="${restaurants.gate}"></span></p>
+            <p> Phone: <span th:text="${restaurants.phone_number}"></span></p>
         </div>
     </div>
 </div>
