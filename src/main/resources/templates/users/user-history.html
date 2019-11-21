@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+    <div class="container">
+        <h1>Order list </h1>
+        <br>
+        <c:forEach var="order" items="${orders}">
+            <div class="col-md-6">
+                <p class="card-title"><strong>Order</strong>: ${order.id}</p>
+                <p><strong>Restaurant</strong>: ${order.restaurant.name}</p>
+                <p><strong>Status</strong>: ${order.status}</p>
+            </div>
+
+        </c:forEach>
+    </div>
+
+</body>
+</html>

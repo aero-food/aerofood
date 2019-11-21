@@ -1,6 +1,8 @@
 package com.codeup.aerofood.controllers;
 
+import com.codeup.aerofood.models.Orders;
 import com.codeup.aerofood.models.User;
+import com.codeup.aerofood.repositories.OrderRepository;
 import com.codeup.aerofood.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +18,13 @@ import java.util.regex.Pattern;
 public class UserController {
     private UserRepository userDao;
 
-    public UserController(UserRepository userDao) {
+    private OrderRepository orderDao;
+
+    public UserController(UserRepository userDao,
+                          OrderRepository orderDao
+    ) {
         this.userDao = userDao;
+        this.orderDao = orderDao;
     }
 
 
@@ -37,6 +44,20 @@ public class UserController {
     public String redirectUser(Model viewModel) {
         viewModel.addAttribute("user", new User());
         return "/home";
+    }
+
+    @PostMapping("/my-orders")
+    public String displayMyOrders(Model viewModel) {
+        //User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Orders> orderList = orderDao.findAll(); //userDao.getOne(loggedUser.getId()).getPosts();
+        //userDao.getOne(loggedUser.getId()).getPosts();
+        for (Orders currentOrder : orderList) {
+            currentOrder.getRestaurant();
+            currentOrder.getOrdered_status();
+        }
+
+        viewModel.addAttribute("orders", orderList);
+        return "/users/user-history";
     }
 
     @PostMapping("/sign-up")
