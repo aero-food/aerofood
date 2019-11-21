@@ -2,48 +2,73 @@ package com.codeup.aerofood.controllers;
 
 import com.codeup.aerofood.models.MenuItem;
 import com.codeup.aerofood.models.OrderDetail;
+import com.codeup.aerofood.repositories.MenuItemRepository;
 import com.codeup.aerofood.repositories.OrderDetailRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// need view
- // need controller
+
+// item name
+// item quantity
+// item price
+// subtotal
+// tax = 8.25%
+// total price
+// delivery time
+// delivery gate
 
 @Controller
 public class CheckoutController {
+
     private OrderDetailRepository orderDetailDao;
+    private MenuItemRepository menuItemDao;
 
-    private final List<MenuItem> itemList = new ArrayList<>();
+    public CheckoutController(OrderDetailRepository orderDetailDao, MenuItemRepository menuItemDao) {
+        this.orderDetailDao = orderDetailDao;
+        this.menuItemDao = menuItemDao;
+    }
 
+
+    // creates a list for order details and a list menu items to be placed
+    // in order details
+    private final List<OrderDetail> order_details = new ArrayList<>();
+    private final List<MenuItem> menu_item = new ArrayList<>();
+
+    // item names
     public List<MenuItem> getMenuItemList() {
-        return itemList;
+        return menu_item;
     }
 
+    //item quantity
     public int getNumberOfItems() {
-        return itemList.size();
+        return menu_item.size();
     }
 
-    public double getSubtotal() {
-        double subtotal = double.ZERO;
+    // subtotal
+//    public float getSubtotal() {
+//        float subtotal = itemPrice * getNumberOfItems();
+//        return subtotal;
+//    }
 
-    }
-
-    public CheckoutController(OrderDetailRepository Order)
+    // total
+//    public float getTotal(double total) {
+//        total = getSubtotal() * 1.0825;
+//        return Float.parseFloat(String.valueOf(total));
+//    }
 
     @GetMapping("/checkout")
     public String checkout(Model viewModel) {
-
         viewModel.addAttribute("menuItem", new MenuItem());
-        return  ;
+        return  "/order-confirmation";
     }
 
-    @PostMapping("/order-confirmation")
+    @GetMapping("/order-confirmation")
     public String confirmOrder(Model viewModel) {
-        viewModel
+        viewModel.addAttribute("menuItem", new MenuItem());
+        return "/home";
     }
 }
