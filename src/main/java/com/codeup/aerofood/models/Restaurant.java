@@ -26,7 +26,7 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String airport;
 
-    @Column(nullable = false, columnDefinition = "INT(10)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
 
 
