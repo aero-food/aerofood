@@ -7,14 +7,16 @@
 </head>
 <body>
 <div th:replace="fragments/navbar :: main-navbar"></div>
-<h1>AERO FOOD</h1>
+<h1 class="page_title">AERO FOOD</h1>
 
-<div class="card">
-    <h3 th:text="Sign in"></h3>
-    <button class=".btn-link" >Sign in</button>
-    <h3 th:text="Register"></h3>
-    <button class=".btn-link" >Register</button>
-</div>
+<section class="container">
+    <div class="card">
+        <h3>Already a user?</h3>
+        <button><a href="/login" class="btn btn-primary">Sign in</a></button>
+        <h3>Still getting your food yourself?</h3>
+        <button value="register"><a href="/register" class="btn btn-primary">Register</a></button>
+    </div>
+</section>
 
 </body>
 </html>
