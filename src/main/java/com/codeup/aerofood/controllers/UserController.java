@@ -97,8 +97,6 @@ public class UserController {
             }
         }
 
-
-
         userDao.save(newUser);
         return "redirect:login";
     }
