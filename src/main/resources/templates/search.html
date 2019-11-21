@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<h1>this is the search page</h1>
+
+<div class="container">
+    <div class="row">
+        <div th:each="restaurants : ${restaurant}" class="card text-center mx-auto mb-3 col-4" style="max-width: 18rem;">
+            <a th:href="@{'/posts/' + ${restaurant.id}}">
+                <div class="card-header">Header</div>
+                <h3 th:text="${restaurant.name}" class="card-title"></h3>
+                <p th:text="${restaurant.gate}" class="card-text"></p>
+
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
