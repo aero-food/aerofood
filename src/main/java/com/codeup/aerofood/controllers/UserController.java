@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/register")
     public String registerUser(Model viewModel) {
         viewModel.addAttribute("user", new User());
-        return "/sign-up";
+        return "/register";
     }
 
     @GetMapping("/login")
@@ -39,7 +39,7 @@ public class UserController {
         return "/home";
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     public String saveUser(@ModelAttribute User newUser, Model viewModel) {
         String regexUS = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
         String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
