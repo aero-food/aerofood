@@ -46,17 +46,17 @@ public class UserController {
         return "/home";
     }
 
-    @PostMapping("/my-orders")
+    @GetMapping("/my-orders")
     public String displayMyOrders(Model viewModel) {
         //User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Orders> orderList = orderDao.findAll(); //userDao.getOne(loggedUser.getId()).getPosts();
+        List<Orders> orders = orderDao.findAll(); //userDao.getOne(loggedUser.getId()).getPosts();
         //userDao.getOne(loggedUser.getId()).getPosts();
-        for (Orders currentOrder : orderList) {
+        for (Orders currentOrder : orders) {
             currentOrder.getRestaurant();
-            currentOrder.getOrdered_status();
         }
 
-        viewModel.addAttribute("orders", orderList);
+        //viewModel.addAttribute("restaurant", userDao.getOne(loggedUser.getId()).getBlog_description());
+        viewModel.addAttribute("orders", orders);
         return "/users/user-history";
     }
 

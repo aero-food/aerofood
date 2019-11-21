@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <th:block th:replace="fragments/header :: main-header"/>
@@ -9,15 +9,33 @@
 
     <div class="container">
         <h1>Order list </h1>
-        <br>
-        <c:forEach var="order" items="${orders}">
-            <div class="col-md-6">
-                <p class="card-title"><strong>Order</strong>: ${order.id}</p>
-                <p><strong>Restaurant</strong>: ${order.restaurant.name}</p>
-                <p><strong>Status</strong>: ${order.status}</p>
-            </div>
+        <section class="container">
+            <div id="orderList">
+                <div th:each="order : ${orders}">
+                    <a th:href="@{'posts/' + ${post.id}}">
+                        <h1 class="section-heading" th:text="${post.title}"></h1>
+                    </a>
+                    <p class="card-body" th:text="${post.body}"></p>
+                    <br>
+                    <!--                <label for="blog_description">Blog Description</label>-->
+                    <!--                <input id="blog_description" name="blog_description" type="text" class="form-control"/>-->
 
-        </c:forEach>
+                    <h3>Categories</h3>
+                    <th:block th:each="category : ${post.categories}">
+                        <div th:text="${category.description}"></div>
+                    </th:block>
+                    <div id="buttons">
+                        <form th:action="'/posts/' + ${post.id} + '/update'" method="get">
+                            <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                        </form>
+                        <form th:action="'/posts/' + ${post.id} + '/delete'" method="post">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
 </body>
