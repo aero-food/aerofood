@@ -30,6 +30,10 @@ public class Orders {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "orderStatus_id")
+    private OrderStatus orderStatus;
+
+    @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
