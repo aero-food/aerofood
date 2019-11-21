@@ -46,7 +46,7 @@ public class UserController {
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
-//        String hash = passwordEncoder.encode(newUser.getPassword());
+//        String hash = passwordEncoder.encode(newUser.getPassword());fhf
 //        newUser.setPassword(hash);
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
 
