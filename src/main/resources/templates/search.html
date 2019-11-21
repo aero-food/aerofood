@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<h1>this is the search page</h1>
+
+
+<div>
+    <div>
+        <div th:each="restaurants : ${restaurants}">
+            <br>
+            <a th:href="@{'/restaurants/' + ${restaurants.id}}">
+                <h3 th:text="${restaurants.name}"></h3></a>
+            <img th:src="${restaurants.thumbnail}" alt="">
+                <p> Gate <span th:text="${restaurants.gate}"></span></p>
+            <p> Phone: <span th:text="${restaurants.phone_number}"></span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
