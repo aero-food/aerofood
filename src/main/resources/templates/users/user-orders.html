@@ -9,7 +9,7 @@
 
 <div class="container">
     <h1>Order list </h1>
-    <section class="container">
+    <div class="container">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -23,25 +23,23 @@
             <tbody>
             <div th:each="currentOrder : ${orders}" id="orderList">
 
-                <div id="orderDetail">
-                    <tr>
-                        <td>
-                            <a th:href="@{'order/' + ${currentOrder.id}}">
-                                <span th:text="${currentOrder.getRestaurant().getName()}"></span>
-                            </a>
-                        </td>
-                        <td th:text="${currentOrder.getOrdered_time_String()}"></td>
-                        <td th:text="${currentOrder.getDelivery_time_String()}"></td>
-                        <td th:text="${currentOrder.getTotal()}"></td>
-                        <td th:text="${currentOrder.getOrderStatus().getStatus()}"></td>
+                <tr>
+                    <td>
+                        <a th:href="@{'order/' + ${currentOrder.id}}">
+                            <span th:text="${currentOrder.getRestaurant().getName()}"></span>
+                        </a>
+                    </td>
+                    <td th:text="${currentOrder.getOrdered_time_String()}"></td>
+                    <td th:text="${currentOrder.getDelivery_time_String()}"></td>
+                    <td th:text="${currentOrder.getTotal()}"></td>
+                    <td th:text="${currentOrder.getOrderStatus().getStatus()}"></td>
 
-                    </tr>
-                </div>
+                </tr>
             </div>
             </tbody>
         </table>
-</div>
-</section>
+    </div>
+    </section>
 
 </div>
 

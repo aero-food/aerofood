@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     /*font-family: 'Indie Flower', cursive;*/
     /*background-color: #eef2db;*/
     /*color: #A0522D;*/
@@ -110,11 +111,11 @@ button {
 }
 
 
-#postList, #orderList {
+#postList {
     display: flex;
     flex-direction: column;
     /*flex-wrap: wrap;*/
     /*max-height: 100vh;*/
-    justify-content: space-around;
+    /*//justify-content: space-around;*/
     overflow: auto;
 }
