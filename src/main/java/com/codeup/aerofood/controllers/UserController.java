@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -51,13 +52,16 @@ public class UserController {
         //User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Orders> orders = orderDao.findAll(); //userDao.getOne(loggedUser.getId()).getPosts();
         //userDao.getOne(loggedUser.getId()).getPosts();
-        for (Orders currentOrder : orders) {
-            currentOrder.getRestaurant();
-        }
 
         //viewModel.addAttribute("restaurant", userDao.getOne(loggedUser.getId()).getBlog_description());
         viewModel.addAttribute("orders", orders);
-        return "/users/user-history";
+        return "users/user-orders";
+    }
+
+    @GetMapping("/order/{id}")
+    public String show(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("orderDetails", orderDao.getOne(id));
+        return "users/order";
     }
 
     @PostMapping("/sign-up")

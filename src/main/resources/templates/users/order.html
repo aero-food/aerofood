@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Display a post</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<div class="container">
+    <h1>Order Details</h1>
+    <div th:text="${orderDetails.getRestaurant().getName()}"></div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="orderDetail : ${orderDetails.getOrderDetails()}">
+            <tr>
+                <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
+                <td th:text="${orderDetail.getQuantity()}"></td>
+                <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

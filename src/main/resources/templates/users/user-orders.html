@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<div class="container">
+    <h1>Order list </h1>
+    <section class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Ordered Time</th>
+                <th scope="col">Delivered Time</th>
+                <th scope="col">Cost</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="currentOrder : ${orders}" id="orderList">
+
+                <div id="orderDetail">
+                    <tr>
+                        <td>
+                            <a th:href="@{'order/' + ${currentOrder.id}}">
+                                <span th:text="${currentOrder.getRestaurant().getName()}"></span>
+                            </a>
+                        </td>
+                        <td th:text="${currentOrder.getOrdered_time_String()}"></td>
+                        <td th:text="${currentOrder.getDelivery_time_String()}"></td>
+                        <td th:text="${currentOrder.getTotal()}"></td>
+                        <td th:text="${currentOrder.getOrderStatus().getStatus()}"></td>
+
+                    </tr>
+                </div>
+            </div>
+            </tbody>
+        </table>
+</div>
+</section>
+
+</div>
+
+</body>
+</html>
