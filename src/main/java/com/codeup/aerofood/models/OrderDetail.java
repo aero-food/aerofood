@@ -14,15 +14,6 @@ public class OrderDetail {
     @Column(nullable = false, columnDefinition = "INT")
     private Integer quantity;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(255)")
-    private String description;
-
-
-    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
-    private Float price;
-
-    @Column(nullable = false, columnDefinition = "INT")
-    private Integer dish_type;
 
 //    @OneToOne
 //   private MenuItem menuItem;
@@ -40,16 +31,8 @@ public class OrderDetail {
 
     }
 
-    public OrderDetail(Integer quantity,
-                       String description,
-                       Float price,
-                       Integer dish_type,
-                       Orders orders,
-                       MenuItem menuItem) {
+    public OrderDetail(Integer quantity, Orders orders, MenuItem menuItem) {
         this.quantity = quantity;
-        this.description = description;
-        this.price = price;
-        this.dish_type = dish_type;
         this.orders = orders;
         this.menuItem = menuItem;
     }
@@ -68,30 +51,6 @@ public class OrderDetail {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public Integer getDish_type() {
-        return dish_type;
-    }
-
-    public void setDish_type(Integer dish_type) {
-        this.dish_type = dish_type;
     }
 
     public Orders getOrders() {

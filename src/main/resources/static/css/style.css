@@ -61,7 +61,17 @@ li{
     flex-direction: row;
     justify-content: space-around;
 }
-#postList {
+
+#orderDetail{
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    /*//justify-content: space-around;*/
+    margin: 10em;
+}
+
+
+#postList, #orderList {
     display: flex;
     flex-direction: column;
     /*flex-wrap: wrap;*/
