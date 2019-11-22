@@ -5,13 +5,43 @@ body {
     /*font-family: 'Source Code Pro', monospace;*/
 }
 
-h1 {
-    color: #1a3f13 ;
+#list1, #list2 {
+    display: flex;
+    justify-content: flex-start;
 }
 
+#list3 {
+    display: flex;
+    justify-content: center;
+}
+
+#list4, #list5, #list6 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+h1 {
+    color: #1a3f13 ;
+    display: flex;
+    justify-content: center;
+}
+
+a {
+
+}
+
+h3 {
+    margin-top: 50px;
+}
+
+h4 {
+    margin-top: 50px;
+}
 
  h2, h3, h4, h5, h6 {
-    color: #656d29;
+     display: flex;
+     justify-content: center;
+     color: #656d29;
  /*#a8a660;*/
 }
 
@@ -20,24 +50,33 @@ ul {
     flex-direction: row;
     align-content: space-around;
     list-style: none;
-
 }
-li{
 
-    margin-right: 2em;
+li{
+    /*margin-right: 2em;*/
 }
 
 
 .btn-delete{
     width: 5em;
 }
+
 .card {
     display: flex;
     align-content: center;
     padding: .25em;
-    margin: 1em;
+    margin-top: 7em;
+    margin-right: 5em;
+    margin-bottom: 5em;
+    margin-left: 5em;
     /*height: 400px;*/
     box-shadow: .2em .2em .2em .2em #888888;
+    height: 20em;
+}
+
+button {
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .card-title {
