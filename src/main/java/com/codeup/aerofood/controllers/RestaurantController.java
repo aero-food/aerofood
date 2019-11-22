@@ -75,6 +75,9 @@ public class RestaurantController {
 
         model.addAttribute("restaurants", restaurants.getOne(id));
 
+        model.addAttribute("menu", menuItems.findAll());
+
+
         return  "/show";
     }
 
