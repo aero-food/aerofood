@@ -15,4 +15,36 @@ public class OrderStatus {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderStatus")
     private List<Orders> orders;
+
+    public OrderStatus() {
+    }
+
+    public OrderStatus(String status, List<Orders> orders) {
+        this.status = status;
+        this.orders = orders;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
 }

@@ -1,7 +1,12 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Orders {
@@ -14,16 +19,13 @@ public class Orders {
     private String gate;
 
     @Column(nullable = false, unique=true,  columnDefinition = "DATETIME")
-    private String delivery_time;
+    private Date delivery_time;
 
     @Column(nullable = false, unique=true,  columnDefinition = "DATETIME")
-    private String ordered_time;
+    private Date ordered_time;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(6,2)")
     private Float total;
-
-    @Column(nullable = false, unique=true,  columnDefinition = "VARCHAR(1)")
-    private String ordered_status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -53,10 +55,7 @@ public class Orders {
                   Restaurant restaurant,
                   List<OrderDetail> orderDetails) {
         this.gate = gate;
-        this.delivery_time = delivery_time;
-        this.ordered_time = ordered_time;
         this.total = total;
-        this.ordered_status = ordered_status;
         this.user = user;
         this.restaurant = restaurant;
         this.orderDetails = orderDetails;
@@ -78,19 +77,35 @@ public class Orders {
         this.gate = gate;
     }
 
-    public String getDelivery_time() {
+    public Date getDelivery_time() {
         return delivery_time;
     }
 
-    public void setDelivery_time(String delivery_time) {
+    public String getDelivery_time_String() {
+        String pattern = "MM/dd/yyyy HH:mm a";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        String date = simpleDateFormat.format(delivery_time);
+        return date;
+    }
+
+    public void setDelivery_time(Date delivery_time) {
         this.delivery_time = delivery_time;
     }
 
-    public String getOrdered_time() {
+    public Date getOrdered_time() {
         return ordered_time;
     }
 
-    public void setOrdered_time(String ordered_time) {
+    public String getOrdered_time_String() {
+        String pattern = "MM/dd/yyyy HH:mm a";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        String date = simpleDateFormat.format(ordered_time);
+        return date;
+    }
+
+    public void setOrdered_time(Date ordered_time) {
         this.ordered_time = ordered_time;
     }
 
@@ -100,15 +115,6 @@ public class Orders {
 
     public void setTotal(Float total) {
         this.total = total;
-    }
-
-
-    public String getOrdered_status() {
-        return ordered_status;
-    }
-
-    public void setOrdered_status(String ordered_status) {
-        this.ordered_status = ordered_status;
     }
 
     public User getUser() {
@@ -133,5 +139,13 @@ public class Orders {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
