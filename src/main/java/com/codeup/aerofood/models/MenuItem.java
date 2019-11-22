@@ -10,10 +10,10 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(50)")
     private String title;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(255)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(255)")
     private String description;
 
 

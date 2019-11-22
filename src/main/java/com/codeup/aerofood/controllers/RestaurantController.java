@@ -1,5 +1,6 @@
 package com.codeup.aerofood.controllers;
 
+import com.codeup.aerofood.models.MenuItem;
 import com.codeup.aerofood.models.Restaurant;
 import com.codeup.aerofood.repositories.CuisineRepository;
 import com.codeup.aerofood.repositories.MenuCategoryRepository;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RestaurantController {
@@ -73,7 +77,24 @@ public class RestaurantController {
     @GetMapping("/restaurants/{id}")
     public String show(@PathVariable long id, Model model){
 
+
+
         model.addAttribute("restaurants", restaurants.getOne(id));
+
+
+        List<MenuItem> menuList = menuItems.findAll();
+
+        List<MenuItem> sortedList = new ArrayList<>();
+
+        for (MenuItem menuItemList : menuList){
+
+            if (id == menuItemList.getRestaurant().getId()){
+                sortedList.add(menuItemList);
+            }
+
+        }
+
+        model.addAttribute("menu", sortedList);
 
         return  "/show";
     }
