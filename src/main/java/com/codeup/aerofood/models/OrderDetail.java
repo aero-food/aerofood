@@ -2,6 +2,7 @@ package com.codeup.aerofood.models;
 
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 
 @Entity
 @Table(name = "order_details")
@@ -67,5 +68,12 @@ public class OrderDetail {
 
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
+    }
+
+    public String getTotalPerItem(){
+        float totalPerItem = this.quantity * this.menuItem.getPrice();
+
+        DecimalFormat df = new DecimalFormat("###.##");
+        return df.format(totalPerItem);
     }
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Display a post</title>
+    <title>Display an order</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
@@ -18,6 +18,7 @@
             <th scope="col">Title</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
+            <th scope="col">Total</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                 <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
                 <td th:text="${orderDetail.getQuantity()}"></td>
                 <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
+                <td th:text="${orderDetail.getTotalPerItem()}"></td>
             </tr>
         </th:block>
         </tbody>
