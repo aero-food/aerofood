@@ -96,7 +96,7 @@ public class RestaurantController {
 
         model.addAttribute("menu", sortedList);
 
-        return  "/show";
+        return  "show";
     }
 
 
