@@ -14,17 +14,21 @@
 
 <hr>
 
-<div th:each="menu : ${menu}">
+<div class="container">
+    <div class="column">
+        <div th:each="menu : ${menu}">
 
-    <p>restaurant id <span th:text="${menu.restaurant.id}"></span></p>
-    <p>title <span th:text="${menu.title}"></span></p>
-    <p>description <span th:text="${menu.description}"></span></p>
-    <p>type <span th:text="${menu.dish_type}"></span></p>
-    <p>price <span th:text="${menu.price}"></span></p>
-    <button>Add</button>
-    <hr>
-    <hr>
+            <p>restaurant id <span th:text="${menu.restaurant.id}"></span></p>
+            <p>title <span th:text="${menu.title}"></span></p>
+            <p>description <span th:text="${menu.description}"></span></p>
+            <p>type <span th:text="${menu.dish_type}"></span></p>
+            <p>price <span th:text="${menu.price}"></span></p>
+            <button>Add</button>
+            <hr>
+            <hr>
 
+        </div>
+    </div>
 </div>
 
 </body>

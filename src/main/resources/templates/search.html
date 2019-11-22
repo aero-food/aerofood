@@ -10,13 +10,13 @@
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <h1>Search for a Restaurant</h1>
 
-<div>
-    <div>
+<div class="container">
+    <div class="column">
         <div th:each="restaurants : ${restaurants}">
             <br>
             <a th:href="@{'/restaurants/' + ${restaurants.id}}">
                 <h3 th:text="${restaurants.name}"></h3></a>
-            <img th:src="${restaurants.thumbnail}" alt="">
+            <img th:src="${restaurants.thumbnail}" alt="" height="100" width="100">
                 <p> Gate <span th:text="${restaurants.gate}"></span></p>
             <p> Phone: <span th:text="${restaurants.phone_number}"></span></p>
         </div>
