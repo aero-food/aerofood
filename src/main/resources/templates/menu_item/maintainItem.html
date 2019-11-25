@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Maintain Categories</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<section class="container">
+
+    <h1 class="my-3 text-center">Menu Items</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+
+        </tr>
+        </thead>
+        <div th:each="menuItem : ${menuItems}">
+            <tr>
+                <td>
+                    <label th:text="${menuItem.description}"></label>
+                </td>
+                <td>
+                    <form th:action="@{'/menuItem/' + ${menuItem.id} + '/editItem'}" method="get"
+                          th:object="${menuItems}">
+                        <input class="btn btn-warning btn-sm" type="submit" value="Update Item">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{'/menuItem/' + ${menuItem.id} + '/deleteItem'}" method="post"
+                          th:object="${menuItems}">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete Item">
+                    </form>
+                </td>
+            </tr>
+        </div>
+    </table>
+    <div>
+        <form th:action="@{/menuItem/addItem}" method="get">
+            <input class="btn btn-success btn-sm" type="submit" value="Add Item">
+        </form>
+    </div>
+</section>
+</body>
+</html>

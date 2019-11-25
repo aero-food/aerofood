@@ -14,7 +14,7 @@ public class Restaurant {
     @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @Column(nullable = false, unique=true,  columnDefinition = "TEXT")
+    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
     private String thumbnail;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -29,6 +29,8 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
+    private List<Cuisine> cuisines;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<Orders> orders;
@@ -36,24 +38,34 @@ public class Restaurant {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
 
-    public Restaurant(){
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "restaurant_menuitem",
+//            joinColumns = {@JoinColumn(name = "restaurant_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "menuItem_id")}
+//    )
+//    private List<Restaurant> retaurants;
+//
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="ads_categories",
+//            joinColumns={@JoinColumn(name="ad_id")},
+//            inverseJoinColumns={@JoinColumn(name="category_id")}
+//    )
+//    private List<AdCategory> categories;
+
+    public Restaurant() {
 
     }
 
-    public Restaurant(String name,
-                      String thumbnail,
-                      String picture_url,
-                      String gate,
-                      String airport,
-                      String phone_number,
-                      List<Orders> orders,
-                      List<MenuItem> menu_items) {
+    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number, List<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.picture_url = picture_url;
         this.gate = gate;
         this.airport = airport;
         this.phone_number = phone_number;
+        this.cuisines = cuisines;
         this.orders = orders;
         this.menu_items = menu_items;
     }
@@ -112,6 +124,14 @@ public class Restaurant {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
+    }
+
+    public List<Cuisine> getCuisines() {
+        return cuisines;
+    }
+
+    public void setCuisines(List<Cuisine> cuisines) {
+        this.cuisines = cuisines;
     }
 
     public List<Orders> getOrders() {

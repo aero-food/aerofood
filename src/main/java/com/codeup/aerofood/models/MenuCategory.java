@@ -3,20 +3,19 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="menu_category")
 public class MenuCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
-    private String category;
+    private String description;
 
     public MenuCategory() {
     }
 
-    public MenuCategory(String category) {
-        this.category = category;
+    public MenuCategory(String description) {
+        this.description = description;
     }
 
     public long getId() {
@@ -27,11 +26,11 @@ public class MenuCategory {
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

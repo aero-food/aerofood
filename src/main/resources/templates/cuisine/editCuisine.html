@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Update posts</title>
@@ -9,12 +9,12 @@
 
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <section class="container">
-    <h1 class="page_title">Update Post</h1>
-    <form th:action="@{'/category/' + ${id} + '/edit'}" th:method="post"  th:object="${category}">
+    <h1 class="page_title">Update Cuisine Description</h1>
+    <form th:action="@{'/cuisine/' + ${id} + '/edit'}" th:method="post"  th:object="${cuisine}">
         <div class="container">
             <div class="form-group">
-                Body:
-                <textarea th:field="*{description}"/>
+                Description:
+                <input th:field="*{description}" class="form-control"/>
             </div>
             <input type="hidden" th:field="*{id}">
             <input class="btn btn-warning" type="submit" value="Update">

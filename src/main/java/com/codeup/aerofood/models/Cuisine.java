@@ -12,12 +12,20 @@ public class Cuisine {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
     public Cuisine() {
     }
 
     public Cuisine(String description) {
         this.description = description;
+    }
+
+    public Cuisine(String description, Restaurant restaurant) {
+        this.description = description;
+        this.restaurant = restaurant;
     }
 
     public long getId() {
@@ -34,5 +42,13 @@ public class Cuisine {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
