@@ -27,6 +27,22 @@ public class CheckoutController {
     private OrderDetailRepository orderDetailDao;
     private MenuItemRepository menuItemDao;
 
+    public OrderDetailRepository getOrderDetailDao() {
+        return orderDetailDao;
+    }
+
+    public void setOrderDetailDao(OrderDetailRepository orderDetailDao) {
+        this.orderDetailDao = orderDetailDao;
+    }
+
+    public MenuItemRepository getMenuItemDao() {
+        return menuItemDao;
+    }
+
+    public void setMenuItemDao(MenuItemRepository menuItemDao) {
+        this.menuItemDao = menuItemDao;
+    }
+
     public CheckoutController(OrderDetailRepository orderDetailDao, MenuItemRepository menuItemDao) {
         this.orderDetailDao = orderDetailDao;
         this.menuItemDao = menuItemDao;
