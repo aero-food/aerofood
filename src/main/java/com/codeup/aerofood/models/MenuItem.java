@@ -1,6 +1,5 @@
 package com.codeup.aerofood.models;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,19 +15,16 @@ public class MenuItem {
     @Column(nullable = false, columnDefinition = "VARCHAR(255)")
     private String description;
 
-
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
     private Float price;
 
-    @Column(nullable = false, columnDefinition = "INT")
-    private Integer dish_type;
+    @ManyToOne
+    @JoinColumn(name = "menu_category_id")
+    private MenuCategory menuCategory;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
-
-//    @OneToOne(mappedBy = "menuItem")
-//    private OrderDetail orderDetail;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
     private List<OrderDetail> orderDetails;
@@ -37,19 +33,15 @@ public class MenuItem {
 
     }
 
-    public MenuItem(String title,
-                    String description,
-                    Float price,
-                    Integer dish_type,
-                    Restaurant restaurant,
-                    List<OrderDetail> orderDetails) {
+    public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.dish_type = dish_type;
+        this.menuCategory = menuCategory;
         this.restaurant = restaurant;
         this.orderDetails = orderDetails;
     }
+
 
     public long getId() {
         return id;
@@ -83,13 +75,14 @@ public class MenuItem {
         this.price = price;
     }
 
-    public Integer getDish_type() {
-        return dish_type;
+    public MenuCategory getMenuCategory() {
+        return menuCategory;
     }
 
-    public void setDish_type(Integer dish_type) {
-        this.dish_type = dish_type;
+    public void setMenuCategory(MenuCategory menuCategory) {
+        this.menuCategory = menuCategory;
     }
+
 
     public Restaurant getRestaurant() {
         return restaurant;
