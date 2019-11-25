@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Show posts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<section class="container">
+    <h1 class="page_title">Create a new Menu Item</h1>
+    <form th:action="@{/menuItem/addItem}" th:method="post" th:object="${menuItem}" class="form-group">
+        <label for="title">Add a menu item</label>
+        <br>
+        <input id="title" th:field="${menuItem.title}" class="form-control" th:required="required"/>
+        <br>
+        <label for="description">Description</label>
+        <br>
+        <input id="description" th:field="${menuItem.description}" class="form-control" th:required="required"/>
+        <br>
+        <label >Dish Type</label>
+        <div class="col-lg-3" th:dish_type="${dish_types}">
+            <select class="form-control" id="testOrder" name="testOrder">
+                <option th:each="dish_type : ${dish_types}"
+                        th:value="${dish_type.id}"
+                        th:text="${dish_type.description}"></option>
+            </select>
+        </div>
+        <label for="price">Price</label>
+        <br>
+        <input id="price" th:field="${menuItem.price}" class="form-control" th:required="required"/>
+        <br>
+        <input type="submit"/>
+
+    </form>
+</section>
+
+</body>
+</html>

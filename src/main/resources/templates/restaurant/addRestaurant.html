@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add restaurant</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<section class="container">
+    <h1 class="page_title">Add a Restaurant</h1>
+    <form th:action="@{/restaurant/add}" th:method="post" th:object="${restaurant}" class="form-group">
+        <label for="name">Name</label>
+        <br>
+        <input id="name" th:field="${restaurant.name}" class="form-control" th:required="required"/>
+        <br>
+        <label for="phone_number">Phone Number</label>
+        <br>
+        <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control" th:required="required"/>
+        <br>
+        <label for="picture">Picture</label>
+        <br>
+        <input id="picture" th:field="${restaurant.picture_url}" class="form-control" th:required="required"/>
+        <br>
+        <label for="airport">Airport</label>
+        <br>
+        <input id="airport" th:field="${restaurant.airport}" class="form-control" th:required="required"/>
+        <br>
+        <label for="name">Gate</label>
+        <br>
+        <input id="gate" th:field="${restaurant.gate}" class="form-control" th:required="required"/>
+        <br>
+        <label for="thumbnail">Thumbnail</label>
+        <br>
+        <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control" th:required="required"/>
+        <br>
+        <div>Cuisines</div>
+        <div>
+            <th:block th:each="cuisine : ${dish_types}">
+                <input type="checkbox" th:field="*{cuisines}" name="categories" th:value="${cuisine.id}"/>
+                <label th:text="${cuisine.description}"></label>
+            </th:block>
+        </div>
+        <input type="submit" class="btn btn-success btn-sm"/>
+
+    </form>
+</section>
+
+</body>
+</html>
