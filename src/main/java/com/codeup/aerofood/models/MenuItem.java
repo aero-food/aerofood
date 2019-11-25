@@ -16,7 +16,7 @@ public class MenuItem {
     private String description;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
-    private Float price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "menu_category_id")
@@ -33,7 +33,7 @@ public class MenuItem {
 
     }
 
-    public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
+    public MenuItem(String title, String description, Double price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -67,11 +67,11 @@ public class MenuItem {
         this.description = description;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

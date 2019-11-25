@@ -65,15 +65,15 @@ public class CheckoutController {
     }
 
     // subtotal
-//    public float getSubtotal() {
-//        float subtotal = itemPrice * getNumberOfItems();
-//        return subtotal;
-//    }
+    public double getSubtotal() {
+        double subtotal = menu_item.getPrice() * getNumberOfItems();
+        return subtotal;
+    }
 
     // total
-//    public float getTotal(double total) {
+//    public double getTotal(double total) {
 //        total = getSubtotal() * 1.0825;
-//        return Float.parseFloat(String.valueOf(total));
+//        return total;
 //    }
 
     @GetMapping("/checkout")
