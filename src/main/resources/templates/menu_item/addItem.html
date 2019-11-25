@@ -21,7 +21,7 @@
         <br>
         <label >Dish Type</label>
         <div class="col-lg-3" th:dish_type="${dish_types}">
-            <select class="form-control" id="testOrder" name="testOrder">
+            <select class="form-control" id="menu_category" name="menu_category">
                 <option th:each="dish_type : ${dish_types}"
                         th:value="${dish_type.id}"
                         th:text="${dish_type.description}"></option>
@@ -31,7 +31,7 @@
         <br>
         <input id="price" th:field="${menuItem.price}" class="form-control" th:required="required"/>
         <br>
-        <input type="submit"/>
+        <input type="submit" class="btn btn-success btn-sm"/>
 
     </form>
 </section>

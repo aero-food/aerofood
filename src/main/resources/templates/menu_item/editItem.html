@@ -9,17 +9,33 @@
 
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <section class="container">
-    <h1 class="page_title">Update Menu Category</h1>
-    <form th:action="@{'/menuCategory/' + ${id} + '/edit'}" th:method="post"  th:object="${menuCategory}">
-        <div class="container">
-            <div class="form-group">
-                Description:
-                <input th:field="*{description}" class="form-control"/>
+    <h1 class="page_title">Update Menu Item</h1>
+    <form th:action="@{'/menuItem/' + ${id} + '/editItem'}" th:method="post"  th:object="${menuItem}">
+        <h1 class="page_title">Create a new Menu Item</h1>
+        <form th:action="@{/menuItem/addItem}" th:method="post" th:object="${menuItem}" class="form-group">
+            <label for="title">Add a menu item</label>
+            <br>
+            <input id="title" th:field="${menuItem.title}" class="form-control" th:required="required"/>
+            <br>
+            <label for="description">Description</label>
+            <br>
+            <input id="description" th:field="${menuItem.description}" class="form-control" th:required="required"/>
+            <br>
+            <label >Dish Type</label>
+            <div class="col-lg-3" th:dish_type="${dish_types}">
+                <select class="form-control" id="menu_category" name="menu_category">
+                    <option th:each="dish_type : ${dish_types}"
+                            th:value="${dish_type.id}"
+                            th:text="${dish_type.description}"></option>
+                </select>
             </div>
-            <input type="hidden" th:field="*{id}">
-            <input class="btn btn-warning" type="submit" value="Update">
+            <label for="price">Price</label>
+            <br>
+            <input id="price" th:field="${menuItem.price}" class="form-control" th:required="required"/>
+            <br>
+            <input type="submit" class="btn btn-success btn-sm"/>
 
-        </div>
+        </form>
     </form>
 </section>
 

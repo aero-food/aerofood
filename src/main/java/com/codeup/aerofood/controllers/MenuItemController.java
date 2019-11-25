@@ -33,29 +33,33 @@ public class MenuItemController {
     }
 
     @PostMapping("/menuItem/addItem")
-    public String create(@ModelAttribute MenuItem newItem, @RequestParam Integer dish_type , Model viewModel) {
-       newItem.setDish_type(dish_type);
+    public String create(@ModelAttribute MenuItem newItem, @RequestParam MenuCategory menu_category, Model viewModel) {
+        newItem.setMenuCategory(menu_category);
         menuItemDao.save(newItem);
         return "redirect:/menuItem/index";
     }
 
     // Update menu item
-    @GetMapping( "/menuItem/{id}/editItem")
+    @GetMapping("/menuItem/{id}/editItem")
     public String updatePost(@PathVariable long id, Model viewModel) {
         viewModel.addAttribute("menuItem", menuItemDao.getOne(id));
+        viewModel.addAttribute("dish_types", menuCategoryDao.findAll());
         return "menu_item/editItem";
     }
 
     @PostMapping("/menuItem/{id}/editItem")
-    public String update(@PathVariable long id, @RequestParam String description) {
+    public String update(@PathVariable long id, @RequestParam String description, Float price, String title) {
+        System.out.println("after update");
         MenuItem oldItem = menuItemDao.getOne(id);
         oldItem.setDescription(description);
+        oldItem.setPrice(price);
+        oldItem.setTitle(title);
         menuItemDao.save(oldItem);
         return "redirect:/menuItem/index";
     }
 
-    //    Delete
-    @PostMapping("/menuItem/{id}/delete")
+    // Delete
+    @PostMapping("/menuItem/{id}/deleteItem")
     public String updateItem(@PathVariable long id) {
         System.out.println("delete");
         System.out.println("id = " + id);
