@@ -49,7 +49,6 @@ public class MenuItemController {
 
     @PostMapping("/menuItem/{id}/editItem")
     public String update(@PathVariable long id, @RequestParam String description, Float price, String title) {
-        System.out.println("after update");
         MenuItem oldItem = menuItemDao.getOne(id);
         oldItem.setDescription(description);
         oldItem.setPrice(price);
@@ -61,8 +60,8 @@ public class MenuItemController {
     // Delete
     @PostMapping("/menuItem/{id}/deleteItem")
     public String updateItem(@PathVariable long id) {
-        System.out.println("delete");
-        System.out.println("id = " + id);
+//        System.out.println("delete");
+//        System.out.println("id = " + id);
         menuItemDao.deleteById(id);
         return "redirect:/menuItem/index";
     }
