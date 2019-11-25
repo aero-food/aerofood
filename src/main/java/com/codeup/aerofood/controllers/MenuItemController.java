@@ -24,7 +24,8 @@ public class MenuItemController {
         return "/menu_item/maintainItem";
     }
 
-    //    Add
+    //    Add menu item
+
     @GetMapping("/menuItem/addItem")
     public String showCreate(Model vModel) {
         vModel.addAttribute("dish_types", menuCategoryDao.findAll());
