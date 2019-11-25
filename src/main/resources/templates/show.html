@@ -12,7 +12,9 @@
 
 <h1 th:text="${restaurants.id}"></h1>
 
+<a href="/search">Back &#x21A9;</a>
 <hr>
+
 
 <div class="container">
     <div class="column">
@@ -30,6 +32,10 @@
         </div>
     </div>
 </div>
+
+<a href="/checkout">Proceed to Checkout</a>
+
+<div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
 </html>

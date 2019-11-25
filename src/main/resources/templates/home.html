@@ -7,18 +7,21 @@
 </head>
 <body>
 <div th:replace="fragments/navbar :: main-navbar"></div>
-<!---->
-<!--<h1 class="page_title">AERO FOOD</h1>-->
 
 <section class="container">
     <div class="card">
         <h3>Still getting your food yourself?</h3>
-        <button value="register" href="/register" class="btn btn-primary">Register</button>
+        <form action="/register" method="GET">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
         <h4>Already a user?</h4>
-        <button href="/login" class="btn btn-primary">Sign in</button>
+        <form action="/login" method="GET">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
     </div>
 </section>
-<!--<div th:replace="fragments/footer :: main-footer"></div>-->
+
+<div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
 </html>
