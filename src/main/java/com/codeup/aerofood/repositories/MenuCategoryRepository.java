@@ -1,6 +1,5 @@
 package com.codeup.aerofood.repositories;
 
-
 import com.codeup.aerofood.models.MenuCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
