@@ -21,7 +21,24 @@
     </div>
 
     <div sec:authorize="isAuthenticated()" class="card">
-        <h3>See Whats Available</h3>
+        <h3 sec:authorize="isAuthenticated()"> Welcome, <span sec:authentication="name"></span></h3>
+
+        <div>
+            <span th:text="${#authentication.principal.isAdmin}"></span>
+        </div>
+
+        <div>
+            <span th:text="${#authentication.principal.email}"></span>
+        </div>
+        <div>
+            <span th:text="${#authentication.principal.username}"></span>
+        </div>
+        <div>
+            <span th:text="${#authentication.principal.phone_number}"></span>
+        </div>
+
+
+        <h4>See Whats Available</h4>
         <form action="/search" method="GET">
             <button class="btn btn-primary" type="submit">Search</button>
         </form>

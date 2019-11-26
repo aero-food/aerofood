@@ -109,7 +109,7 @@ public class User {
         this.orders = orders;
     }
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
