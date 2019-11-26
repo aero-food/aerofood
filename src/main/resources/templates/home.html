@@ -9,7 +9,7 @@
 <div th:replace="fragments/navbar :: main-navbar"></div>
 
 <section class="container">
-    <div class="card">
+    <div sec:authorize="isAnonymous()" class="card">
         <h3>Still getting your food yourself?</h3>
         <form action="/register" method="GET">
             <button class="btn btn-primary" type="submit">Register</button>
@@ -19,6 +19,15 @@
             <button class="btn btn-primary" type="submit">Login</button>
         </form>
     </div>
+
+    <div sec:authorize="isAuthenticated()" class="card">
+        <h3>See Whats Available</h3>
+        <form action="/search" method="GET">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+
 </section>
 
 <div th:replace="fragments/footer :: main-footer"></div>
