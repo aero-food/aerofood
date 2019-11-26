@@ -14,7 +14,10 @@
         <li><h5><a href="/my-orders">My Orders</a></h5></li>
 
         <li id="list5" ><h5><a href="/login">Login</a></h5></li>
-        <li id="list6" ><h5><a href="/logout">Logout</a></h5></li>
-
+        <li>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+            </form>
+        </li>
     </ul>
 </nav>

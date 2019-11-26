@@ -37,11 +37,11 @@ public class UserController {
         return "sign-up";
     }
 
-    @GetMapping("/login")
-    public String loginUser(Model viewModel) {
-        viewModel.addAttribute("user", new User());
-        return "users/login";
-    }
+//    @GetMapping("/login")
+//    public String loginUser(Model viewModel) {
+//        viewModel.addAttribute("user", new User());
+//        return "users/login";
+//    }
 
     @PostMapping("/login")
     public String redirectUser(Model viewModel) {
@@ -129,10 +129,10 @@ public class UserController {
     }
 
 
-    @GetMapping("/logout")
-    public String logoutUser() {
-        return "redirect:/home";
-    }
+//    @GetMapping("/logout")
+//    public String logoutUser() {
+//        return "redirect:/home";
+//    }
 
 
 }
