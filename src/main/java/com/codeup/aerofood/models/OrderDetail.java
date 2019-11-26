@@ -71,9 +71,13 @@ public class OrderDetail {
     }
 
     public String getTotalPerItem(){
-        float totalPerItem = this.quantity * this.menuItem.getPrice();
+        double totalPerItem = this.quantity * this.menuItem.getPrice();
 
         DecimalFormat df = new DecimalFormat("###.##");
         return df.format(totalPerItem);
+    }
+
+    public double getTotalPerItemDouble(){
+        return this.quantity * this.menuItem.getPrice();
     }
 }

@@ -49,7 +49,7 @@ public class MenuItemController {
     }
 
     @PostMapping("/menuItem/{id}/editItem")
-    public String update(@PathVariable long id, @RequestParam String description, Float price, String title) {
+    public String update(@PathVariable long id, @RequestParam String description, Double price, String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
         oldItem.setDescription(description);
         oldItem.setPrice(price);

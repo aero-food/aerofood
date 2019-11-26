@@ -16,7 +16,7 @@ public class MenuItem {
     private String description;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
-    private Double price;
+    private static Double price;
 
     @ManyToOne
     @JoinColumn(name = "menu_category_id")
@@ -67,7 +67,7 @@ public class MenuItem {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public static Double getPrice() {
         return price;
     }
 
@@ -78,6 +78,8 @@ public class MenuItem {
     public MenuCategory getMenuCategory() {
         return menuCategory;
     }
+
+
 
     public void setMenuCategory(MenuCategory menuCategory) {
         this.menuCategory = menuCategory;

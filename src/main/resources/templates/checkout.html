@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
+
 <div th:replace="fragments/navbar :: main-navbar"></div>
 
-<h3>This is the checkout page</h3>
+<div class="container">
+    <h3>Review your order</h3>
+    <div>
+        <thead>
+            <tr>
+
+              <!--order number
+                      - use order_id-->
+                <th scope="col"th:text="${order_details.id}"></div>">Order Confirmation</th>
+
+              <!--date-->
+                <th scope="col">Date/Time</th>
+
+               <!--list of items-->
+                <th scope="col">
+                    <th:block th:each="orderDetail : ${orderDetails.getOrderDetails()}">
+                        <tr>
+                            <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
+                            <td th:text="${orderDetail.getQuantity()}"></td>
+                            <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
+                            <td th:text="${orderDetail.getTotalPerItem()}"></td>
+                        </tr>
+                    </th:block>
+                </th>
+
+             <!--subtotal-->
+                <th scope="col">Subtotal</th>
+
+              <!--total-->
+                <th scope="col">Total</th>
+
+             <!--gate-->
+<!--                    drop down-->
+                <th scope="col">Pickup at Gate: </th>
+            </tr>
+        </thead>
+</div>
+</div>
 
 <a href="/restaurants/1">Back to Order</a>
 
@@ -16,7 +54,6 @@
 <a href="/payment">Proceed to Payment</a>
 
 <div th:replace="fragments/footer :: main-footer"></div>
-
 
 </body>
 </html>

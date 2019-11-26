@@ -54,6 +54,8 @@ public class CheckoutController {
     private final List<OrderDetail> order_details = new ArrayList<>();
     private final List<MenuItem> menu_item = new ArrayList<>();
 
+    // order confirmation number
+
     // item names
     public List<MenuItem> getMenuItemList() {
         return menu_item;
@@ -64,17 +66,25 @@ public class CheckoutController {
         return menu_item.size();
     }
 
+    // Loop through orderDetails
+
     // subtotal
     public double getSubtotal() {
-        double subtotal = menu_item.getPrice() * getNumberOfItems();
+        double subtotal = MenuItem.getPrice();
+        subtotal = subtotal * getNumberOfItems();
         return subtotal;
     }
 
     // total
-//    public double getTotal(double total) {
-//        total = getSubtotal() * 1.0825;
-//        return total;
-//    }
+    public double getTotal(double total) {
+        total = getSubtotal() * 1.0825;
+        return total;
+    }
+
+    // Date/Time
+
+    // Gate number
+
 
     @GetMapping("/checkout")
     public String checkout(Model viewModel) {
