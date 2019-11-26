@@ -1,6 +1,7 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class MenuItem {
     @Column(nullable = false, columnDefinition = "VARCHAR(50)")
     private String title;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
@@ -33,6 +34,13 @@ public class MenuItem {
 
     }
 
+    public MenuItem(String title, String description, Float price, Restaurant restaurant) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.restaurant = restaurant;
+    }
+
     public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
@@ -41,7 +49,6 @@ public class MenuItem {
         this.restaurant = restaurant;
         this.orderDetails = orderDetails;
     }
-
 
     public long getId() {
         return id;
@@ -69,6 +76,12 @@ public class MenuItem {
 
     public Float getPrice() {
         return price;
+    }
+
+    public String getPriceString() {
+        DecimalFormat df = new DecimalFormat("0.00##");
+        String result = df.format(price);
+        return result;
     }
 
     public void setPrice(Float price) {

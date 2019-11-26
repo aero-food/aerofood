@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Update posts</title>
+    <title>Update Restaurant</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
@@ -10,31 +10,26 @@
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <section class="container">
     <h1 class="page_title">Update Restaurant</h1>
-    <form th:action="@{'/restaurant/' + ${id} + '/edit'}" th:method="post"  th:object="${restaurant}">
+    <form th:action="@{'/restaurant/' + ${restaurant.id} + '/edit'}" th:method="post" th:object="${restaurant}">
         <div class="container">
             <div class="form-group">
-                <label for="name">Name</label>
-                <br>
+                <label for="name">Name: </label>
                 <input id="name" th:field="${restaurant.name}" class="form-control" th:required="required"/>
                 <br>
-                <label for="phone_number">Phone Number</label>
+                <label for="phone_number">Phone Number: </label>
+                <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
+                       th:required="required"/>
                 <br>
-                <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control" th:required="required"/>
-                <br>
-                <label for="picture">Picture</label>
-                <br>
+                <label for="picture">Picture: </label>
                 <input id="picture" th:field="${restaurant.picture_url}" class="form-control" th:required="required"/>
                 <br>
-                <label for="airport">Airport</label>
-                <br>
+                <label for="airport">Airport: </label>
                 <input id="airport" th:field="${restaurant.airport}" class="form-control" th:required="required"/>
                 <br>
-                <label for="name">Gate</label>
-                <br>
+                <label for="name">Gate: </label>
                 <input id="gate" th:field="${restaurant.gate}" class="form-control" th:required="required"/>
                 <br>
-                <label for="thumbnail">Thumbnail</label>
-                <br>
+                <label for="thumbnail">Thumbnail: </label>
                 <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control" th:required="required"/>
                 <br>
                 <div>Cuisines</div>
@@ -42,21 +37,110 @@
                 <div>
                     <th:block th:each="cuisine : ${cuisineList}">
                         <input type="checkbox" th:field="*{cuisines}" name="cuisines" th:value="${cuisine.id}"/>
-                        <label th:text="${cuisine.description}"></label>
+                        <label th:text="${cuisine.description}"></label>&nbsp;
                     </th:block>
                     <th:block th:each="cuisine : ${newCuisines}">
                         <input type="checkbox" th:field="*{cuisines}" name="cuisines" th:value="${cuisine.id}"/>
-                        <label th:text="${cuisine.description}"></label>
+                        <label th:text="${cuisine.description}"></label>&nbsp;
                     </th:block>
-
+                </div>
+                <div>New Menu Items</div>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Add</th>
+                        </tr>
+                        </thead>
+                        <th:block th:each="menuItem : ${newMenuItemList}">
+                            <tr>
+                                <td>
+                                    <label th:text="${menuItem.title}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${menuItem.description}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${menuItem.getPriceString()}"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </table>
                 </div>
                 <input type="hidden" th:field="*{id}">
-                <input class="btn btn-warning" type="submit" value="Update">
-<!--            <input type="hidden" th:field="*{id}">-->
-
-
+                <input class="btn btn-warning" type="submit" value="Update Restaurant">
+            </div>
         </div>
     </form>
+    <h5>Select Menu Items</h5>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Dish Type</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <th:block th:each="menuItem : ${menuItems}">
+                <tr>
+                    <td>
+                        <input th:id="'title' + ${menuItem.id}" th:value="${menuItem.getTitle()}"
+                               class="form-control" th:required="required"/>
+                    </td>
+                    <td>
+                        <input th:id="'description' + ${menuItem.id}" th:value="${menuItem.getDescription()}"
+                               class="form-control" th:required="required"/>
+                    </td>
+                    <td>
+                        <input th:id="'price' + ${menuItem.id}" th:value="${menuItem.getPrice()}"
+                               class="form-control" th:required="required"/>
+                    </td>
+                    <td>
+                        <div class="form-control" th:dish_type="${dish_types}">
+                            <select class="form-control" th:id="'menu_category' + ${menuItem.id}"
+                                    th:name="'menu_category' + ${menuItem.id}">
+                                <option th:each="dish_type : ${dish_types}"
+                                        th:value="${dish_type.id}"
+                                        th:text="${dish_type.description}"
+                                        th:selected="${menuItem.getMenuCategory().getId() == dish_type.getId()}"></option>
+                            </select>
+                        </div>
+
+                    </td>
+                    <td>
+                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/editRestaurantMenuItem'}"
+                              th:method="post"
+                              th:object="${menuItem}" class="form-group">
+                            <input class="btn btn-warning" type="submit" value="Update">
+                        </form>
+
+                    </td>
+                    <td>
+
+                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/deleteRestaurantMenuItem'}"
+                              th:method="post"
+                              th:object="${menuItem}" class="form-group">
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+
+                    </td>
+                    <!--                    </div>-->
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+
 </section>
 
 </body>

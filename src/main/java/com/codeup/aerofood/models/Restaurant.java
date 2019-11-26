@@ -38,24 +38,18 @@ public class Restaurant {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "restaurant_menuitem",
-//            joinColumns = {@JoinColumn(name = "restaurant_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "menuItem_id")}
-//    )
-//    private List<Restaurant> retaurants;
-//
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="ads_categories",
-//            joinColumns={@JoinColumn(name="ad_id")},
-//            inverseJoinColumns={@JoinColumn(name="category_id")}
-//    )
-//    private List<AdCategory> categories;
 
     public Restaurant() {
 
+    }
+
+    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number) {
+        this.name = name;
+        this.thumbnail = thumbnail;
+        this.picture_url = picture_url;
+        this.gate = gate;
+        this.airport = airport;
+        this.phone_number = phone_number;
     }
 
     public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number, List<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items) {
