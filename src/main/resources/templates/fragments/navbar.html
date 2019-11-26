@@ -20,12 +20,23 @@
             </form>
         </li>
     </ul>
-    <ul class="navbar" sec:authorize="isAuthenticated()">
+<!--    <ul class="navbar" sec:authorize="isAuthenticated()">-->
 
-        <li><h5><a href="/menuCategory/index">Menu Categories</a></h5></li>
-        <li><h5><a href="/cuisine/index">Cuisine Categories</a></h5></li>
-        <li><h5><a href="/restaurant/index">Manage Restaurants</a></h5></li>
-        <li><h5><a href="/menuItem/index">Manage Items</a></h5></li>
+    <span class="navbar" sec:authorize="isAuthenticated()">
 
-    </ul>
+        <ul class="navbar" th:if="${#authentication.principal.isAdmin == true}">
+
+            <li><h5><a href="/menuCategory/index">Menu Categories</a></h5></li>
+            <li><h5><a href="/cuisine/index">Cuisine Categories</a></h5></li>
+            <li><h5><a href="/restaurant/index">Manage Restaurants</a></h5></li>
+            <li><h5><a href="/menuItem/index">Manage Items</a></h5></li>
+        </ul>
+
+<!--        <span th:unless="${#authentication.principal.isAdmin == true}">Not Admin</span>-->
+
+    </span>
+
+
+
+<!--    </ul>-->
 </nav>
