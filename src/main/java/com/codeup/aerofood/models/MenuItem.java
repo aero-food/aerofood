@@ -34,6 +34,14 @@ public class MenuItem {
 
     }
 
+    public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.menuCategory = menuCategory;
+        this.restaurant = restaurant;
+    }
+
     public MenuItem(String title, String description, Float price, Restaurant restaurant) {
         this.title = title;
         this.description = description;

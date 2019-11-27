@@ -32,7 +32,7 @@
                 <label for="thumbnail">Thumbnail: </label>
                 <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control" th:required="required"/>
                 <br>
-                <div>Cuisines</div>
+                <h5>Cuisines</h5>
 
                 <div>
                     <th:block th:each="cuisine : ${cuisineList}">
@@ -44,41 +44,54 @@
                         <label th:text="${cuisine.description}"></label>&nbsp;
                     </th:block>
                 </div>
-                <div>New Menu Items</div>
-                <div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Add</th>
-                        </tr>
-                        </thead>
-                        <th:block th:each="menuItem : ${newMenuItemList}">
-                            <tr>
-                                <td>
-                                    <label th:text="${menuItem.title}"></label>
-                                </td>
-                                <td>
-                                    <label th:text="${menuItem.description}"></label>
-                                </td>
-                                <td>
-                                    <label th:text="${menuItem.getPriceString()}"></label>
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
-                                </td>
-                            </tr>
-                        </th:block>
-                    </table>
-                </div>
+
                 <input type="hidden" th:field="*{id}">
-                <input class="btn btn-warning" type="submit" value="Update Restaurant">
+                <input class="btn btn-warning" type="submit" id="submitRestaurantUpdate" value="Update Restaurant">
             </div>
         </div>
     </form>
-    <h5>Select Menu Items</h5>
+    <h5>Add Menu Items</h5>
+
+<!--        <div>New Menu Items</div>-->
+<!--        <div>-->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Add</th>
+                </tr>
+                </thead>
+                <th:block th:each="menuItem : ${newMenuItemList}">
+                    <tr>
+                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/addRestaurantMenuItem'}"
+                              th:method="post"
+                              th:object="${menuItem}" class="form-group">
+                        <td>
+                            <input th:id="'Restaurant' + ${menuItem.id}" th:value="${restaurantId}"
+                                   class="form-control" th:required="required" th:name="restaurantId" type="hidden"/>
+
+                            <label th:text="${menuItem.title}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${menuItem.description}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${menuItem.getPriceString()}"></label>
+                        </td>
+                        <td>
+                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-success" type="submit"
+                                   value="Add">
+<!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
+                        </td>
+                        </form>
+                    </tr>
+                </th:block>
+            </table>
+<!--        </div>-->
+
+    <h5>Update Menu Items</h5>
     <div>
         <table class="table">
             <thead>
@@ -92,39 +105,44 @@
             </tr>
             </thead>
             <th:block th:each="menuItem : ${menuItems}">
+
                 <tr>
-                    <td>
-                        <input th:id="'title' + ${menuItem.id}" th:value="${menuItem.getTitle()}"
-                               class="form-control" th:required="required"/>
-                    </td>
-                    <td>
-                        <input th:id="'description' + ${menuItem.id}" th:value="${menuItem.getDescription()}"
-                               class="form-control" th:required="required"/>
-                    </td>
-                    <td>
-                        <input th:id="'price' + ${menuItem.id}" th:value="${menuItem.getPrice()}"
-                               class="form-control" th:required="required"/>
-                    </td>
-                    <td>
-                        <div class="form-control" th:dish_type="${dish_types}">
-                            <select class="form-control" th:id="'menu_category' + ${menuItem.id}"
-                                    th:name="'menu_category' + ${menuItem.id}">
-                                <option th:each="dish_type : ${dish_types}"
-                                        th:value="${dish_type.id}"
-                                        th:text="${dish_type.description}"
-                                        th:selected="${menuItem.getMenuCategory().getId() == dish_type.getId()}"></option>
-                            </select>
-                        </div>
+                    <form th:action="@{'/restaurant/' + ${menuItem.id} + '/editRestaurantMenuItem'}"
+                          th:method="post"
+                          th:object="${menuItem}" class="form-group">
+                        <td>
+                            <input th:id="'MenuItem' + ${menuItem.id}" th:value="${menuItem.id}"
+                                   class="form-control" th:required="required" th:name="menuItemId" type="hidden"/>
 
-                    </td>
-                    <td>
-                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/editRestaurantMenuItem'}"
-                              th:method="post"
-                              th:object="${menuItem}" class="form-group">
-                            <input class="btn btn-warning" type="submit" value="Update">
-                        </form>
+                            <input th:id="'title' + ${menuItem.id}" th:value="${menuItem.getTitle()}"
+                                   class="form-control" th:required="required" th:name="title"/>
+                        </td>
+                        <td>
+                            <input th:id="'description' + ${menuItem.id}" th:value="${menuItem.getDescription()}"
+                                   class="form-control" th:required="required" th:name="description"/>
+                        </td>
+                        <td>
+                            <input th:id="'price' + ${menuItem.id}" th:value="${menuItem.getPrice()}"
+                                   name="price" class="form-control" th:required="required"/>
+                        </td>
+                        <td>
+                            <div class="form-control" th:dish_type="${dish_types}">
+                                <select class="form-control" th:id="'menu_category' + ${menuItem.id}"
+                                        th:name="menu_category">
+                                    <option th:each="dish_type : ${dish_types}"
+                                            th:value="${dish_type.id}"
+                                            th:text="${dish_type.description}"
+                                            th:selected="${menuItem.getMenuCategory().getId() == dish_type.getId()}"></option>
+                                </select>
+                            </div>
 
-                    </td>
+                        </td>
+                        <td>
+                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-warning" type="submit"
+                                   value="Update">
+
+                        </td>
+                    </form>
                     <td>
 
                         <form th:action="@{'/restaurant/' + ${menuItem.id} + '/deleteRestaurantMenuItem'}"
@@ -133,9 +151,11 @@
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
 
+
                     </td>
                     <!--                    </div>-->
                 </tr>
+
             </th:block>
         </table>
     </div>

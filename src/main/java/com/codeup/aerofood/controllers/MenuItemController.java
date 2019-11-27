@@ -20,7 +20,7 @@ public class MenuItemController {
 
     @GetMapping("/menuItem/index")
     public String showItem(Model viewModel) {
-        viewModel.addAttribute("menuItems", menuItemDao.findAll());
+        viewModel.addAttribute("menuItems", menuItemDao.findMenuItemByRestaurantIsNull());
         return "/menu_item/maintainItem";
     }
 
