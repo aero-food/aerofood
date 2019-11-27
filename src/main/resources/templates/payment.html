@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<h3>Payment</h3>
+
+<a href="/checkout">Back to Cart</a>
+
+<a href="/order-confirmation">Payment Complete</a>
+
+<div th:replace="fragments/footer :: main-footer"></div>
+
+</body>
+</html>
