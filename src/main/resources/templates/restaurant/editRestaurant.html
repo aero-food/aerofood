@@ -9,12 +9,13 @@
 
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <section class="container">
-    <h1 class="page_title">Update Restaurant</h1>
+    <div class="page-header">Update Restaurant</div>
     <form th:action="@{'/restaurant/' + ${restaurant.id} + '/edit'}" th:method="post" th:object="${restaurant}">
         <div class="container">
-            <div class="form-group">
-                <label for="name">Name: </label>
-                <input id="name" th:field="${restaurant.name}" class="form-control" th:required="required"/>
+            <div class="form-group ">
+                    <label for="name">Name:&nbsp; </label>
+                    <input id="name" th:field="${restaurant.name}" class="form-control"
+                           th:required="required"/>
                 <br>
                 <label for="phone_number">Phone Number: </label>
                 <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
@@ -50,46 +51,48 @@
             </div>
         </div>
     </form>
-    <h5>Add Menu Items</h5>
+    <div class="section-header">Add Menu Items</div>
+    <table id="newItems" class="table">
+        <thead>
+        <tr>
+            <th data-field="id" data-sortable="true">Dish Type</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Add</th>
+        </tr>
+        </thead>
 
-<!--        <div>New Menu Items</div>-->
-<!--        <div>-->
-            <table class="table">
-                <thead>
+        <th:block th:each="menuItem : ${newMenuItemList}">
                 <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Add</th>
-                </tr>
-                </thead>
-                <th:block th:each="menuItem : ${newMenuItemList}">
-                    <tr>
-                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/addRestaurantMenuItem'}"
-                              th:method="post"
-                              th:object="${menuItem}" class="form-group">
+                    <form th:action="@{'/restaurant/' + ${menuItem.getId()} + '/addRestaurantMenuItem'}"
+                          th:method="post"
+                          th:object="${menuItem}" class="form-group">
+                        <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
                         <td>
-                            <input th:id="'Restaurant' + ${menuItem.id}" th:value="${restaurantId}"
+                            <input th:id="'Restaurant' + ${restaurantId}" th:value="${restaurantId}"
                                    class="form-control" th:required="required" th:name="restaurantId" type="hidden"/>
 
-                            <label th:text="${menuItem.title}"></label>
+                            <label th:text="${menuItem.getTitle()}"></label>
                         </td>
                         <td>
-                            <label th:text="${menuItem.description}"></label>
+                            <label th:text="${menuItem.getDescription()}"></label>
                         </td>
                         <td>
                             <label th:text="${menuItem.getPriceString()}"></label>
                         </td>
                         <td>
-                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-success" type="submit"
+                            <input th:id="'btnUpdate' + ${menuItem.getId()}" class="btn btn-success" type="submit"
                                    value="Add">
-<!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
+                            <!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
                         </td>
-                        </form>
-                    </tr>
-                </th:block>
-            </table>
-<!--        </div>-->
+                    </form>
+                </tr>
+            </th:block>
+
+        </th:block>
+    </table>
+    <!--        </div>-->
 
     <h5>Update Menu Items</h5>
     <div>

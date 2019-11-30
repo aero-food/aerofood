@@ -1,3 +1,5 @@
+/*Elements*/
+
 body {
     margin: 0;
     /*font-family: 'Indie Flower', cursive;*/
@@ -6,21 +8,10 @@ body {
     /*font-family: 'Source Code Pro', monospace;*/
 }
 
-#list1, #list2 {
-    display: flex;
-    justify-content: flex-start;
+button {
+    margin-left: 200px;
+    margin-right: 200px;
 }
-
-#list3 {
-    display: flex;
-    justify-content: center;
-}
-
-#list4, #list5, #list6 {
-    display: flex;
-    justify-content: flex-end;
-}
-
 h1 {
     color: #1a3f13 ;
     display: flex;
@@ -39,11 +30,11 @@ h4 {
     margin-top: 50px;
 }
 
- h2, h3, h4, h5, h6 {
-     display: flex;
-     justify-content: center;
-     color: #656d29;
- /*#a8a660;*/
+h2, h3, h4, h5, h6 {
+    display: flex;
+    justify-content: center;
+    color: #656d29;
+    /*#a8a660;*/
 }
 
 ul {
@@ -57,43 +48,20 @@ li{
     margin: 2em;
 }
 
-
-.btn-delete{
-    width: 5em;
-}
-
-.card {
+/*Element ID*/
+#list1, #list2 {
     display: flex;
-    align-content: center;
-    padding: .25em;
-    margin-top: 7em;
-    margin-right: 5em;
-    margin-bottom: 5em;
-    margin-left: 5em;
-    /*height: 400px;*/
-    box-shadow: .2em .2em .2em .2em #888888;
-    height: 20em;
+    justify-content: flex-start;
 }
 
-button {
-    margin-left: 200px;
-    margin-right: 200px;
+#list3 {
+    display: flex;
+    justify-content: center;
 }
 
-.card-title {
-    /*color: #3F3C3C;*/
-    text-shadow: .1em .1em lightgrey;
-}
-
-.card-body{
-    color: #a8a660;
-}
-
-.lightgreen {
-    color:#dadfbc;
-}
-.orange {
-    color:#e88e01;
+#list4, #list5, #list6 {
+    display: flex;
+    justify-content: flex-end;
 }
 
 #buttons{
@@ -118,4 +86,50 @@ button {
     /*max-height: 100vh;*/
     /*//justify-content: space-around;*/
     overflow: auto;
+}
+/*Classes*/
+
+
+.btn-delete{
+    width: 5em;
+}
+
+.card {
+    display: flex;
+    align-content: center;
+    padding: .25em;
+    margin-top: 7em;
+    margin-right: 5em;
+    margin-bottom: 5em;
+    margin-left: 5em;
+    /*height: 400px;*/
+    box-shadow: .2em .2em .2em .2em #888888;
+    height: 20em;
+}
+
+
+.card-title {
+    /*color: #3F3C3C;*/
+    text-shadow: .1em .1em lightgrey;
+}
+
+.card-body{
+    color: #a8a660;
+}
+
+.lightgreen {
+    color:#dadfbc;
+}
+.orange {
+    color:#e88e01;
+}
+.page-header {
+    font-size: 2em;
+}
+.section-header {
+    font-size: 1.5em;
+}
+
+.sub-section-header {
+    font-size: 1em;
 }
