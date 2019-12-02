@@ -15,3 +15,4 @@ public interface MenuItemRepository extends JpaRepository<MenuItem,Long> {
 //    public List<MenuItem> findMenuItemByRestaurantIsNullAndOrderByMenuCategoryAndTitleIsNotIn(List<String> titles);
 //    public List<MenuItem> findMenuItemByRestaurantIsNullOrderByMenuCategory(Restaurant restaurant);
 }
+

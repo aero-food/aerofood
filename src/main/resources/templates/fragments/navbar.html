@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<nav class="navbar navbar-expand-lg" th:fragment="main-navbar">
+<nav class="navbar navbar-expand-lg " th:fragment="main-navbar">
     <ul>
-        <li id="list1" ><h5><a href="/home">Home</a></h5></li>
-        <li id="list2" ><h5><a href="/register">Register</a></h5></li>
-        <li id="list3" ><h4>Aero Food</h4></li>
-        <li id="list4" ><h5><a href="/search">Restaurants</a></h5></li>
+        <li ><span class="nav-link">Aero Food</span></li>
+        <li ><span class="nav-link"><a href="/home">Home</a></span></li>
 
-        <li><h5><a href="/menuCategory/index">Menu Categories</a></h5></li>
-        <li><h5><a href="/cuisine/index">Cuisine Categories</a></h5></li>
-        <li><h5><a href="/restaurant/index">Manage Restaurants</a></h5></li>
-        <li><h5><a href="/menuItem/index">Manage Items</a></h5></li>
+        <li ><span class="nav-link"><a href="/search">Restaurants</a></span></li>
+        <li ><span class="nav-link"><a href="/register">Register</a></span></li>
+        <li ><span class="nav-link"><a href="/login">Login</a></span></li>
 
-        <li id="list5" ><h5><a href="/login">Login</a></h5></li>
-        <li id="list6" ><h5><a href="/logout">Logout</a></h5></li>
+        <li><span class="nav-link"><a href="/my-orders">My Orders</a></span></li>
+
+        <li ><span class="nav-link"><a href="/logout">Logout</a></span></li>
+
+        <li><span class="nav-link"><a href="/menuCategory/index">Menu Categories</a></span></li>
+        <li><span class="nav-link"><a href="/cuisine/index">Cuisine Categories</a></span></li>
+        <li><span class="nav-link"><a href="/restaurant/index">Manage Restaurants</a></span></li>
+        <li><span class="nav-link"><a href="/menuItem/index">Manage Items</a></span></li>
+
+
 
     </ul>
 </nav>
