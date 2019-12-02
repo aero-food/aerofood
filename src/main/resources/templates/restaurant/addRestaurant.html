@@ -42,6 +42,37 @@
                 <label th:text="${cuisine.description}"></label>
             </th:block>
         </div>
+        <div>Menu Items</div>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Add</th>
+                </tr>
+                </thead>
+                <th:block th:each="menuItem : ${menuItems}" >
+                    <tr>
+                        <td>
+                            <label th:text="${menuItem.title}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${menuItem.description}"></label>
+                        </td>
+                        <td>
+                            <label th:text="${menuItem.getPriceString()}"></label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
+<!--                          <input type="checkbox"  name="selectedMenuItems" th:value="${menuItem.id}"/>-->
+<!--                            th:field="*{menuItems}"-->
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
         <input type="submit" class="btn btn-success btn-sm"/>
 
     </form>

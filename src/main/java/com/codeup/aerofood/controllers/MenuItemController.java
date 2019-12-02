@@ -20,7 +20,7 @@ public class MenuItemController {
 
     @GetMapping("/menuItem/index")
     public String showItem(Model viewModel) {
-        viewModel.addAttribute("menuItems", menuItemDao.findAll());
+        viewModel.addAttribute("menuItems", menuItemDao.findMenuItemByRestaurantIsNull());
         return "/menu_item/maintainItem";
     }
 
@@ -34,7 +34,9 @@ public class MenuItemController {
     }
 
     @PostMapping("/menuItem/addItem")
-    public String create(@ModelAttribute MenuItem newItem, @RequestParam MenuCategory menu_category, Model viewModel) {
+    public String create(@ModelAttribute MenuItem newItem,
+                         @RequestParam MenuCategory menu_category,
+                         Model viewModel) {
         newItem.setMenuCategory(menu_category);
         menuItemDao.save(newItem);
         return "redirect:/menuItem/index";
@@ -49,8 +51,13 @@ public class MenuItemController {
     }
 
     @PostMapping("/menuItem/{id}/editItem")
-    public String update(@PathVariable long id, @RequestParam String description, Float price, String title) {
+    public String update(@PathVariable long id, @RequestParam String description,
+                         @RequestParam Float price,
+                         @RequestParam MenuCategory menu_category,
+                         @RequestParam String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
+        //System.out.println("**** menu_category = " + menu_category.getDescription());
+        oldItem.setMenuCategory(menu_category);
         oldItem.setDescription(description);
         oldItem.setPrice(price);
         oldItem.setTitle(title);

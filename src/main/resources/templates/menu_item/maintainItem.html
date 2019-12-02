@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Maintain Categories</title>
+    <title>Maintain Menu Items</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
@@ -15,7 +15,9 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Title</th>
             <th>Description</th>
+            <th>Price</th>
             <th>Update</th>
             <th>Delete</th>
 
@@ -24,7 +26,13 @@
         <div th:each="menuItem : ${menuItems}">
             <tr>
                 <td>
+                    <label th:text="${menuItem.title}"></label>
+                </td>
+                <td>
                     <label th:text="${menuItem.description}"></label>
+                </td>
+                <td>
+                    <label th:text="${menuItem.getPriceString()}"></label>
                 </td>
                 <td>
                     <form th:action="@{'/menuItem/' + ${menuItem.id} + '/editItem'}" method="get"
