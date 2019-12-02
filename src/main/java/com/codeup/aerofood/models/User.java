@@ -1,5 +1,7 @@
 package com.codeup.aerofood.models;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -26,6 +28,9 @@ public class User {
     @Column(nullable = false, columnDefinition = "VARCHAR(255)")
     private String password;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean isAdmin;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Orders> orders;
 
@@ -38,6 +43,7 @@ public class User {
         password = copy.password;
         this.phone_number = copy.phone_number;
         this.orders = copy.orders;
+        this.isAdmin = copy.isAdmin;
     }
 
 
@@ -45,13 +51,16 @@ public class User {
                 String email,
                 String phone_number,
                 String password,
-                List<Orders> orders) {
+                List<Orders> orders,
+                boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.phone_number = phone_number;
         this.password = password;
         this.orders = orders;
+        this.isAdmin = isAdmin;
     }
+
 
     public long getId() {
         return id;
@@ -99,5 +108,13 @@ public class User {
 
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
