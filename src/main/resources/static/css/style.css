@@ -45,24 +45,32 @@ ul {
 }
 
 li{
-    margin: 2em;
+    display: inline;
+    list-style-type:none;
+    margin: .5em;
 }
+/*ul {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    align-content: space-around;*/
+/*    list-style: none;*/
 
+/*}*/
 /*Element ID*/
-#list1, #list2 {
-    display: flex;
-    justify-content: flex-start;
-}
+/*#list1, #list2 {*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*}*/
 
-#list3 {
-    display: flex;
-    justify-content: center;
-}
+/*#list3 {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
 
-#list4, #list5, #list6 {
-    display: flex;
-    justify-content: flex-end;
-}
+/*#list4, #list5, #list6 {*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*}*/
 
 #buttons{
     display: flex;

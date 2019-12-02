@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update Menu Category</title>
+    <title>Order Confirmation</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-
 <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
@@ -20,20 +19,9 @@
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
-<section class="container">
-    <div class="page-header">Update Menu Category</div>
-    <form th:action="@{'/menuCategory/' + ${id} + '/edit'}" th:method="post"  th:object="${menuCategory}">
-        <div class="container">
-            <div class="form-group">
-                Description:
-                <input th:field="*{description}" class="form-control"/>
-            </div>
-            <input type="hidden" th:field="*{id}">
-            <input class="btn btn-warning" type="submit" value="Update">
+<h3>Order has been placed</h3>
 
-        </div>
-    </form>
-</section>
+<div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
 </html>

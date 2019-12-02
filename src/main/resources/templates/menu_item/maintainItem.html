@@ -7,8 +7,19 @@
 </head>
 <body>
 
-<div th:replace="fragments/navbar :: main-navbar"></div>
-
+<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--Nav bar-->
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <th:block th:if="${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+    </th:block>
+</div>
+<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</div>
 <section class="container">
 
     <div class="page-header">Menu Items</div>

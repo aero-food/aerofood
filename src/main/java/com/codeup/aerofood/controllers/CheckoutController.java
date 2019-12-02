@@ -63,12 +63,18 @@ public class CheckoutController {
     @GetMapping("/checkout")
     public String checkout(Model viewModel) {
         viewModel.addAttribute("menuItem", new MenuItem());
-        return  "/order-confirmation";
+        return  "checkout";
+    }
+
+    @GetMapping("/payment")
+    public String payment(Model viewModel) {
+        viewModel.addAttribute("menuItem", new MenuItem());
+        return  "payment";
     }
 
     @GetMapping("/order-confirmation")
     public String confirmOrder(Model viewModel) {
         viewModel.addAttribute("menuItem", new MenuItem());
-        return "/home";
+        return "order-confirmation";
     }
 }
