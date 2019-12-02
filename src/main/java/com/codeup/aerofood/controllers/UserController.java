@@ -4,7 +4,7 @@ import com.codeup.aerofood.models.Orders;
 import com.codeup.aerofood.models.User;
 import com.codeup.aerofood.repositories.OrderRepository;
 import com.codeup.aerofood.repositories.UserRepository;
-import com.codeup.aerofood.services.EmailService;
+import com.codeup.aerofood.services.EmailSvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +21,11 @@ public class UserController {
     private UserRepository userDao;
 
     private OrderRepository orderDao;
-    private EmailService emailService;
+    private EmailSvc emailService;
 
     public UserController(UserRepository userDao,
                           OrderRepository orderDao,
-                          EmailService emailService) {
+                          EmailSvc emailService) {
         this.userDao = userDao;
         this.orderDao = orderDao;
         this.emailService = emailService;
