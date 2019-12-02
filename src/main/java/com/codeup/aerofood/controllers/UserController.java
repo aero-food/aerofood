@@ -70,11 +70,8 @@ public class UserController {
         String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
-        //System.out.println("newUser.getPassword() = " + newUser.getPassword());
         String hash = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(hash);
-        //System.out.println("newUser.getPassword() = " + newUser.getPassword());
-
 
         // Verify the phone number format
 
@@ -125,12 +122,5 @@ public class UserController {
         userDao.save(newUser);
         return "redirect:login";
     }
-
-
-//    @GetMapping("/logout")
-//    public String logoutUser() {
-//        return "redirect:/home";
-//    }
-
 
 }
