@@ -4,6 +4,7 @@ import com.codeup.aerofood.models.Orders;
 import com.codeup.aerofood.models.User;
 import com.codeup.aerofood.repositories.OrderRepository;
 import com.codeup.aerofood.repositories.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,12 @@ public class UserController {
 
     private OrderRepository orderDao;
 
-    public UserController(UserRepository userDao,
-                          OrderRepository orderDao
-    ) {
+    private PasswordEncoder passwordEncoder;
+
+    public UserController(UserRepository userDao, OrderRepository orderDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.orderDao = orderDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -35,11 +37,11 @@ public class UserController {
         return "sign-up";
     }
 
-    @GetMapping("/login")
-    public String loginUser(Model viewModel) {
-        viewModel.addAttribute("user", new User());
-        return "users/login";
-    }
+//    @GetMapping("/login")
+//    public String loginUser(Model viewModel) {
+//        viewModel.addAttribute("user", new User());
+//        return "users/login";
+//    }
 
     @PostMapping("/login")
     public String redirectUser(Model viewModel) {
@@ -71,8 +73,8 @@ public class UserController {
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
-//        String hash = passwordEncoder.encode(newUser.getPassword());fhf
-//        newUser.setPassword(hash);
+        String hash = passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(hash);
         //System.out.println("newUser.getPassword() = " + newUser.getPassword());
 
 
@@ -127,10 +129,10 @@ public class UserController {
     }
 
 
-    @GetMapping("/logout")
-    public String logoutUser() {
-        return "redirect:/home";
-    }
+//    @GetMapping("/logout")
+//    public String logoutUser() {
+//        return "redirect:/home";
+//    }
 
 
 }
