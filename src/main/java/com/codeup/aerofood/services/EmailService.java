@@ -1,6 +1,7 @@
 package com.codeup.aerofood.services;
 
 //import org.apache.catalina.User;
+import com.sendgrid.*;
 import com.codeup.aerofood.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service("mailService")
 public class EmailService {
-
+//
     @Autowired
     public JavaMailSender emailSender;
 
