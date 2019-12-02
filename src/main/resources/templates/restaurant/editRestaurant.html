@@ -4,17 +4,31 @@
     <meta charset="UTF-8">
     <title>Update Restaurant</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <script src="/css/js/jquery.js"></script>
 </head>
 <body>
 
-<div th:replace="fragments/navbar :: main-navbar"></div>
+<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--Nav bar-->
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <th:block th:if="${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+    </th:block>
+</div>
+<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</div>
 <section class="container">
-    <h1 class="page_title">Update Restaurant</h1>
+    <div class="page-header">Update Restaurant</div>
     <form th:action="@{'/restaurant/' + ${restaurant.id} + '/edit'}" th:method="post" th:object="${restaurant}">
         <div class="container">
-            <div class="form-group">
-                <label for="name">Name: </label>
-                <input id="name" th:field="${restaurant.name}" class="form-control" th:required="required"/>
+            <div class="form-group ">
+                <label for="name">Name:&nbsp; </label>
+                <input id="name" th:field="${restaurant.name}" class="form-control"
+                       th:required="required"/>
                 <br>
                 <label for="phone_number">Phone Number: </label>
                 <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
@@ -50,66 +64,74 @@
             </div>
         </div>
     </form>
-    <h5>Add Menu Items</h5>
+    <div class="section-header">Add Menu Items</div>
+    <th:set var="currentMenuCategory" value="${none}"/>
+    <table id="table" class="table">
+        <!--        <thead>-->
+        <tr>
+            <th id="dishType">Dish Type</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Add</th>
+        </tr>
+        <th:block th:each="menuItem : ${newMenuItemList}">
+              <tr>
+<!--                  <div th:text="${menuItem.getMenuCategory().getDescription()} != ${currentMenuCategory} ? ${menuItem.getMenuCategory().getDescription()} : ' ' " />-->
+<!--                  <th:set var="currentMenuCategory" value="${menuItem.getMenuCategory().getDescription()}"/>-->
 
-<!--        <div>New Menu Items</div>-->
-<!--        <div>-->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Add</th>
-                </tr>
-                </thead>
-                <th:block th:each="menuItem : ${newMenuItemList}">
-                    <tr>
-                        <form th:action="@{'/restaurant/' + ${menuItem.id} + '/addRestaurantMenuItem'}"
-                              th:method="post"
-                              th:object="${menuItem}" class="form-group">
-                        <td>
-                            <input th:id="'Restaurant' + ${menuItem.id}" th:value="${restaurantId}"
-                                   class="form-control" th:required="required" th:name="restaurantId" type="hidden"/>
-
-                            <label th:text="${menuItem.title}"></label>
-                        </td>
-                        <td>
-                            <label th:text="${menuItem.description}"></label>
-                        </td>
-                        <td>
-                            <label th:text="${menuItem.getPriceString()}"></label>
-                        </td>
-                        <td>
-                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-success" type="submit"
-                                   value="Add">
-<!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
-                        </td>
-                        </form>
-                    </tr>
-                </th:block>
-            </table>
-<!--        </div>-->
-
-    <h5>Update Menu Items</h5>
+                  <form th:action="@{'/restaurant/' + ${menuItem.getId()} + '/addRestaurantMenuItem'}"
+                      th:method="post"
+                      th:object="${menuItem}" class="form-group">
+                    <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
+                    <td>
+                        <input th:id="'Restaurant' + ${restaurantId}" th:value="${restaurantId}"
+                               class="form-control" th:required="required" th:name="restaurantId" type="hidden"/>
+                        <label th:text="${menuItem.getTitle()}"></label>
+                    </td>
+                    <td>
+                        <label th:text="${menuItem.getDescription()}"></label>
+                    </td>
+                    <td>
+                        <label th:text="${menuItem.getPriceString()}"></label>
+                    </td>
+                    <td>
+                        <input th:id="'btnUpdate' + ${menuItem.getId()}" class="btn btn-success" type="submit" value="Add">
+                        <!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
+                    </td>
+                </form>
+            </tr>
+        </th:block>
+    </table>
+    <div class="section-header">Update Menu Items</div>
     <div>
-        <table class="table">
+        <table class="table" id="updateItems">
             <thead>
             <tr>
+                <th>Dish Type</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>Dish Type</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <th:block th:each="menuItem : ${menuItems}">
-
                 <tr>
                     <form th:action="@{'/restaurant/' + ${menuItem.id} + '/editRestaurantMenuItem'}"
                           th:method="post"
                           th:object="${menuItem}" class="form-group">
+                        <td>
+                            <div class="form-control" th:dish_type="${dish_types}">
+                                <select class="form-control" th:id="'menu_category' + ${menuItem.id}"
+                                        th:name="menu_category">
+                                    <option th:each="dish_type : ${dish_types}"
+                                            th:value="${dish_type.id}"
+                                            th:text="${dish_type.description}"
+                                            th:selected="${menuItem.getMenuCategory().getId() == dish_type.getId()}"></option>
+                                </select>
+                            </div>
+                        </td>
                         <td>
                             <input th:id="'MenuItem' + ${menuItem.id}" th:value="${menuItem.id}"
                                    class="form-control" th:required="required" th:name="menuItemId" type="hidden"/>
@@ -126,41 +148,21 @@
                                    name="price" class="form-control" th:required="required"/>
                         </td>
                         <td>
-                            <div class="form-control" th:dish_type="${dish_types}">
-                                <select class="form-control" th:id="'menu_category' + ${menuItem.id}"
-                                        th:name="menu_category">
-                                    <option th:each="dish_type : ${dish_types}"
-                                            th:value="${dish_type.id}"
-                                            th:text="${dish_type.description}"
-                                            th:selected="${menuItem.getMenuCategory().getId() == dish_type.getId()}"></option>
-                                </select>
-                            </div>
-
-                        </td>
-                        <td>
                             <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-warning" type="submit"
                                    value="Update">
-
                         </td>
                     </form>
                     <td>
-
                         <form th:action="@{'/restaurant/' + ${menuItem.id} + '/deleteRestaurantMenuItem'}"
                               th:method="post"
                               th:object="${menuItem}" class="form-group">
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
-
-
                     </td>
-                    <!--                    </div>-->
                 </tr>
-
             </th:block>
         </table>
     </div>
-
-
 </section>
 
 </body>

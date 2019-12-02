@@ -7,32 +7,30 @@
 <body>
 <div th:replace="fragments/navbar :: main-navbar"></div>
 <div class="container">
-    <h1>Create an account</h1>
+    <div class="page-header">Create an account</div>
     <div th:if="${error}">
         <br>
         <div th:text="${error}"></div>
 
         <br>
     </div>
-    <form th:action="@{/sign-up}" th:method="POST" th:object="${user}">
-        <table>
-            <tr>
-                <td><label for="username">Username</label></td>
-                <td><input id="username" th:field="*{username}" th:required="required"/></td>
-            </tr>
-            <tr>
-                <td><label for="email">Email</label></td>
-                <td><input id="email" th:field="*{email}" th:required="required"/></td>
-            </tr>
-            <tr>
-                <td><label for="phone_number">Phone Number</label></td>
-                <td><input id="phone_number" th:field="*{phone_number}" th:required="required"/></td>
-            </tr>
-            <tr>
-                <td><label for="password">Password</label></td>
-                <td><input id="password" type="password" th:field="*{password}" th:required="required"/></td>
-            </tr>
-        </table>
+    <form th:action="@{/sign-up}" th:method="POST" th:object="${user}" class="form-group">
+                <label for="username">Username</label>
+                <input id="username" th:field="*{username}" class="form-control" placeholder="username" th:required="required"/>
+            
+            <br>
+                <label for="email">Email</label>
+                <input id="email" th:field="*{email}" placeholder="email" class="form-control" th:required="required"/>
+            
+            <br>
+                <label for="phone_number">Phone Number</label>
+                <input id="phone_number" th:field="*{phone_number}" placeholder="phone" class="form-control" th:required="required"/>
+            
+            <br>
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" class="form-control" th:required="required"/>
+            
+
         <br>
         <input value="Sign me up!" type="submit"/>
     </form>

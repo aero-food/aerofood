@@ -4,6 +4,7 @@ import com.codeup.aerofood.models.Orders;
 import com.codeup.aerofood.models.User;
 import com.codeup.aerofood.repositories.OrderRepository;
 import com.codeup.aerofood.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class UserController {
         viewModel.addAttribute("user", new User());
         return "sign-up";
     }
-
+//
 //    @GetMapping("/login")
 //    public String loginUser(Model viewModel) {
 //        viewModel.addAttribute("user", new User());
@@ -51,11 +52,8 @@ public class UserController {
 
     @GetMapping("/my-orders")
     public String displayMyOrders(Model viewModel) {
-        //User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Orders> orders = orderDao.findAll(); //userDao.getOne(loggedUser.getId()).getPosts();
-        //userDao.getOne(loggedUser.getId()).getPosts();
-
-        //viewModel.addAttribute("restaurant", userDao.getOne(loggedUser.getId()).getBlog_description());
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Orders> orders = userDao.getOne(loggedUser.getId()).getOrders();
         viewModel.addAttribute("orders", orders);
         return "users/user-orders";
     }
@@ -72,11 +70,8 @@ public class UserController {
         String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
-        //System.out.println("newUser.getPassword() = " + newUser.getPassword());
         String hash = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(hash);
-        //System.out.println("newUser.getPassword() = " + newUser.getPassword());
-
 
         // Verify the phone number format
 
@@ -127,12 +122,5 @@ public class UserController {
         userDao.save(newUser);
         return "redirect:login";
     }
-
-
-//    @GetMapping("/logout")
-//    public String logoutUser() {
-//        return "redirect:/home";
-//    }
-
 
 }

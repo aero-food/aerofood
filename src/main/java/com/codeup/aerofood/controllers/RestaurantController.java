@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -99,15 +100,15 @@ public class RestaurantController {
         newMenuItem.setMenuCategory(currentMenuItem.getMenuCategory());
         menuItemsDao.save(newMenuItem);
         //
-    //}
+        //}
         return;
-}
+    }
 
     private void addRestaurantMenuItems(MenuItem[] menuItems, Restaurant currentRestaurant) {
         // Get the categories
         MenuItem newMenuItem;
         List<MenuItem> newMenuItemList = new ArrayList<>();
-        System.out.println("menuItems.length = " + menuItems.length);
+//        System.out.println("menuItems.length = " + menuItems.length);
         //if (menuItems != null) {
 
         for (int i = 0; i < menuItems.length; i++) {
@@ -161,7 +162,15 @@ public class RestaurantController {
     public String showCreate(Model vModel) {
         vModel.addAttribute("restaurant", new Restaurant());
         vModel.addAttribute("dish_types", cuisineDao.findAll());
-        vModel.addAttribute("menuItems", menuItemsDao.findAll());
+
+        List<MenuItem> currentMenuItems = menuItemsDao.findMenuItemByRestaurantIsNull();
+        Collections.sort(currentMenuItems, MenuItem.MenuCategoryComparator);
+        List<MenuItem> sortedCurrentList = new ArrayList<>();
+        for(MenuItem element: currentMenuItems){
+            sortedCurrentList.add(element);
+        }
+        vModel.addAttribute("menuItems", sortedCurrentList);
+//        vModel.addAttribute("menuItems", menuItemsDao.findMenuItemByRestaurantIsNull());
 
         return "restaurant/addRestaurant";
     }
@@ -183,10 +192,11 @@ public class RestaurantController {
 
     // Update restaurant
     @GetMapping("/restaurant/{id}/edit")
-    public String updatePost(@PathVariable long id, Model viewModel) {
+    public String updatePost(@PathVariable long id,
+                             Model viewModel) {
         viewModel.addAttribute("restaurant", restaurantDao.getOne(id));
         // Cuisine type
-        int index = 0;
+        int index;
         List<Cuisine> cuisineList = restaurantDao.getOne(id).getCuisines();
         if (!cuisineList.isEmpty()) {
             List<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
@@ -205,27 +215,36 @@ public class RestaurantController {
 
         // New menu items
         List<MenuItem> restaurantMenuItemList = restaurantDao.getOne(id).getMenu_items();
-        List<MenuItem> newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNull(); //menuItemsDao.findAll();
-        List<MenuItem> selectThisMenuItem = new ArrayList<>();
-        boolean exists = false;
-//        MenuItem currentMenuItem;
-        //var result = new ArrayList<Person>();
-
-        for (MenuItem currentMenuItem : newMenuItemList) {
-//            System.out.println("currentMenuItem.getTitle() = " + currentMenuItem.getTitle());
-            for (int jIndex = 0; jIndex < restaurantMenuItemList.size(); jIndex++) {
-                if (currentMenuItem.getTitle().equalsIgnoreCase(restaurantMenuItemList.get(jIndex).getTitle())) {
-                    exists = true;
-                }
+        List<String> itemMenuTitles = new ArrayList<>();
+        List<String> newItemMenuCategories = new ArrayList<>();
+        for (MenuItem currentMenuItem : restaurantMenuItemList) {
+            itemMenuTitles.add(currentMenuItem.getTitle());
+            if (!newItemMenuCategories.contains(currentMenuItem.getMenuCategory().getDescription())) {
+                newItemMenuCategories.add(currentMenuItem.getMenuCategory().getDescription());
             }
-            if (!(exists)) {
-                selectThisMenuItem.add(currentMenuItem);
-            }
-            exists = false;
+        }
+        List<MenuItem> newMenuItemList;
+        if (itemMenuTitles.size() > 0) {
+            newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNullAndTitleIsNotIn(itemMenuTitles);
+        } else {
+            newMenuItemList = menuItemsDao.findAll();
         }
 
-        viewModel.addAttribute("menuItems", restaurantDao.getOne(id).getMenu_items());
-        viewModel.addAttribute("newMenuItemList", selectThisMenuItem);
+        List<MenuItem> currentMenuItems = restaurantDao.getOne(id).getMenu_items();
+        Collections.sort(currentMenuItems, MenuItem.MenuCategoryComparator);
+        List<MenuItem> sortedCurrentList = new ArrayList<>();
+        for(MenuItem element: currentMenuItems){
+            sortedCurrentList.add(element);
+        }
+        viewModel.addAttribute("menuItems", sortedCurrentList);
+
+        Collections.sort(newMenuItemList, MenuItem.MenuCategoryComparator);
+        List<MenuItem> sortedList = new ArrayList<>();
+        for(MenuItem element: newMenuItemList){
+            sortedList.add(element);
+        }
+        viewModel.addAttribute("newMenuItemList",  sortedList);
+        viewModel.addAttribute("newMenuItemListCategories", newItemMenuCategories);
 
         viewModel.addAttribute("itemList", restaurantDao.getOne(id).getCuisines());
         viewModel.addAttribute("dish_types", menuCategoryDao.findAll());

@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Aero Food | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-<div th:replace="fragments/navbar :: main-navbar"></div>
+<!--Nav bar-->
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <th:block th:if="${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+    </th:block>
+</div>
+<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+</div>
+
 
 <section class="container">
-    <div sec:authorize="isAnonymous()" class="card">
+    <div class="card">
         <h3>Still getting your food yourself?</h3>
         <form action="/register" method="GET">
             <button class="btn btn-primary" type="submit">Register</button>
@@ -20,8 +32,8 @@
         </form>
     </div>
 
-    <div sec:authorize="isAuthenticated()" class="card">
-        <h3 sec:authorize="isAuthenticated()"> Welcome, <span sec:authentication="name"></span></h3>
+    <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">
+        <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}"> Welcome, <span sec:authentication="name"></span></h3>
 
         <div>
             <span th:text="${#authentication.principal.isAdmin}"></span>

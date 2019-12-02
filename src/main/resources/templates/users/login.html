@@ -7,8 +7,8 @@
 </head>
 <body>
 <div th:replace="fragments/navbar :: main-navbar"></div>
-<div class="container">
-    <h1>Log In</h1>
+<div class="container ">
+    <div class="page-header">Log In</div>
     <div th:if="${param.error}">
         Invalid Username and Password.
     </div>
@@ -17,16 +17,14 @@
     </div>
 
     <form th:action="@{/login}" method="post">
-        <table>
-            <tr>
-                <td><label for="username">Username</label></td>
-                <td><input id="username" name="username" type="text"/></td>
-            </tr>
-            <tr>
-                <td><label for="password">Password</label></td>
-                <td><input id="password" name="password" type="password"/></td>
-            </tr>
-        </table>
+        <div class="form-group"></div>
+        <label for="username">Username</label><br>
+        <input id="username" name="username" type="text" placeholder="username" class="form-control"/><br>
+
+
+        <label for="password">Password</label><br>
+        <input id="password" name="password" type="password" class="form-control"/><br>
+
 
         <input type="submit" value="Log In"/>
     </form>

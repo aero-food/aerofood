@@ -54,6 +54,7 @@ public class MenuItemController {
     public String update(@PathVariable long id, @RequestParam String description,
                          @RequestParam Float price,
                          @RequestParam MenuCategory menu_category,
+                         @RequestParam String picture_url,
                          @RequestParam String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
         //System.out.println("**** menu_category = " + menu_category.getDescription());

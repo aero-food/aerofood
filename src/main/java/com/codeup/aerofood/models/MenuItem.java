@@ -2,6 +2,7 @@ package com.codeup.aerofood.models;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -120,5 +121,19 @@ public class MenuItem {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+    public static Comparator<MenuItem> MenuCategoryComparator = new Comparator<MenuItem>() {
+
+        public int compare(MenuItem s1, MenuItem s2) {
+            String MenuItem1 = s1.getMenuCategory().getDescription().toUpperCase();
+            String MenuItem2 = s2.getMenuCategory().getDescription().toUpperCase();
+
+            //ascending order
+            return MenuItem1.compareTo(MenuItem2);
+
+            //descending order
+            //return StudentName2.compareTo(StudentName1);
+        }};
+
 }
 
