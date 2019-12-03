@@ -37,17 +37,14 @@ public class UserController {
         viewModel.addAttribute("user", new User());
         return "sign-up";
     }
-//
-//    @GetMapping("/login")
-//    public String loginUser(Model viewModel) {
-//        viewModel.addAttribute("user", new User());
-//        return "users/login";
-//    }
 
     @PostMapping("/login")
     public String redirectUser(Model viewModel) {
+        System.out.println("home");
         viewModel.addAttribute("user", new User());
-        return "home";
+//        /restaurant/index
+        //return "home";
+        return "restaurant/index";
     }
 
     @GetMapping("/my-orders")
