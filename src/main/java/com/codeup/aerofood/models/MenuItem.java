@@ -1,6 +1,7 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +19,7 @@ public class MenuItem {
     private String description;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
-    private Float price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "menu_category_id")
@@ -35,7 +36,7 @@ public class MenuItem {
 
     }
 
-    public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant) {
+    public MenuItem(String title, String description, BigDecimal price, MenuCategory menuCategory, Restaurant restaurant) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -43,14 +44,14 @@ public class MenuItem {
         this.restaurant = restaurant;
     }
 
-    public MenuItem(String title, String description, Float price, Restaurant restaurant) {
+    public MenuItem(String title, String description, BigDecimal price, Restaurant restaurant) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.restaurant = restaurant;
     }
 
-    public MenuItem(String title, String description, Float price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
+    public MenuItem(String title, String description, BigDecimal price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -83,7 +84,7 @@ public class MenuItem {
         this.description = description;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -93,7 +94,7 @@ public class MenuItem {
         return result;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

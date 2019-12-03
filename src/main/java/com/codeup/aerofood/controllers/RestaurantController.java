@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -303,7 +304,7 @@ public class RestaurantController {
     public String update(@PathVariable long id,
                          @RequestParam List<Long> menuItemId,
                          @RequestParam List<String> description,
-                         @RequestParam List<Float> price,
+                         @RequestParam List<BigDecimal> price,
                          @RequestParam List<MenuCategory> menu_category,
                          @RequestParam List<String> title) {
         System.out.println("update");

@@ -2,6 +2,7 @@ package com.codeup.aerofood.models;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 @Entity
@@ -71,7 +72,9 @@ public class OrderDetail {
     }
 
     public String getTotalPerItem(){
-        float totalPerItem = this.quantity * this.menuItem.getPrice();
+        int quantity = this.getQuantity();
+        BigDecimal price = this.menuItem.getPrice();
+        BigDecimal totalPerItem =  price.multiply(new BigDecimal(quantity));
 
         DecimalFormat df = new DecimalFormat("###.##");
         return df.format(totalPerItem);
