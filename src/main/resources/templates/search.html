@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Aero Food | Restaurants</title>
+    <titleqSearch</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
@@ -20,20 +20,7 @@
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
-<!--<div id="rest-title" class="page-header">Restaurants</div>-->
-<!--<div></div>-->
-
-
-
-<div class="d-none d-lg-block">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-3"><strong>Restaurants</strong></h1>
-        </div>
-    </div>
-</div>
-
-
+<div class="page-header">Search for a Restaurant</div>
 
 <div class="container">
     <div class="column">
