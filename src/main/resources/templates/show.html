@@ -23,8 +23,12 @@
 
 <h1 th:text="${restaurants.id}"></h1>
 
+<h1 th:text="${#session.getAttribute('newSessionAttribute')}"></h1>
+
+
 <a href="/search">Back &#x21A9;</a>
 <hr>
+
 
 
 <div class="container">
@@ -36,11 +40,27 @@
             <p>description: <span th:text="${menu.description}"></span></p>
             <p>type: <span th:text="${menu.getMenuCategory().getDescription()}"></span></p>
             <p>price: <span th:text="${menu.price}"></span></p>
-            <button>Add</button>
+
+            <form th:action="@{'/restaurants/' + ${menu.restaurant.id}}" method="post">
+
+                <textarea name="item" cols="40" rows="2"></textarea>
+                <br>
+
+
+                <input type="submit" value="Add" />
+
+            </form>
             <hr>
             <hr>
 
         </div>
+<!--        <div>-->
+<!--            <h2>Cart Items</h2>-->
+
+<!--            <ul th:each="item : ${cart}">-->
+<!--                <li th:text="${item}">msg</li>-->
+<!--            </ul>-->
+<!--        </div>-->
     </div>
 </div>
 

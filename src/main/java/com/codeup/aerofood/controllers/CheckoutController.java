@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,20 @@ public class CheckoutController {
 //    }
 
     @GetMapping("/checkout")
-    public String checkout(Model viewModel) {
-        viewModel.addAttribute("menuItem", new MenuItem());
+    public String checkout(Model model, HttpSession session) {
+
+//        viewModel.addAttribute("menuItem", new MenuItem());
+
+        @SuppressWarnings("unchecked")
+        List<String> cart = (List<String>) session.getAttribute("ITEM_CART");
+
+//        if (cart == null) {
+//            cart = new ArrayList<>();
+//        }
+
+        model.addAttribute("sessionCart", cart);
+
+
         return  "checkout";
     }
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -140,7 +141,17 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurants/{id}")
-    public String show(@PathVariable long id, Model model) {
+    public String show(@PathVariable long id, Model model, HttpSession session) {
+
+        @SuppressWarnings("unchecked")
+        List<String> cart = (List<String>) session.getAttribute("ITEM_CART");
+
+        if (cart == null) {
+            cart = new ArrayList<>();
+        }
+        model.addAttribute("sessionCart", cart);
+
+        session.setAttribute("newSessionAttribute", "new session value");
 
 
         model.addAttribute("restaurants", restaurantDao.getOne(id));
@@ -148,6 +159,24 @@ public class RestaurantController {
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
 
         return "show";
+    }
+
+    @PostMapping("/restaurants/{id}")
+    public String addShow(@PathVariable long id, @RequestParam(value = "item") String item, Model model, HttpSession session) {
+
+        @SuppressWarnings("unchecked")
+
+        List<String> cart = (List<String>) session.getAttribute("ITEM_CART");
+
+        if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute("ITEM_CART", cart);
+        }
+
+        cart.add(item);
+        session.setAttribute("ITEM_CART", cart);
+
+        return show(id, model, session);
     }
 
     @GetMapping("/restaurant/index")
