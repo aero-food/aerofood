@@ -3,6 +3,12 @@ nav {
    font-size: 1.5rem;
 }
 
+#rest-title {
+    font-size: 4.5rem;
+    display: flex;
+    justify-content: center;
+}
+
 body {
     margin: 0;
     position: relative;
