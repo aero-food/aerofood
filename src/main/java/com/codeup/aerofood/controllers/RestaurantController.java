@@ -145,9 +145,7 @@ public class RestaurantController {
 
 
         model.addAttribute("restaurants", restaurantDao.getOne(id));
-
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
-
         return "show";
     }
 
@@ -270,8 +268,12 @@ public class RestaurantController {
         oldRestaurant.setPhone_number(phone_number);
         oldRestaurant.setPicture_url(picture_url);
         oldRestaurant.setThumbnail(thumbnail);
-        addRestaurantCuisine(cuisines, oldRestaurant);
-        addRestaurantMenuItems(menuItems, oldRestaurant);
+        if (cuisines != null){
+            addRestaurantCuisine(cuisines, oldRestaurant);
+        }
+       if(menuItems != null){
+           addRestaurantMenuItems(menuItems, oldRestaurant);
+       }
         restaurantDao.save(oldRestaurant);
         return "redirect:/restaurant/index";
     }
