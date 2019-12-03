@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Aero Food | Home</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<!--Nav bar-->
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <th:block th:if="${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+    </th:block>
+</div>
+<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</div>
+
+
+
+
+
+</body>
+</html>

@@ -48,7 +48,6 @@ public class Orders {
 
     public Orders(String gate,
                   String delivery_time,
-                  String ordered_time,
                   Float total,
                   String ordered_status,
                   User user,
@@ -59,6 +58,20 @@ public class Orders {
         this.user = user;
         this.restaurant = restaurant;
         this.orderDetails = orderDetails;
+    }
+    public Orders(String gate,
+                  String delivery_time,
+                  Date ordered_time,
+                  Float total,
+                  String ordered_status,
+                  User user,
+                  Restaurant restaurant)
+            {
+        this.gate = gate;
+        this.total = total;
+        this.ordered_time = ordered_time;
+        this.user = user;
+        this.restaurant = restaurant;
     }
 
     public long getId() {
