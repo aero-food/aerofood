@@ -57,7 +57,6 @@ public class MenuItemController {
                          @RequestParam String picture_url,
                          @RequestParam String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
-        //System.out.println("**** menu_category = " + menu_category.getDescription());
         oldItem.setMenuCategory(menu_category);
         oldItem.setDescription(description);
         oldItem.setPrice(price);
@@ -69,8 +68,6 @@ public class MenuItemController {
     // Delete
     @PostMapping("/menuItem/{id}/deleteItem")
     public String updateItem(@PathVariable long id) {
-//        System.out.println("delete");
-//        System.out.println("id = " + id);
         menuItemDao.deleteById(id);
         return "redirect:/menuItem/index";
     }

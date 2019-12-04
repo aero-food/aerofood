@@ -164,32 +164,10 @@ public class RestaurantController {
         return "show";
     }
 
-//    PostMapping use pathvariable to got back to restaurant and requestParam for the menuItemID//
-
-
     @PostMapping("/restaurants/{id}/{menuItemId}")
     public String addShow(@PathVariable long id, @PathVariable long menuItemId, Model model) {
 
         menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
-
-//        menuItemService.findById(menuItemId).ifPresent(System.out :: println);
-
-        // something about custom queries from the liqour app
-
-//        shoppingCartService.addItem(menuItemsDao.getOne(menuItemId)); // this is only adding the id and not the whole object
-
-//        MenuItem tempItem = menuItemService.findById(menuItemId);
-//
-//        shoppingCartService.addItem(menuItemService.findById(menuItemId));
-
-//                long id1 = 1L;
-//        Optional<MenuItem> optional = menuItemService.findById(id1);
-//
-//        if (optional.isPresent()) {
-//            System.out.println(optional.get());
-//        } else {
-//            System.out.printf("No employee found with id %d%n", id1);
-//        }
 
         return "redirect:/restaurants/{id}";
     }
@@ -215,7 +193,6 @@ public class RestaurantController {
             sortedCurrentList.add(element);
         }
         vModel.addAttribute("menuItems", sortedCurrentList);
-//        vModel.addAttribute("menuItems", menuItemsDao.findMenuItemByRestaurantIsNull());
 
         return "restaurant/addRestaurant";
     }
@@ -227,11 +204,8 @@ public class RestaurantController {
                          Model viewModel) {
         addRestaurantCuisine(dish_types, newRestaurant);
         restaurantDao.save(newRestaurant);
-        //System.out.println("menuItems = " + menuItems);
         addRestaurantMenuItems(menuItems, newRestaurant);
-        // addRestaurantId_MenuItems(newRestaurant);
         restaurantDao.save(newRestaurant);
-//        viewModel.addAttribute("cuisineCategories", restaurantDao.findAll());
         return "redirect:/restaurant/index";
     }
 

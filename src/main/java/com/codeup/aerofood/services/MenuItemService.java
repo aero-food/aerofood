@@ -28,17 +28,11 @@ public class MenuItemService {
         return  menuItemRepository.findById(id);
     }
 
-//    public MenuItem findById(long id){
-//            return  menuItemRepository.findById(id).get();
-//        }
 
     public List<MenuItem> getAll() {
         return (List<MenuItem>) menuItemRepository.findAll();
     }
 
-//    public MenuItem findOne(long id){
-//        return menuItemRepository.findOne(id).get();
-//    }
 
 
     public MenuItem create(MenuItem menuItem){
