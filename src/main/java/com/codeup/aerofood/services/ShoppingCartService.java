@@ -61,7 +61,9 @@ public class ShoppingCartService {
         double total = 0;
 
         for (MenuItem key : orderItems.keySet()) {
-            total += Double.valueOf(key.getPrice());
+//            total += Double.valueOf(key.getPrice());
+            total += Double.valueOf((key.getPrice().toString()));
+
         }
 
         System.out.println(total);
@@ -75,7 +77,9 @@ public class ShoppingCartService {
         double total = 0;
 
         for (MenuItem key : orderItems.keySet()) {
-            total += Double.valueOf(key.getPrice());
+//            total += Double.valueOf(key.getPrice());
+            total += Double.valueOf((key.getPrice().toString()));
+
         }
 
         System.out.println(total);
