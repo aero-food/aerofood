@@ -47,6 +47,12 @@
     <div class="column">
         <div th:each="menu : ${menu}">
 
+            <p>restaurant id: <span th:text="${menu.restaurant.id}"></span></p>
+            <p>title: <span th:text="${menu.title}"></span></p>
+            <p>description: <span th:text="${menu.description}"></span></p>
+            <p>type: <span th:text="${menu.getMenuCategory().getDescription()}"></span></p>
+            <p>price: <span th:text="${menu.price}"></span></p>
+            <p>menuItemID: <span th:text="${menu.id}"></span></p>
 
 <!--            <p><span th:text="${menu.restaurant.id}"></span></p>-->
             <p><span th:text="${menu.title}"></span></p>
@@ -55,13 +61,25 @@
             <p><span th:text="${menu.price}"></span></p>
             <button>Add</button>
             <hr>
+            <br>
+<!--    Temp button          -->
+            <div class="mt-1">
+<!--                <form method="POST" th:action="@{'/shoppingCart/addItem/' + ${menu.id}}">-->
+<!--                    -->
+<!--                /restaurants/{id}/{menuItemId}-->
+                <form method="POST" th:action="@{'/restaurants/' + ${menu.restaurant.id} + '/' +  ${menu.id}}">
+                    <input type="submit" value="ADD TO CART" class="uk-button uk-button-primary uk-button-small uk-border-rounded" />
+                </form>
+            </div>
+
+            <br>
             <hr>
             <div></div>
         </div>
     </div>
 </div>
 
-<a href="/checkout">Proceed to Checkout</a>
+<a href="/shoppingCart">Proceed to Checkout</a>
 
 <div th:replace="fragments/footer :: main-footer"></div>
 
