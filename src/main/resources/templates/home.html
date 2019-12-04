@@ -4,8 +4,10 @@
     <meta charset="UTF-8"/>
     <title>Aero Food | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
+
 </head>
 <body>
+<!--<img src="static/img/aerofood-logo.png">-->
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
@@ -20,16 +22,24 @@
 </div>
 
 
-<section class="container">
+<section class="container font-type">
     <div class="card">
-        <h3>Still getting your food yourself?</h3>
-        <form action="/register" method="GET">
-            <button class="btn btn-primary" type="submit">Register</button>
-        </form>
-        <h4>Already a user?</h4>
-        <form action="/login" method="GET">
-            <button class="btn btn-primary" type="submit">Login</button>
-        </form>
+        <div class="row">
+            <div class="col">
+                <h3>Still getting your food yourself?
+                    Let us help!</h3>
+                <form action="/register" method="GET">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </form>
+            </div>
+            <div class="red-line"></div>
+            <div class="col">
+                <h3>Already a user?</h3>
+                <form action="/login" method="GET">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">

@@ -102,14 +102,43 @@ li{
     width: 5em;
 }
 
+.brand {
+    font-size: 26pt;
+    font-weight: bold;
+}
+
+.font-type {
+    /*font-size: 22pt;*/
+    /*font-weight: bold;*/
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav-font-size {
+    font-size: 22pt;
+}
+
+.footer-font-size {
+    font-size: 16pt;
+}
+
+.nav-item {
+    color: #D22234;
+}
+
+.red-line {
+    border-left: 4px solid #D22234;
+    height: 200px;
+    margin-top: 50px;
+}
+
 .card {
     display: flex;
     align-content: center;
-    padding: .25em;
+    /*padding: .25em;*/
     margin-top: 7em;
-    margin-right: 5em;
+    /*margin-right: 5em;*/
     margin-bottom: 5em;
-    margin-left: 5em;
+    /*margin-left: 5em;*/
     /*height: 400px;*/
     box-shadow: .2em .2em .2em .2em #888888;
     height: 20em;
@@ -140,4 +169,9 @@ li{
 
 .sub-section-header {
     font-size: 1em;
+}
+
+.btn-primary {
+    background-color: #D22234 !important;
+    border: #D22234 !important;
 }
