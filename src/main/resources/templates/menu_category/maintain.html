@@ -6,57 +6,60 @@
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
+<div class="container">
+    <!--Nav bar-->
+    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+    </th:block>
+    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<section class="container">
-
-    <div class="page-header">Menu Categories</div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Category</th>
-            <th>Update</th>
-            <th>Delete</th>
-
-        </tr>
-        </thead>
-        <div th:each="menuCategory : ${menuCategories}">
+    <!--    Middle section-->
+    <section class="mt-5">
+        <div class="page-header">Menu Categories</div>
+        <table class="table">
+            <thead>
             <tr>
-                <td>
-                    <label th:text="${menuCategory.description}"></label>
-                </td>
-                <td>
-                    <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/edit'}" method="get"
-                          th:object="${menuCategory}">
-                        <input class="btn btn-warning btn-sm" type="submit" value="Update Item">
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/delete'}" method="post"
-                          th:object="${menuCategory}">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Delete Item">
-                    </form>
-                </td>
+                <th>Category</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
+            </thead>
+            <th:block th:each="menuCategory : ${menuCategories}">
+                <tr>
+                    <td>
+                        <label th:text="${menuCategory.description}"></label>
+                    </td>
+                    <td>
+                        <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/edit'}" method="get"
+                              th:object="${menuCategory}">
+                            <input class="btn btn-warning btn-sm" type="submit" value="Update Item">
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/delete'}" method="post"
+                              th:object="${menuCategory}">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete Item">
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <div>
+            <form th:action="@{/menuCategory/add}" method="get">
+                <input class="btn btn-success btn-sm" type="submit" value="Add Item">
+            </form>
         </div>
-    </table>
-    <div>
-        <form th:action="@{/menuCategory/add}" method="get">
-            <input class="btn btn-success btn-sm" type="submit" value="Add Item">
-        </form>
-    </div>
-</section>
+    </section>
+    <!--    Footer-->
+    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+</div>
 </body>
 </html>

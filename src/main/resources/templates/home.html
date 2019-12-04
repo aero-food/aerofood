@@ -21,6 +21,7 @@
 
 
 <section class="container">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
     <div class="card">
         <h3>Still getting your food yourself?</h3>
         <form action="/register" method="GET">
@@ -31,7 +32,7 @@
             <button id="login" class="btn btn-primary" type="submit">Login</button>
         </form>
     </div>
-
+    </th:block>
     <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">
         <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}"> Welcome, <span sec:authentication="name"></span></h3>
 

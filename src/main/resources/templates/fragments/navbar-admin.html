@@ -2,21 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<nav class="navbar" th:fragment="main-navbar" style="z-index: 3; position: fixed; top: 0px; left: 0px; width: 100%; background-color: white; opacity: 100%;">
-    <ul>
-        <li id="list3"><span>Aero Food</span></li>
-        <li id="list1"><span><a href="/home">Home</a></span></li>
-
-        <li id="list4"><span><a href="/search">Restaurants</a></span></li>
-        <li><span><a href="/menuCategory/index">Menu Categories</a></span></li>
-        <li><span><a href="/cuisine/index">Cuisine Categories</a></span></li>
-        <li><span><a href="/restaurant/index">Manage Restaurants</a></span></li>
-        <li><span><a href="/menuItem/index">Manage Items</a></span></li>
-        <li sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" th:method="post">
-                <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;"  >Logout</button>
-            </form>
-        </li>
-    </ul>
-
+<nav class="navbar navbar navbar-expand-lg navbar-light bg-light" th:fragment="main-navbar"
+     style="z-index: 3; position: fixed; top: 0px; left: 0px; width: 100%; background-color: white; opacity: 100%;"
+     id="navbarSupportedContentAdmin">
+    <div><a class="brand" style="color: #D22234" href="">Aero Food</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" >
+        <ul id="middleNav" class="navbar-nav" style="border: 0px; margin: 0px; width: 100%;">
+            <li class="nav-item"><span><a href="/search">Restaurants</a></span></li>
+            <li class="nav-item"><span><a href="/cuisine/index">Cuisine Categories</a></span></li>
+            <li class="nav-item"><span><a href="/menuCategory/index">Menu Item Categories</a></span></li>
+            <li class="nav-item"><span><a href="/menuItem/index">Menu Items</a></span></li>
+            <li class="nav-item"><span><a href="/restaurant/index">Update Restaurants</a></span></li>
+        </ul>
+    </div>
+    <div>
+        <ul id="adminNavBar2" class="navbar-nav ml-auto">
+            <li class="nav-item pull-right">
+                <a href="/search">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item pull-right" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                    <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;">Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
 </nav>
