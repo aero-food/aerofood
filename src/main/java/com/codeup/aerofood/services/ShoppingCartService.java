@@ -24,8 +24,6 @@ public class ShoppingCartService {
 
     private RestaurantRepository restaurantDao;
 
-    private MenuCategoryRepository menuCategoryDao;
-
     private MenuItemRepository menuItemsDao;
 
     private UserRepository userDao;
@@ -33,10 +31,9 @@ public class ShoppingCartService {
     private Map<MenuItem, Integer> orderItems = new HashMap<>();
 
     @Autowired
-    public ShoppingCartService(RestaurantRepository restaurantDao, MenuCategoryRepository menuCategoryDao, MenuItemRepository menuItemsDao, UserRepository userDao){
+    public ShoppingCartService(RestaurantRepository restaurantDao, MenuItemRepository menuItemsDao, UserRepository userDao){
         this.restaurantDao = restaurantDao;
-        this.menuCategoryDao = menuCategoryDao;
-        this. menuItemsDao = menuItemsDao;
+        this.menuItemsDao = menuItemsDao;
         this.userDao = userDao;
     }
 
@@ -84,14 +81,14 @@ public class ShoppingCartService {
 
 
 ////////////////////////////// Need to figure out
-    public void newOrder(String gate){
-        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String timeStamp = new SimpleDateFormat("MM/dd/yyyy" + "\n" + "HH:mm:ss").format(new Date());
-
-        Orders order[] ={
-                new Orders()
-        };
-    }
+//    public void newOrder(String gate){
+//        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        String timeStamp = new SimpleDateFormat("MM/dd/yyyy" + "\n" + "HH:mm:ss").format(new Date());
+//
+//        Orders order[] ={
+//                new Orders()
+//        };
+//    }
 
 
 //    public BigDecimal getTotal() {

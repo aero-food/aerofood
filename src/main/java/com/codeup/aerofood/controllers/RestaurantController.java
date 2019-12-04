@@ -8,6 +8,8 @@ import com.codeup.aerofood.repositories.CuisineRepository;
 import com.codeup.aerofood.repositories.MenuCategoryRepository;
 import com.codeup.aerofood.repositories.MenuItemRepository;
 import com.codeup.aerofood.repositories.RestaurantRepository;
+import com.codeup.aerofood.services.MenuItemService;
+import com.codeup.aerofood.services.ShoppingCartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +29,24 @@ public class RestaurantController {
 
     private MenuItemRepository menuItemsDao;
 
+    private ShoppingCartService shoppingCartService;
+
+    private MenuItemService menuItemService;
+
+
 
     public RestaurantController(RestaurantRepository restaurantDao,
                                 CuisineRepository cuisineDao,
                                 MenuCategoryRepository menuCategoryDao,
-                                MenuItemRepository menuItemsDao) {
+                                MenuItemRepository menuItemsDao,
+                                ShoppingCartService shoppingCartService,
+                                MenuItemService menuItemService) {
         this.restaurantDao = restaurantDao;
         this.cuisineDao = cuisineDao;
         this.menuCategoryDao = menuCategoryDao;
         this.menuItemsDao = menuItemsDao;
+        this.shoppingCartService = shoppingCartService;
+        this.menuItemService = menuItemService;
     }
 
     public RestaurantRepository getRestaurantDao() {
@@ -147,10 +158,24 @@ public class RestaurantController {
 
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
 
+        model.addAttribute("cart", shoppingCartService.getItemsInCart());
+
         return "show";
     }
 
 //    PostMapping use pathvariable to got back to restaurant and requestParam for the menuItemID//
+
+
+    @PostMapping("/restaurants/{id}/{menuItemId}")
+    public String addShow(@PathVariable long id, @PathVariable long menuItemId, Model model) {
+
+//        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
+
+        shoppingCartService.addItem(menuItemsDao.getOne(menuItemId));
+
+        return "redirect:/restaurants/{id}";
+    }
+
 
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
