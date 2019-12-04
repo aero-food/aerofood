@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Aero Food ${restaurants.name} Menu</title>
+    <title>Aero Food | ${restaurants.name} Menu</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
@@ -19,9 +19,25 @@
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
-<h1 th:text="${restaurants.name}"></h1>
 
-<h1 th:text="${restaurants.id}"></h1>
+<!--    <div class="d-none d-lg-block">-->
+<!--    <div class="jumbotron jumbotron-fluid">-->
+        <div class="container">
+            <div id="outer" style="width:350px;height:240px; overflow:hidden;">
+                <div id="inner">
+                    <img th:src="${restaurants.getPicture_url()}" alt="" height="240">
+                    <h1 th:text="${restaurants.getName()}" class="display-3"><strong></strong></h1>
+                </div>
+<!--    </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+
+
+
+
+
+<!--<h1 th:text="${restaurants.id}"></h1>-->
 
 <a href="/search">Back &#x21A9;</a>
 <hr>
@@ -37,6 +53,12 @@
             <p>type: <span th:text="${menu.getMenuCategory().getDescription()}"></span></p>
             <p>price: <span th:text="${menu.price}"></span></p>
             <p>menuItemID: <span th:text="${menu.id}"></span></p>
+
+<!--            <p><span th:text="${menu.restaurant.id}"></span></p>-->
+            <p><span th:text="${menu.title}"></span></p>
+            <p><span th:text="${menu.description}"></span></p>
+            <p><span th:text="${menu.getMenuCategory().getDescription()}"></span></p>
+            <p><span th:text="${menu.price}"></span></p>
             <button>Add</button>
             <hr>
             <br>
@@ -52,7 +74,7 @@
 
             <br>
             <hr>
-
+            <div></div>
         </div>
     </div>
 </div>

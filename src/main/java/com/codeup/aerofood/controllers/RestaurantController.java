@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -156,7 +157,6 @@ public class RestaurantController {
 
 
         model.addAttribute("restaurants", restaurantDao.getOne(id));
-
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
 
         model.addAttribute("cart", shoppingCartService.getItemsInCart());
@@ -288,8 +288,12 @@ public class RestaurantController {
         oldRestaurant.setPhone_number(phone_number);
         oldRestaurant.setPicture_url(picture_url);
         oldRestaurant.setThumbnail(thumbnail);
-        addRestaurantCuisine(cuisines, oldRestaurant);
-        addRestaurantMenuItems(menuItems, oldRestaurant);
+        if (cuisines != null){
+            addRestaurantCuisine(cuisines, oldRestaurant);
+        }
+       if(menuItems != null){
+           addRestaurantMenuItems(menuItems, oldRestaurant);
+       }
         restaurantDao.save(oldRestaurant);
         return "redirect:/restaurant/index";
     }
@@ -322,7 +326,7 @@ public class RestaurantController {
     public String update(@PathVariable long id,
                          @RequestParam List<Long> menuItemId,
                          @RequestParam List<String> description,
-                         @RequestParam List<Float> price,
+                         @RequestParam List<BigDecimal> price,
                          @RequestParam List<MenuCategory> menu_category,
                          @RequestParam List<String> title) {
         System.out.println("update");

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @Controller
 public class MenuItemController {
     private final MenuItemRepository menuItemDao;
@@ -52,7 +54,7 @@ public class MenuItemController {
 
     @PostMapping("/menuItem/{id}/editItem")
     public String update(@PathVariable long id, @RequestParam String description,
-                         @RequestParam Float price,
+                         @RequestParam BigDecimal price,
                          @RequestParam MenuCategory menu_category,
                          @RequestParam String picture_url,
                          @RequestParam String title) {
