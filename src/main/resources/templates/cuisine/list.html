@@ -7,56 +7,63 @@
 </head>
 <body>
 
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
+<!--Main Div-->
+<div class="container">
+    <!--Nav bar-->
+    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+    </th:block>
+    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<section class="container">
+    <!--    Middle section-->
+    <section class="mt-5">
 
-    <h1 class="my-3 text-center">Cuisine Categories</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Category</th>
-            <th>Update</th>
-            <th>Delete</th>
-
-        </tr>
-        </thead>
-        <div th:each="cuisineCategory : ${cuisineCategories}">
+        <div class="page-header">Cuisine Categories</div>
+        <table class="table">
+            <thead>
             <tr>
-                <td>
-                    <label th:text="${cuisineCategory.description}"></label>
-                </td>
-                <td>
-                    <form th:action="@{'/cuisine/' + ${cuisineCategory.id} + '/edit'}" method="get"
-                          th:object="${cuisineCategory}">
-                        <input class="btn btn-warning btn-sm" type="submit" value="Update">
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{'/cuisine/' + ${cuisineCategory.id} + '/delete'}" method="post"
-                          th:object="${cuisineCategory}">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
-                    </form>
-                </td>
+                <th>Category</th>
+                <th>Update</th>
+                <th>Delete</th>
+
             </tr>
+            </thead>
+            <div th:each="cuisineCategory : ${cuisineCategories}">
+                <tr>
+                    <td>
+                        <label th:text="${cuisineCategory.description}"></label>
+                    </td>
+                    <td>
+                        <form th:action="@{'/cuisine/' + ${cuisineCategory.id} + '/edit'}" method="get"
+                              th:object="${cuisineCategory}">
+                            <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/cuisine/' + ${cuisineCategory.id} + '/delete'}" method="post"
+                              th:object="${cuisineCategory}">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            </div>
+        </table>
+        <div>
+            <form th:action="@{/cuisine/add}" method="get">
+                <input class="btn btn-success btn-sm" type="submit" value="Add">
+            </form>
         </div>
-    </table>
-    <div>
-        <form th:action="@{/cuisine/add}" method="get">
-            <input class="btn btn-success btn-sm" type="submit" value="Add">
-        </form>
-    </div>
-</section>
+    </section>
+    <!--    Footer-->
+    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+</div>
 </body>
 </html>

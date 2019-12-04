@@ -211,11 +211,11 @@ public class RestaurantController {
 
     // Update restaurant
     @GetMapping("/restaurant/{id}/edit")
-    public String updatePost(@PathVariable long id,
+    public String updateRestaurant(@PathVariable long id,
                              Model viewModel) {
         viewModel.addAttribute("restaurant", restaurantDao.getOne(id));
         // Cuisine type
-        int index;
+        int index = 0;
         List<Cuisine> cuisineList = restaurantDao.getOne(id).getCuisines();
         if (!cuisineList.isEmpty()) {
             List<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
@@ -234,42 +234,32 @@ public class RestaurantController {
 
         // New menu items
         List<MenuItem> restaurantMenuItemList = restaurantDao.getOne(id).getMenu_items();
-        List<String> itemMenuTitles = new ArrayList<>();
-        List<String> newItemMenuCategories = new ArrayList<>();
-        for (MenuItem currentMenuItem : restaurantMenuItemList) {
-            itemMenuTitles.add(currentMenuItem.getTitle());
-            if (!newItemMenuCategories.contains(currentMenuItem.getMenuCategory().getDescription())) {
-                newItemMenuCategories.add(currentMenuItem.getMenuCategory().getDescription());
+        List<MenuItem> newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNull(); //menuItemsDao.findAll();
+        List<MenuItem> selectThisMenuItem = new ArrayList<>();
+        boolean exists = false;
+//        MenuItem currentMenuItem;
+        //var result = new ArrayList<Person>();
+
+        for (MenuItem currentMenuItem : newMenuItemList) {
+//            System.out.println("currentMenuItem.getTitle() = " + currentMenuItem.getTitle());
+            for (int jIndex = 0; jIndex < restaurantMenuItemList.size(); jIndex++) {
+                if (currentMenuItem.getTitle().equalsIgnoreCase(restaurantMenuItemList.get(jIndex).getTitle())) {
+                    exists = true;
+                }
             }
-        }
-        List<MenuItem> newMenuItemList;
-        if (itemMenuTitles.size() > 0) {
-            newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNullAndTitleIsNotIn(itemMenuTitles);
-        } else {
-            newMenuItemList = menuItemsDao.findAll();
+            if (!(exists)) {
+                selectThisMenuItem.add(currentMenuItem);
+            }
+            exists = false;
         }
 
-        List<MenuItem> currentMenuItems = restaurantDao.getOne(id).getMenu_items();
-        Collections.sort(currentMenuItems, MenuItem.MenuCategoryComparator);
-        List<MenuItem> sortedCurrentList = new ArrayList<>();
-        for(MenuItem element: currentMenuItems){
-            sortedCurrentList.add(element);
-        }
-        viewModel.addAttribute("menuItems", sortedCurrentList);
-
-        Collections.sort(newMenuItemList, MenuItem.MenuCategoryComparator);
-        List<MenuItem> sortedList = new ArrayList<>();
-        for(MenuItem element: newMenuItemList){
-            sortedList.add(element);
-        }
-        viewModel.addAttribute("newMenuItemList",  sortedList);
-        viewModel.addAttribute("newMenuItemListCategories", newItemMenuCategories);
+        viewModel.addAttribute("menuItems", restaurantDao.getOne(id).getMenu_items());
+        viewModel.addAttribute("newMenuItemList", selectThisMenuItem);
 
         viewModel.addAttribute("itemList", restaurantDao.getOne(id).getCuisines());
         viewModel.addAttribute("dish_types", menuCategoryDao.findAll());
         viewModel.addAttribute("restaurantId", id);
-        return "restaurant/editRestaurant";
-    }
+        return "restaurant/editRestaurant";}
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,
@@ -310,11 +300,6 @@ public class RestaurantController {
     @PostMapping("/restaurant/{id}/addRestaurantMenuItem")
     public String update(@PathVariable long id,
                          @RequestParam List<Long> restaurantId) {
-        System.out.println("add menu items to restaurant");
-        //Restaurant oldRestaurant = restaurantDao.getOne(id);
-        //addRestaurantMenuItems(menuItems, oldRestaurant);
-        //restaurantDao.save(oldRestaurant);
-//        menuItemsDao.save(oldItem);
         addRestaurantMenuItem(id, restaurantId.get(0));
         Restaurant oldRestaurant = restaurantDao.getOne(restaurantId.get(0));
         return "redirect:/restaurant/" + oldRestaurant.getId() + "/edit";

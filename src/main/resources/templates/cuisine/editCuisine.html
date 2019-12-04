@@ -6,34 +6,39 @@
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
+<!--Main Div-->
+<div class="container">
+    <!--Nav bar-->
+    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+    </th:block>
+    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<section class="container">
-    <h1 class="page_title">Update Cuisine Description</h1>
-    <form th:action="@{'/cuisine/' + ${id} + '/edit'}" th:method="post"  th:object="${cuisine}">
-        <div class="container">
-            <div class="form-group">
-                Description:
-                <input th:field="*{description}" class="form-control"/>
+    <!--    Middle section-->
+    <section class="mt-5">
+        <div class="page-header">Update Cuisine Description</div>
+        <form th:action="@{'/cuisine/' + ${id} + '/edit'}" th:method="post" th:object="${cuisine}">
+            <div class="container">
+                <div class="form-group">
+                    Description:
+                    <input th:field="*{description}" class="form-control"/>
+                </div>
+                <input type="hidden" th:field="*{id}">
+                <input class="btn btn-warning" type="submit" value="Update">
+
             </div>
-            <input type="hidden" th:field="*{id}">
-            <input class="btn btn-warning" type="submit" value="Update">
-
-        </div>
-    </form>
-</section>
-
+        </form>
+    </section>
+    <!--    Footer-->
+    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+</div>
 </body>
 </html>

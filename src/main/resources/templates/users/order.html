@@ -6,45 +6,46 @@
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar :: main-navbar"></div>
-    </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<div class="container">
-    <div class="page-header">Order Details</div>
-    <div th:text="${orderDetails.getRestaurant().getName()}"></div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="orderDetail : ${orderDetails.getOrderDetails()}">
+<div id="mainDiv">
+    <div>
+        <!--Nav bar-->
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </div>
+        <div th:if="not ${#authorization.expression('isAuthenticated()')}">
+            <div th:replace="fragments/navbar :: main-navbar"></div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 2em;">
+        <div class="page-header">Order Details</div>
+        <div th:text="${orderDetails.getRestaurant().getName()}"></div>
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
-                <td th:text="${orderDetail.getQuantity()}"></td>
-                <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
-                <td th:text="${orderDetail.getTotalPerItem()}"></td>
+                <th scope="col">Title</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
             </tr>
-        </th:block>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <th:block th:each="orderDetail : ${orderDetails.getOrderDetails()}">
+                <tr>
+                    <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
+                    <td th:text="${orderDetail.getQuantity()}"></td>
+                    <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
+                    <td th:text="${orderDetail.getTotalPerItem()}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
