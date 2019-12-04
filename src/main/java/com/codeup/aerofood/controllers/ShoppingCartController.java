@@ -27,32 +27,52 @@ public class ShoppingCartController {
     }
 
 
+//    @GetMapping("/shoppingCart")
+//    public ModelAndView shoppingCart(){
+//        ModelAndView modelAndView = new ModelAndView("shoppingCart");
+//        modelAndView.addObject("items", shoppingCartService.getItemsInCart());
+////        modelAndView.addObject("total", shoppingCartService.getTotal().toString());
+////        modelAndView.addObject("total_stripe", shoppingCartService.getTotal().toString().replace(".", ""));
+//        return modelAndView;
+//    }
     @GetMapping("/shoppingCart")
-    public ModelAndView shoppingCart(){
-        ModelAndView modelAndView = new ModelAndView("shoppingCart");
-        modelAndView.addObject("items", shoppingCartService.getItemsInCart());
+    public String shoppingCart(Model model){
+//        ModelAndView modelAndView = new ModelAndView("shoppingCart");
+//        modelAndView.addObject("items", shoppingCartService.getItemsInCart());
 //        modelAndView.addObject("total", shoppingCartService.getTotal().toString());
 //        modelAndView.addObject("total_stripe", shoppingCartService.getTotal().toString().replace(".", ""));
-        return modelAndView;
+
+        model.addAttribute("items", shoppingCartService.getItemsInCart());
+
+        //map.entrySet().forEach(entry -> {
+        //    System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+        //});
+
+//        shoppingCartService.getItemsInCart().entrySet().forEach(entry ->{
+//            System.out.println(entry.getKey().getId());
+////            System.out.println(entry.getKey().getTitle());
+//        });
+
+        return "shoppingCart";
     }
 
-    @GetMapping("/shoppingCart/addItem/{menuItemId}")
-    public ModelAndView addItem(@PathVariable("menuItemId") Long menuItemId){
-        ModelAndView modelAndView = new ModelAndView("shoppingCart");
-        return modelAndView;
-    }
+//    @GetMapping("/shoppingCart/addItem/{menuItemId}")
+//    public ModelAndView addItem(@PathVariable("menuItemId") Long menuItemId){
+//        ModelAndView modelAndView = new ModelAndView("shoppingCart");
+//        return modelAndView;
+//    }
 
-    @PostMapping("/shoppingCart/addItem/{menuItemId}")
-    public ModelAndView addItemToCart(@PathVariable("menuItemId") Long menuItemId){
-        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
-        return shoppingCart();
-    }
-
-    @PostMapping("/shoppingCart/removeProduct/{menuItemId}")
-    public ModelAndView removeItemFromCart(@PathVariable("menuItemId") Long menuItemId){
-        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::removeItem);
-        return shoppingCart();
-    }
+//    @PostMapping("/shoppingCart/addItem/{menuItemId}")
+//    public ModelAndView addItemToCart(@PathVariable("menuItemId") Long menuItemId){
+//        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
+//        return shoppingCart();
+//    }
+//
+//    @PostMapping("/shoppingCart/removeProduct/{menuItemId}")
+//    public ModelAndView removeItemFromCart(@PathVariable("menuItemId") Long menuItemId){
+//        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::removeItem);
+//        return shoppingCart();
+//    }
 
     @GetMapping("/shoppingCart/checkout")
     public ModelAndView order(@RequestParam("gate") String gate){

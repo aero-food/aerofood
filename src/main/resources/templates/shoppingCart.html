@@ -21,11 +21,13 @@
 
 <h1>this is the cart page</h1>
 
-<div th:each="product : ${menuItems.entrySet()}">
+<div th:each="product : ${items.entrySet()}">
     <div>
-        <h1 th:text="${product.getKey().name}"></h1>
+<!--        <h1 th:text="${product.getKey()}"></h1>-->
+        <h1 th:text="${product.getKey().getTitle()}"></h1>
     </div>
 </div>
+
 
 
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class RestaurantController {
@@ -169,9 +170,26 @@ public class RestaurantController {
     @PostMapping("/restaurants/{id}/{menuItemId}")
     public String addShow(@PathVariable long id, @PathVariable long menuItemId, Model model) {
 
-//        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
+        menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
 
-        shoppingCartService.addItem(menuItemsDao.getOne(menuItemId));
+//        menuItemService.findById(menuItemId).ifPresent(System.out :: println);
+
+        // something about custom queries from the liqour app
+
+//        shoppingCartService.addItem(menuItemsDao.getOne(menuItemId)); // this is only adding the id and not the whole object
+
+//        MenuItem tempItem = menuItemService.findById(menuItemId);
+//
+//        shoppingCartService.addItem(menuItemService.findById(menuItemId));
+
+//                long id1 = 1L;
+//        Optional<MenuItem> optional = menuItemService.findById(id1);
+//
+//        if (optional.isPresent()) {
+//            System.out.println(optional.get());
+//        } else {
+//            System.out.printf("No employee found with id %d%n", id1);
+//        }
 
         return "redirect:/restaurants/{id}";
     }

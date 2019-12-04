@@ -15,6 +15,10 @@ public class MenuItemService {
 
     private MenuItemRepository menuItemRepository;
 
+    public MenuItemService(MenuItemRepository menuItemRepository){
+        this.menuItemRepository = menuItemRepository;
+    }
+
 
     public Page<MenuItem> findAllMenuItemsPageable(Pageable pageable){
         return menuItemRepository.findAll(pageable);
@@ -23,6 +27,10 @@ public class MenuItemService {
     public Optional<MenuItem> findById(long id){
         return  menuItemRepository.findById(id);
     }
+
+//    public MenuItem findById(long id){
+//            return  menuItemRepository.findById(id).get();
+//        }
 
     public List<MenuItem> getAll() {
         return (List<MenuItem>) menuItemRepository.findAll();
