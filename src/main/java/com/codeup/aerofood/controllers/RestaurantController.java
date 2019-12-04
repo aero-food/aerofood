@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RestaurantController {
@@ -215,7 +214,7 @@ public class RestaurantController {
                              Model viewModel) {
         viewModel.addAttribute("restaurant", restaurantDao.getOne(id));
         // Cuisine type
-        int index = 0;
+        int index;
         List<Cuisine> cuisineList = restaurantDao.getOne(id).getCuisines();
         if (!cuisineList.isEmpty()) {
             List<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
@@ -237,6 +236,8 @@ public class RestaurantController {
         List<MenuItem> newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNull(); //menuItemsDao.findAll();
         List<MenuItem> selectThisMenuItem = new ArrayList<>();
         boolean exists = false;
+//        MenuItem currentMenuItem;
+        //var result = new ArrayList<Person>();
 
         for (MenuItem currentMenuItem : newMenuItemList) {
 //            System.out.println("currentMenuItem.getTitle() = " + currentMenuItem.getTitle());
