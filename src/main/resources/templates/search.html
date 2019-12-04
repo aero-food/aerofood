@@ -6,37 +6,101 @@
     <title>Search</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body class="font-type">
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
+<body id="body">
+<div id="mainDiv">
+    <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
+    <!--Nav bar-->
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <th:block th:if="not ${#authentication.principal.isAdmin}">
+            <div th:replace="fragments/navbar :: main-navbar"></div>
+        </th:block>
+        <th:block th:if="${#authentication.principal.isAdmin}">
+            <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+        </th:block>
+    </div>
+    <div th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
-    </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<div class="page-header text-center" style="color: #D22234"> <h2><u>Restaurants</u></h2></div>
-
-
-<div class="container text-center">
-    <div class="column">
-        <div th:each="restaurants : ${restaurants}">
-            <br>
-            <a th:href="@{'/restaurants/' + ${restaurants.id}}">
-                <h3 th:text="${restaurants.name}"></h3></a>
-            <img th:src="${restaurants.thumbnail}" alt="" height="100" width="100">
-                <p> Gate <span th:text="${restaurants.gate}"></span></p>
-            <p> Phone: <span th:text="${restaurants.phone_number}"></span></p>
+    </div>
+    <div class="restaurant-list-container">
+        <div class="page-header">Search for a Restaurant</div>
+        <div class="row" id="restaurantList">
+            <div th:each="restaurant : ${restaurants}">
+                <div class="menu-tile">
+                    <a th:href="@{'/restaurants/' + ${restaurant.id}}">
+                        <div id="outer" style="width:400px;height:240px; overflow:hidden;">
+                            <div id="inner">
+                                <img th:src="${restaurant.getPicture_url()}" alt="" height="240">
+                            </div>
+                        </div>
+                        <div class="restaurant-info">
+                            <span th:text="${restaurant.name}"></span>&nbsp;(Gate: <span
+                                th:text=" ${restaurant.gate}"></span>)
+                            </span>
+                        </div>
+                        <div class="cuisine-type">
+                            <th:block th:each="cuisine,itrStat : ${restaurant.getCuisines()}">
+                                <span th:text="${cuisine.getDescription()}"></span>
+                                <th:block th:if="${itrStat.index <= itrStat.size - 2}">
+                                    ,
+                                </th:block>
+                                <!--                                                    <td th:text="${itrStat.index}">0</td>-->
+                                <!--                                                    <td th:text="${itrStat.size}">10</td>-->
+                            </th:block>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
+<br>
 <div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
 </html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Search</title>-->
+<!--    <th:block th:replace="fragments/header :: main-header"/>-->
+<!--</head>-->
+<!--<body class="font-type">-->
+<!--&lt;!&ndash;<div th:replace="fragments/navbar :: main-navbar"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;Nav bar&ndash;&gt;-->
+<!--<div th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--    <th:block th:if="not ${#authentication.principal.isAdmin}">-->
+<!--        <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--    </th:block>-->
+<!--    <th:block th:if="${#authentication.principal.isAdmin}">-->
+<!--        <div th:replace="fragments/navbar-admin :: main-navbar"></div>-->
+<!--    </th:block>-->
+<!--</div>-->
+<!--<div th:if="not ${#authorization.expression('isAuthenticated()')}">-->
+<!--    <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--</div>-->
+<!--<div class="page-header text-center" style="color: #D22234"> <h2><u>Restaurants</u></h2></div>-->
+
+
+<!--<div class="container text-center">-->
+<!--    <div class="column">-->
+<!--        <div th:each="restaurants : ${restaurants}">-->
+<!--            <br>-->
+<!--            <a th:href="@{'/restaurants/' + ${restaurants.id}}">-->
+<!--                <h3 th:text="${restaurants.name}"></h3></a>-->
+<!--            <img th:src="${restaurants.thumbnail}" alt="" height="100" width="100">-->
+<!--                <p> Gate <span th:text="${restaurants.gate}"></span></p>-->
+<!--            <p> Phone: <span th:text="${restaurants.phone_number}"></span></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div th:replace="fragments/footer :: main-footer"></div>-->
+
+<!--</body>-->
+<!--</html>-->

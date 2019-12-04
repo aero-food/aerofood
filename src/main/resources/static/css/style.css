@@ -1,6 +1,10 @@
 /*Elements*/
 
-body {
+html, body {
+
+    /*padding-bottom: 120px;*/
+    height: 100%;
+    padding: 0;
     margin: 0;
     /*font-family: 'Indie Flower', cursive;*/
     /*background-color: #eef2db;*/
@@ -8,25 +12,28 @@ body {
     /*font-family: 'Source Code Pro', monospace;*/
 }
 
+#body {
+    padding-top: 10px;
+    padding-bottom: 200px;
+}
+
+#container {
+    min-height: 100%;
+    position: relative;
+}
+
 button {
     margin-left: 200px;
     margin-right: 200px;
 }
+
 h1 {
     color: #1a3f13 ;
     display: flex;
     justify-content: center;
 }
 
-a {
-
-}
-
-h3 {
-    margin-top: 50px;
-}
-
-h4 {
+h3, h4 {
     margin-top: 50px;
 }
 
@@ -49,13 +56,7 @@ li{
     list-style-type:none;
     margin: .5em;
 }
-/*ul {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    align-content: space-around;*/
-/*    list-style: none;*/
 
-/*}*/
 /*Element ID*/
 /*#list1, #list2 {*/
 /*    display: flex;*/
@@ -82,10 +83,8 @@ li{
     font-size: 1em;
     display: flex;
     flex-direction: row;
-    /*//justify-content: space-around;*/
     margin: 10em;
 }
-
 
 #postList {
     display: flex;
@@ -95,7 +94,6 @@ li{
     /*//justify-content: space-around;*/
     overflow: auto;
 }
-/*Classes*/
 
 
 .btn-delete{
@@ -174,4 +172,13 @@ li{
 .btn-primary {
     background-color: #D22234 !important;
     border: #D22234 !important;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 95px;
+    /*left: 0;*/
+    /*margin-top: 10rem;*/
 }
