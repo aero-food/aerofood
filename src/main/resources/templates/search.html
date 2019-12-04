@@ -6,7 +6,7 @@
     <title>Search</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body>
+<body class="font-type">
 <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
@@ -20,9 +20,10 @@
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
-<div class="page-header">Search for a Restaurant</div>
+<div class="page-header text-center" style="color: #D22234"> <h2><u>Restaurants</u></h2></div>
 
-<div class="container">
+
+<div class="container text-center">
     <div class="column">
         <div th:each="restaurants : ${restaurants}">
             <br>
