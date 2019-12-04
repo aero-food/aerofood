@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -97,8 +98,25 @@ public class ShoppingCartService {
 //                .reduce(BigDecimal::add)
 //                .orElse(BigDecimal.ZERO);
 //    }
-//
+
+//    public BigDecimal getTotal() {
+//        return BigDecimal.valueOf(1.99);
+//    }
+
     public BigDecimal getTotal() {
-        return BigDecimal.valueOf(1.99);
+
+        double total = 0;
+
+        for (MenuItem key : orderItems.keySet()) {
+            total += Double.valueOf(key.getPrice());
+        }
+
+        System.out.println(total);
+
+        BigDecimal finalPrice= new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+
+        return finalPrice;
     }
+
+
 }

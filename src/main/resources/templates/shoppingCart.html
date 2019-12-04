@@ -23,11 +23,11 @@
 
 <div th:each="product : ${items.entrySet()}">
     <div>
-<!--        <h1 th:text="${product.getKey()}"></h1>-->
         <h1 th:text="${product.getKey().getTitle()}"></h1>
     </div>
 </div>
 
+<h3> Your Total = <span th:text="${total}"></span></h3>
 
 
 

@@ -44,6 +44,10 @@ public class ShoppingCartController {
 
         model.addAttribute("items", shoppingCartService.getItemsInCart());
 
+        model.addAttribute("total", shoppingCartService.getTotal().toString());
+
+        shoppingCartService.getTotal();
+
         //map.entrySet().forEach(entry -> {
         //    System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
         //});
