@@ -150,6 +150,8 @@ public class RestaurantController {
         return "show";
     }
 
+//    PostMapping use pathvariable to got back to restaurant and requestParam for the menuItemID//
+
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
 //

@@ -31,8 +31,8 @@ public class ShoppingCartController {
     public ModelAndView shoppingCart(){
         ModelAndView modelAndView = new ModelAndView("shoppingCart");
         modelAndView.addObject("items", shoppingCartService.getItemsInCart());
-        modelAndView.addObject("total", shoppingCartService.getTotal().toString());
-        modelAndView.addObject("total_stripe", shoppingCartService.getTotal().toString().replace(".", ""));
+//        modelAndView.addObject("total", shoppingCartService.getTotal().toString());
+//        modelAndView.addObject("total_stripe", shoppingCartService.getTotal().toString().replace(".", ""));
         return modelAndView;
     }
 
