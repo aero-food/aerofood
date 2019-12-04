@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Show posts</title>
@@ -7,30 +7,35 @@
 </head>
 <body>
 
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-<!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
+<div class="container">
+    <!--Nav bar-->
+    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+    </th:block>
+    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-<section class="container">
-    <h1 class="page_title">Create a new Cuisine Category</h1>
-    <form th:action="@{/cuisine/add}" th:method="post" th:object="${cuisine}" class="form-group">
-        <label for="cuisine">Category</label>
-        <br>
-        <input id="cuisine" th:field="${cuisine.description}" class="form-control" th:required="required"/>
-        <br>
-        <input type="submit"/>
+    <!--    Middle section-->
+    <section class="mt-5">
+        <div class="page-header">Create a new Cuisine Category</div>
+        <form th:action="@{/cuisine/add}" th:method="post" th:object="${cuisine}" class="form-group">
+            <label for="cuisine">Category</label>
+            <br>
+            <input id="cuisine" th:field="${cuisine.description}" class="form-control" th:required="required"/>
+            <br>
+            <input type="submit"/>
 
-    </form>
-</section>
-
+        </form>
+    </section>
+    <!--    Footer-->
+    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+</div>
 </body>
 </html>
