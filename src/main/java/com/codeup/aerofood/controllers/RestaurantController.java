@@ -236,8 +236,6 @@ public class RestaurantController {
         List<MenuItem> newMenuItemList = menuItemsDao.findMenuItemByRestaurantIsNull(); //menuItemsDao.findAll();
         List<MenuItem> selectThisMenuItem = new ArrayList<>();
         boolean exists = false;
-//        MenuItem currentMenuItem;
-        //var result = new ArrayList<Person>();
 
         for (MenuItem currentMenuItem : newMenuItemList) {
 //            System.out.println("currentMenuItem.getTitle() = " + currentMenuItem.getTitle());
