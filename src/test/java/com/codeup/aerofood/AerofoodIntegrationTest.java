@@ -99,9 +99,7 @@ public class AerofoodIntegrationTest {
         assertNotNull(httpSession);
     }
 
-
-//Category
-
+// Test Category
     @Test
     public void testIfCategoryCanBeCreated() throws Exception {
         this.mvc.perform(post("/menuCategory/add").with(csrf())
