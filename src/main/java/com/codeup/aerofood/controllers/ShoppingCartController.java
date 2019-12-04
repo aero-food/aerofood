@@ -44,7 +44,9 @@ public class ShoppingCartController {
 
         model.addAttribute("items", shoppingCartService.getItemsInCart());
 
-        model.addAttribute("total", shoppingCartService.getTotal().toString());
+        model.addAttribute("total", shoppingCartService.getTotal());
+
+        model.addAttribute("totalTax", shoppingCartService.getTotalWithTax());
 
         shoppingCartService.getTotal();
 

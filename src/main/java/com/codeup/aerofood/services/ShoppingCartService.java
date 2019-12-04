@@ -92,16 +92,6 @@ public class ShoppingCartService {
 //    }
 
 
-//    public BigDecimal getTotal() {
-//        return orderItems.entrySet().stream()
-//                .map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
-//                .reduce(BigDecimal::add)
-//                .orElse(BigDecimal.ZERO);
-//    }
-
-//    public BigDecimal getTotal() {
-//        return BigDecimal.valueOf(1.99);
-//    }
 
     public BigDecimal getTotal() {
 
@@ -117,6 +107,21 @@ public class ShoppingCartService {
 
         return finalPrice;
     }
+    public BigDecimal getTotalWithTax() {
 
+        double total = 0;
+
+        for (MenuItem key : orderItems.keySet()) {
+            total += Double.valueOf(key.getPrice());
+        }
+
+        System.out.println(total);
+
+        total = (total * .0825) + total;
+
+        BigDecimal finalPrice= new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+
+        return finalPrice;
+    }
 
 }
