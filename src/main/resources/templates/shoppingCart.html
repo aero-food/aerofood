@@ -14,8 +14,12 @@
             margin-bottom: 1em;
             margin-left: 2em;
             /*height: 400px;*/
-            box-shadow: .2em .2em .2em .2em #888888;
+            box-shadow: 0 0 0 0 #888888;
             /*height: 10em;*/
+        }
+        .card-body {
+            padding: .5em;
+            color: black;
         }
     </style>
 </head>
@@ -51,14 +55,15 @@
             </div>
     </div>
 
-
+<div class="card d-flex flex-column mr-auto ml-auto">
+    <div class="card-body">
     <h3> Total in Cart = <span th:text="${total}"></span></h3>
 
     <h3> Total With Tax = <span th:text="${totalTax}"></span></h3>
         </div>
 
     <form  th:action="@{'/shoppingCart/checkout'}" method="GET">
-        <h4 class="remove-margin">Delivery Gate</h4>
+        <h4 class="remove-margin">Enter your Gate</h4>
         <input  id="checkout_address" name="checkout_address" type="text" />
         <br/>
         <div>
@@ -76,6 +81,7 @@
         </div>
     </form>
     </div>
-
+    </div>
+</div>
 </body>
 </html>
