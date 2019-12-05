@@ -1,16 +1,20 @@
 package com.codeup.aerofood.services;
 
 import com.codeup.aerofood.models.MenuItem;
+import com.codeup.aerofood.models.Orders;
+import com.codeup.aerofood.models.User;
 import com.codeup.aerofood.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -26,11 +30,14 @@ public class ShoppingCartService {
 
     private Map<MenuItem, Integer> orderItems = new HashMap<>();
 
+    private OrderRepository ordersDao;
+
     @Autowired
-    public ShoppingCartService(RestaurantRepository restaurantDao, MenuItemRepository menuItemsDao, UserRepository userDao){
+    public ShoppingCartService(RestaurantRepository restaurantDao, MenuItemRepository menuItemsDao, UserRepository userDao, OrderRepository orderRepository){
         this.restaurantDao = restaurantDao;
         this.menuItemsDao = menuItemsDao;
         this.userDao = userDao;
+        this.ordersDao = ordersDao;
     }
 
     public void addItem(MenuItem menuItem){
@@ -89,6 +96,26 @@ public class ShoppingCartService {
         BigDecimal finalPrice= new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
 
         return finalPrice;
+    }
+
+    public void checkout(String gate) {
+
+        newOrder(gate);
+    }
+
+    public void newOrder(String gate) {
+        User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Float orderTotal = Float.valueOf(getTotalWithTax().toString());
+
+        Orders order = new Orders();
+
+        order.setGate(gate);
+        order.setTotal(orderTotal);
+        order.setUser(sessionUser);
+
+
+        ordersDao.save(order);
     }
 
 }
