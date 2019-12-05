@@ -31,7 +31,7 @@
 <!--            <li class="nav-item">-->
 <!--                <a sec:authorize="isAuthenticated()" class="nav-link" href="/search">My Orders<span class="sr-only"></span></a>-->
 <!--            </li>-->
-            <li class="nav-item mr-auto">
+            <li class="nav-item">
                 <a class="nav-link" href="/search">Restaurants</a>
             </li>
             <li class="nav-item pull-right">
@@ -44,9 +44,17 @@
 <!--            </li>-->
                         <!--    This code commented out is ugly but works.     -->
 
-            <li th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()" class="nav-item pull-right">
+<!--            <li th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()" class="nav-item pull-right">-->
+<!--                <form th:action="@{/logout}" th:method="post">-->
+<!--                    <a sec:authorize="isAuthenticated()" class="nav-link">Logout</a>-->
+<!--                </form>-->
+<!--            </li>-->
+
+<!--            This one works-->
+
+            <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" th:method="post">
-                    <a sec:authorize="isAuthenticated()" class="nav-link">Logout</a>
+                    <button>Logout</button>
                 </form>
             </li>
         </ul>
