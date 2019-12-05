@@ -5,21 +5,45 @@
     <title>About</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
+
 <body>
-<div th:replace="fragments/navbar :: main-navbar"></div>
+    <div th:replace="fragments/navbar :: main-navbar"></div>
 
-<h3>About</h3>
+    <div class="" style="padding-top: 160px">
+        <h1 style="font-size: 53pt">About</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h1 class="text-center">Laura Vela</h1>
+                <a href="https://alumni.codeup.com/students/702"><img style="width:340px; height:350px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/LauraG.jpg" alt="Laura"></a>
+                  <div class="row">
 
-<h1>Laura Vela</h1>
-<a href="https://alumni.codeup.com/students/702"><img src="https://s3.amazonaws.com/alumni.codeup.com/LauraG.jpg" alt="Laura"></a>
+                    <i class="fa fa-envelope about-icons" style="font-size: 25pt"></i><a href="https://github.com/gloriaLVela"></a>
+                    <i class="fa fa-github about-icons" style="font-size: 25pt"></i><a href="https://github.com/gloriaLVela"></a>
+                    <i class="fa fa-linkedin about-icons" style="font-size: 25pt"></i><a href="gloria.laura.vela@gmail.com"></a>
 
-<h1>Mark Strange</h1>
-<a href="https://alumni.codeup.com/students/716"><img src="https://s3.amazonaws.com/alumni.codeup.com/MarkS.jpg" alt="Mark"></a>
-
-<h1>Alex Ahrens</h1>
-<a href="https://alumni.codeup.com/students/705"><img src="https://s3.amazonaws.com/alumni.codeup.com/AlexA.jpg" alt="Alex"></a>
-
-<div th:replace="fragments/footer :: main-footer"></div>
+                  </div>
+            </div>
+            <div class="col-md-4">
+                <h1 class="text-center">Mark Strange</h1>
+                <a href="https://alumni.codeup.com/students/716"><img style="width:340px; height:350px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/MarkS.jpg" alt="Mark"></a>
+                   <div class="row text-center">
+                    <i class="fa fa-envelope about-icons" style="font-size: 25pt"><a href="https://github.com/strangemark-88"></a></i>
+                    <i class="fa fa-github about-icons" style="font-size: 25pt"><a href="https://www.linkedin.com/in/mark-strange/"></a></i>
+                    <i class="fa fa-linkedin about-icons" style="font-size: 25pt"><a href="strange.mark88@gmail.com"></a></i>
+                   </div>
+            </div>
+            <div class="col-md-4">
+                <h1 class="text-center">Alex Ahrens</h1>
+                <a href ="https://alumni.codeup.com/students/705"><img style="width:340px; height:350px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/AlexA.jpg" alt="Alex"></a>
+                <div class="row text-center">
+                    <i class="fa fa-envelope about-icons" style="font-size: 25pt"><a href="https://github.com/Alexander-Ahrens"></a></i>
+                    <i class="fa fa-github about-icons" style="font-size: 25pt"><a href="https://www.linkedin.com/in/alexander-ahrens/"></a></i>
+                    <i class="fa fa-linkedin about-icons" style="font-size: 25pt"><a href="alexander.m.ahrens@gmail.com"></a></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
 </html>

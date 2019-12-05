@@ -1,20 +1,12 @@
-/*Elements*/
-
 html, body {
-
-    /*padding-bottom: 120px;*/
     height: 100%;
     padding: 0;
     margin: 0;
-    /*font-family: 'Indie Flower', cursive;*/
-    /*background-color: #eef2db;*/
-    /*color: #A0522D;*/
-    /*font-family: 'Source Code Pro', monospace;*/
 }
 
 #body {
     padding-top: 10px;
-    padding-bottom: 200px;
+    /*padding-bottom: 200px;*/
 }
 
 #container {
@@ -33,9 +25,9 @@ h1 {
     justify-content: center;
 }
 
-h3, h4 {
-    margin-top: 50px;
-}
+/*h3, h4 {*/
+/*    margin-top: 50px;*/
+/*}*/
 
 h2, h3, h4, h5, h6 {
     display: flex;
@@ -175,10 +167,22 @@ li{
 }
 
 #footer {
-    position: absolute;
+    /*position: fixed;*/
     bottom: 0;
     width: 100%;
-    height: 95px;
+    /*height: 95px;*/
     /*left: 0;*/
     /*margin-top: 10rem;*/
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.about-icons {
+    color: #D22234;
+    font-size: 40pt;
+    padding: 20px;
 }

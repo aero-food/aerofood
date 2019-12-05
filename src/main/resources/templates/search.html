@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Aero Food | Search</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
+<div id="container">
 <body id="body">
 <div id="mainDiv">
     <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
@@ -22,7 +23,7 @@
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
     <div class="restaurant-list-container">
-        <div class="page-header">Search for a Restaurant</div>
+        <div class="page-header">Restaurant Search</div>
         <div class="row" id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile">
@@ -57,6 +58,7 @@
 <div th:replace="fragments/footer :: main-footer"></div>
 
 </body>
+</div>
 </html>
 
 
