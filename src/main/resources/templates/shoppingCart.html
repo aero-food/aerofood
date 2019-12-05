@@ -31,20 +31,24 @@
 
 <h3> Total With Tax = <span th:text="${totalTax}"></span></h3>
 
-<div class="uk-margin-small-bottom">
-    <script
-            th:method="POST"
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_j75Rf78ZCFhDGGrirhsEM0I300mcaSFYtv"
-            th:attr="data-amount=${totalStripe}"
-            data-name="AeroFood"
-            data-description='Meal Delivery'
-            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-            data-locale="auto"
-            data-zip-code="true">
-    </script>
-</div>
-
+<form  th:action="@{'/shoppingCart/checkout'}" method="GET">
+    <h4 class="remove-margin">Delivery Gate</h4>
+    <input  id="checkout_address" name="checkout_address" type="text" />
+    <br/>
+    <div>
+        <script
+                th:method="POST"
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_j75Rf78ZCFhDGGrirhsEM0I300mcaSFYtv"
+                th:attr="data-amount=${totalStripe}"
+                data-name="AeroFood"
+                data-description='Meal Delivery'
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-zip-code="true">
+        </script>
+    </div>
+</form>
 
 
 </body>

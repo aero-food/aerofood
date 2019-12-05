@@ -15,13 +15,13 @@ public class Orders {
     @Column(nullable = false, columnDefinition = "int(11) UNSIGNED")
     private long id;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(3)")
+    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String gate;
 
-    @Column(nullable = false, unique=true,  columnDefinition = "DATETIME")
+    @Column(columnDefinition = "DATETIME")
     private Date delivery_time;
 
-    @Column(nullable = false, unique=true,  columnDefinition = "DATETIME")
+    @Column(columnDefinition = "DATETIME")
     private Date ordered_time;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(6,2)")
@@ -73,6 +73,16 @@ public class Orders {
         this.user = user;
         this.restaurant = restaurant;
     }
+
+           public Orders(String gate,
+                  Float total,
+                  User user){
+        this.gate = gate;
+        this.total = total;
+        this.user = user;
+
+    }
+
 
     public long getId() {
         return id;

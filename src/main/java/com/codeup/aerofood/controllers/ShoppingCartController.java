@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ShoppingCartController {
@@ -36,6 +37,18 @@ public class ShoppingCartController {
         shoppingCartService.getTotal();
 
         return "shoppingCart";
+    }
+
+    @GetMapping("/shoppingCart/checkout")
+    public String order(@RequestParam("checkout_address") String checkout_address, Model model) {
+
+//            shoppingCartService.checkout(checkout_address);
+
+//        model.addAttribute("order_num", orderRepository.findAll().size());
+        model.addAttribute("order_num", 1);
+        model.addAttribute("gate", checkout_address);
+
+        return "success";
     }
 
 }
