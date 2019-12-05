@@ -8,7 +8,7 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String showLoginForm() {
-        System.out.println("authentication");
+        //System.out.println("authentication");
         return "users/login";
     }
 
