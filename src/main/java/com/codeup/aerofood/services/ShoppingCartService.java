@@ -106,16 +106,16 @@ public class ShoppingCartService {
     public void newOrder(String gate) {
         User sessionUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Float orderTotal = Float.valueOf(getTotalWithTax().toString());
+//        Float orderTotal = Float.valueOf(getTotalWithTax().toString());
+//
+//        Orders order = new Orders();
+//
+//        order.setGate(gate);
+//        order.setTotal(orderTotal);
+//        order.setUser(sessionUser);
 
-        Orders order = new Orders();
 
-        order.setGate(gate);
-        order.setTotal(orderTotal);
-        order.setUser(sessionUser);
-
-
-        ordersDao.save(order);
+//        ordersDao.save(order);
     }
 
 }
