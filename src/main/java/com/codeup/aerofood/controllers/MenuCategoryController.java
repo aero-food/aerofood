@@ -19,7 +19,7 @@ public class MenuCategoryController {
     @GetMapping("/menuCategory/index")
     public String showCategory(Model viewModel) {
         viewModel.addAttribute("menuCategories", menuCategoryDao.findAll());
-        return "/menu_category/maintain";
+        return "menu_category/maintain";
     }
 
 //    Add

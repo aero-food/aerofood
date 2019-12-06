@@ -174,9 +174,10 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
-//
+
         viewModel.addAttribute("restaurants", restaurantDao.findAll());
-        return "/restaurant/listRestaurants";
+        return "restaurant/listRestaurants";
+        // removed first slash and now works
     }
 
     //    Add
@@ -256,7 +257,9 @@ public class RestaurantController {
         viewModel.addAttribute("itemList", restaurantDao.getOne(id).getCuisines());
         viewModel.addAttribute("dish_types", menuCategoryDao.findAll());
         viewModel.addAttribute("restaurantId", id);
-        return "restaurant/editRestaurant";}
+
+        return "restaurant/editRestaurant";} // just have editRestaurant? remove slash? remove from folder?
+                                            // try compliling locally and running, same error
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,

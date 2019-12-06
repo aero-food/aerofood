@@ -23,7 +23,7 @@ public class CuisineController {
     public String showCuisine(Model viewModel) {
 //
        viewModel.addAttribute("cuisineCategories", cuisineDao.findAll());
-       return "/cuisine/list";
+       return "cuisine/list";
     }
 
     //    Add

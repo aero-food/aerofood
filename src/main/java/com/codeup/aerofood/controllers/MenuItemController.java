@@ -23,7 +23,7 @@ public class MenuItemController {
     @GetMapping("/menuItem/index")
     public String showItem(Model viewModel) {
         viewModel.addAttribute("menuItems", menuItemDao.findMenuItemByRestaurantIsNull());
-        return "/menu_item/maintainItem";
+        return "menu_item/maintainItem";
     }
 
     //    Add menu item
@@ -41,7 +41,8 @@ public class MenuItemController {
                          Model viewModel) {
         newItem.setMenuCategory(menu_category);
         menuItemDao.save(newItem);
-        return "redirect:/menuItem/index";
+//        return "redirect:/menuItem/index";
+        return "menuItem/index";
     }
 
     // Update menu item
@@ -64,13 +65,15 @@ public class MenuItemController {
         oldItem.setPrice(price);
         oldItem.setTitle(title);
         menuItemDao.save(oldItem);
-        return "redirect:/menuItem/index";
+//        return "redirect:/menuItem/index";
+        return "menuItem/index";
     }
 
     // Delete
     @PostMapping("/menuItem/{id}/deleteItem")
     public String updateItem(@PathVariable long id) {
         menuItemDao.deleteById(id);
-        return "redirect:/menuItem/index";
+//        return "redirect:/menuItem/index";
+        return "menuItem/index";
     }
 }
