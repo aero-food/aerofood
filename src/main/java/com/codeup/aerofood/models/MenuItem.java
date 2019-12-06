@@ -21,6 +21,9 @@ public class MenuItem {
     @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
     private BigDecimal price;
 
+    @Column(columnDefinition = "VARCHAR(255)")
+    private String picture_url;
+
     @ManyToOne
     @JoinColumn(name = "menu_category_id")
     private MenuCategory menuCategory;
@@ -115,6 +118,14 @@ public class MenuItem {
         this.restaurant = restaurant;
     }
 
+    public String getPicture_url() {
+        return picture_url;
+    }
+
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
+    }
+
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
@@ -136,5 +147,14 @@ public class MenuItem {
             //return StudentName2.compareTo(StudentName1);
         }};
 
+
+
+    //    public static Comparator<MenuItem> getMenuCategoryComparator() {
+//        return MenuCategoryComparator;
+//    }
+//
+//    public static void setMenuCategoryComparator(Comparator<MenuItem> menuCategoryComparator) {
+//        MenuCategoryComparator = menuCategoryComparator;
+//    }
 }
 
