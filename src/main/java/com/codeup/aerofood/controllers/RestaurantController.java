@@ -174,9 +174,10 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
-//
+
         viewModel.addAttribute("restaurants", restaurantDao.findAll());
-        return "/restaurant/listRestaurants";
+        return "restaurant/listRestaurants";
+        // removed first slash and now works
     }
 
     //    Add
