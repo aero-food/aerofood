@@ -9,6 +9,9 @@ public class MenuCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(columnDefinition = "VARCHAR(255)")
+    private String picture;
+
     @Column(nullable = false)
     private String description;
 
@@ -37,6 +40,14 @@ public class MenuCategory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public List<MenuItem> getMenu_items() {
