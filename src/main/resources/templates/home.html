@@ -5,7 +5,7 @@
     <title>Aero Food | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body>
+<body style="height: 100vh;">
 <!--<body style="background-image: url('/css/img/airport-board.jpg'); no-repeat: center center; ">-->
 <!--Nav bar-->
 <div th:replace="fragments/navbar :: main-navbar"></div>
@@ -41,11 +41,11 @@
 
 
     </div>
-
+<div style="height: 10em;">&nbsp;</div>
 
 </section>
 
-<footer id="footer" class="footer-font-size font-type footer" style="background-color: #D22234; color: #ffffff" th:fragment="main-footer">
+<footer id="footer" class="navbar fixed-bottom" style="background-color: #D22234; color: #ffffff" th:fragment="main-footer"/>
 
 <!--<div class="footer-bottom" th:replace="fragments/footer :: main-footer"></div>-->
 
