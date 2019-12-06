@@ -84,7 +84,12 @@ ul {
 #login {
     margin-left: 437px;
 }
-
+#homeRow{
+    margin-top: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 #mainDiv{
     display: grid;
     grid-template-rows: 10% 89% 1%;
@@ -176,6 +181,19 @@ ul {
     height: 20em;
 }
 
+.img-card {
+    /*display: flex;*/
+    width:400px;height:240px; overflow:hidden;
+    /*align-content: center;*/
+    /*padding: .25em;*/
+    /*margin-top: 7em;*/
+    /*margin-right: 5em;*/
+    /*margin-bottom: 5em;*/
+    /*margin-left: 5em;*/
+    /*!*height: 400px;*!*/
+    /*!*box-shadow: .2em .2em .2em .2em #888888;*!*/
+    /*height: 20em;*/
+}
 .card-title {
     /*color: #3F3C3C;*/
     text-shadow: .1em .1em lightgrey;
@@ -209,18 +227,18 @@ ul {
 .footer-font-size {
     font-size: 16pt;
 }
-.jumbotron{
-    background: url("/css/img/airport-board.jpg") no-repeat center center;
-    /*-webkit-background-size: 100% 100%;*/
-    /*-moz-background-size: 100% 100%;*/
-    /*-o-background-size: 100% 100%;*/
-    /*background-size: 100% 100%;*/
-    width:100%;
-    color: white;
-    font-size: 5em;
-    text-align: center;
-    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
-}
+/*.jumbotron{*/
+/*    background: url("/css/img/airport-board.jpg") no-repeat center center;*/
+/*    !*-webkit-background-size: 100% 100%;*!*/
+/*    !*-moz-background-size: 100% 100%;*!*/
+/*    !*-o-background-size: 100% 100%;*!*/
+/*    !*background-size: 100% 100%;*!*/
+/*    width:100%;*/
+/*    color: white;*/
+/*    font-size: 5em;*/
+/*    text-align: center;*/
+/*    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
+/*}*/
 .lightgreen {
     color: #dadfbc;
 }
@@ -244,11 +262,11 @@ ul {
 .main-header {
     /*font-size: 2em;*/
     text-align: center;
-    margin-top: 15em;
-    color: white;
+    margin-top: 5em;
+    /*color: white;*/
     /*font-size: 5em;*/
     /*text-align: center;*/
-    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+    /*text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
 
 }
 .page-header {

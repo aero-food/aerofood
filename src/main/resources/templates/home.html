@@ -5,66 +5,49 @@
     <title>Aero Food | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body style="background-image: url('/css/img/airport-board.jpg'); no-repeat: center center">
+<body>
+<!--<body style="background-image: url('/css/img/airport-board.jpg'); no-repeat: center center; ">-->
 <!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
-    <th:block th:if="not ${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar :: main-navbar"></div>
-    </th:block>
-    <th:block th:if="${#authentication.principal.isAdmin}">
-        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-    </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
-
-<section class="container">
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<!--<div th:if="${#authorization.expression('isAuthenticated()')}">-->
 <!--    <th:block th:if="not ${#authentication.principal.isAdmin}">-->
-    <div class="card">
-        <h3>Still getting your food yourself?</h3>
-        <form action="/register" method="GET">
-            <button id="reg" class="btn btn-primary" type="submit">Register</button>
-        </form>
-        <h4>Already a user?</h4>
-        <form action="/login" method="GET">
-            <button id="login" class="btn btn-primary" type="submit">Login</button>
-        </form>
-    </div>
-    </th:block>
-    <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">
-        <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}"> Welcome, <span sec:authentication="name"></span></h3>
+<!--        <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--    </th:block>-->
+<!--    <th:block th:if="${#authentication.principal.isAdmin}">-->
+<!--        <div th:replace="fragments/navbar-admin :: main-navbar"></div>-->
+<!--    </th:block>-->
+<!--</div>-->
+<!--<div th:if="not ${#authorization.expression('isAuthenticated()')}">-->
+<!--    <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--</div>-->
 
-        <div>
-            <span th:text="${#authentication.principal.isAdmin}"></span>
-        </div>
+<!--Mid Section-->
+<section class="container">
+    <!--    <th:block th:if="not ${#authentication.principal.isAdmin}">-->
+    <div class="main-header">
+        <br>
+        <br>
+        <h3>Do you have to catch a flight and do not have enough time to get food?</h3>
+        <br>
+        <h3 >Join AeroFood and get the food deliver at the gate</h3>
+
+
     </div>
+    <!--    <p><a href="http://www.YourLinkHere.com" class="btn btn-primary btn-lg">Register today &raquo;</a></p>-->
+    <div id="homeRow">
+        <div class="img-card"><img src="/img/breakfast.jpeg" th:src="@{/img/breakfast.jpeg}"/></div>
+        <div class="img-card"><img src="/img/pizza.jpeg" th:src="@{/img/pizza.jpeg}"/></div>
+        <div class="img-card"><img src="/img/salad.jpeg" th:src="@{/img/salad.jpeg}"/></div>
+
+
+    </div>
+
+
 </section>
 
-<!--<img src="../static/css/img/airport-board.jpg" height="1392" width="1300"/>-->
-<!--<section class="container">-->
-<!--    <div class="jumbotron"  style="background-image: url(/css/img/airport-board.jpg); width=1300;">-->
-<!--        <h1>Do you have to catch a flight and do not have enough time to get food?</h1>-->
-<!--&lt;!&ndash;        <p class="lead">Join Aerofood and get the food deliver to your terminal gate</p>&ndash;&gt;-->
-<!--&lt;!&ndash;        <p><a href="http://www.YourLinkHere.com" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>&ndash;&gt;-->
-<!--    </div>-->
->>>>>>> fix-admin-navbar
+<footer id="footer" class="footer-font-size font-type footer" style="background-color: #D22234; color: #ffffff" th:fragment="main-footer">
 
-<!--    <div class="jumbotron">-->
-<!--        <div class="container push-spaces">-->
-<div class="main-header">
-    <h1>Aerofood</h1>
-    <h1>Do you have to catch a flight and do not have enough time to get food?</h1>
-    <p class="lead">Join Aerofood and get the food deliver to your terminal gate</p>
-    <p><a href="http://www.YourLinkHere.com" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-
-</div>
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</section>-->
-
-<div th:replace="fragments/footer :: main-footer"></div>
+<!--<div class="footer-bottom" th:replace="fragments/footer :: main-footer"></div>-->
 
 </body>
 </html>
