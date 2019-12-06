@@ -16,12 +16,12 @@ public class HomeController {
 
     @GetMapping("/home")
     public String showHome() {
-        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedUser.getIsAdmin()) {
-            return "redirect:/search";
-        } else {
+//        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (loggedUser.getIsAdmin()) {
+//            return "redirect:/search";
+//        } else {
             return "home";
-        }
+//        }
     }
 
     @GetMapping("/about")

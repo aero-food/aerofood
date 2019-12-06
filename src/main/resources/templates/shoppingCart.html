@@ -2,8 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Aero Food | Home</title>
+    <title>AeroFood | Cart</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        .card {
+            display: flex;
+            align-content: center;
+            padding: .25em;
+            margin-top: 1em;
+            margin-right: 2em;
+            margin-bottom: 1em;
+            margin-left: 2em;
+            /*height: 400px;*/
+            box-shadow: 0 0 0 0 #888888;
+            /*height: 10em;*/
+        }
+        .card-body {
+            padding: .5em;
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <!--Nav bar-->
@@ -19,37 +37,51 @@
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
 
-<h1>this is the cart page</h1>
+    <h1>Shopping Cart</h1>
 
-<div th:each="product : ${items.entrySet()}">
-    <div>
-        <h1 th:text="${product.getKey().getTitle()}"></h1>
+    <div class="container">
+
+    <div class="d-flex flex-column">
+            <div class="card d-flex flex-column">
+        <div th:each="product : ${items.entrySet()}">
+
+
+                <div class="d-flex flex-row">
+
+                <h3 class="ml-2" th:text="${product.getKey().getTitle()}"></h3>
+
+                <p class="ml-auto">$<span th:text="${product.getKey().getPrice()}"></span></p>
+                </div>
+            </div>
+    </div>
+
+<div class="card d-flex flex-column mr-auto ml-auto">
+    <div class="card-body">
+    <h3> Total in Cart = <span th:text="${total}"></span></h3>
+
+    <h3> Total With Tax = <span th:text="${totalTax}"></span></h3>
+        </div>
+
+    <form  th:action="@{'/shoppingCart/checkout'}" method="GET">
+        <h4 class="remove-margin">Enter your Gate</h4>
+        <input  id="checkout_address" name="checkout_address" type="text" />
+        <br/>
+        <div>
+            <script
+                    th:method="POST"
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_j75Rf78ZCFhDGGrirhsEM0I300mcaSFYtv"
+                    th:attr="data-amount=${totalStripe}"
+                    data-name="AeroFood"
+                    data-description='Meal Delivery'
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto"
+                    data-zip-code="true">
+            </script>
+        </div>
+    </form>
+    </div>
     </div>
 </div>
-
-<h3> Total in Cart = <span th:text="${total}"></span></h3>
-
-<h3> Total With Tax = <span th:text="${totalTax}"></span></h3>
-
-<form  th:action="@{'/shoppingCart/checkout'}" method="GET">
-    <h4 class="remove-margin">Delivery Gate</h4>
-    <input  id="checkout_address" name="checkout_address" type="text" />
-    <br/>
-    <div>
-        <script
-                th:method="POST"
-                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="pk_test_j75Rf78ZCFhDGGrirhsEM0I300mcaSFYtv"
-                th:attr="data-amount=${totalStripe}"
-                data-name="AeroFood"
-                data-description='Meal Delivery'
-                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                data-locale="auto"
-                data-zip-code="true">
-        </script>
-    </div>
-</form>
-
-
 </body>
 </html>
