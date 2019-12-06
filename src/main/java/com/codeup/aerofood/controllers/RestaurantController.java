@@ -256,7 +256,9 @@ public class RestaurantController {
         viewModel.addAttribute("itemList", restaurantDao.getOne(id).getCuisines());
         viewModel.addAttribute("dish_types", menuCategoryDao.findAll());
         viewModel.addAttribute("restaurantId", id);
-        return "restaurant/editRestaurant";}
+
+        return "restaurant/editRestaurant";} // just have editRestaurant? remove slash? remove from folder?
+                                            // try compliling locally and running, same error
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,
