@@ -32,6 +32,7 @@
         </form>
     </div>
     </th:block>
+
     <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">
         <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}">Welcome, <span sec:authentication="name"></span></h3>
 
@@ -40,6 +41,9 @@
         </div>
     </div>
 </section>
+
+
+<!-- I'm just typing notes so that it'll let me commit-->
 
 <!--<img src="../static/css/img/airport-board.jpg" height="1392" width="1300"/>-->
 <!--<section class="container">-->
