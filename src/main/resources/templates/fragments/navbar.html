@@ -31,9 +31,15 @@
             <li class="nav-item pull-right">
                 <a sec:authorize="isAnonymous()" class="nav-link" href="/login" style="color: #F4691A">Sign In</a>
             </li>
-            <li th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()" class="nav-item pull-right">
+<!--            <li th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()" class="nav-item pull-right">-->
+<!--                <form th:action="@{/logout}" th:method="post">-->
+<!--                    <a sec:authorize="isAuthenticated()" href="@{/logout}" class="nav-link" style="color: #F4691A">Logout</a>-->
+<!--                </form>-->
+<!--            </li>-->
+
+            <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" th:method="post">
-                    <a sec:authorize="isAuthenticated()" href="@{/logout}" class="nav-link" style="color: #F4691A">Logout</a>
+                    <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;"  >Logout</button>
                 </form>
             </li>
         </ul>
