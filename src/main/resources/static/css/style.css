@@ -6,6 +6,11 @@ body {
     /*font-family: 'Source Code Pro', monospace;*/
 }
 
+.brand {
+    margin-top: -4px;
+    padding-left: 15px;
+}
+
 #list1, #list2 {
     display: flex;
     justify-content: flex-start;
@@ -118,4 +123,13 @@ button {
     /*max-height: 100vh;*/
     /*//justify-content: space-around;*/
     overflow: auto;
+}
+
+.nav-item {
+    font-size: 25px;
+    margin: 20px 0 0 10px;
+}
+
+.logout-btn {
+    padding-top: -10px;
 }
