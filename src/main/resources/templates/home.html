@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>AeroFood | Home</title>
@@ -34,17 +34,54 @@
         <br>
     </div>
 
+
+<!-----------------------  END OF JUMBOTRON  ----------------------->
     <div th:replace="fragments/navbar :: main-navbar"></div>
-    <!--<h1 class="page_title">AeroFood</h1>-->
 
     <section class="container">
-        <div class="card">
-            <h3>Already a user?</h3>
-            <button><a href="/login" class="btn btn-primary">Sign in</a></button>
-            <h3>Still getting your food yourself?</h3>
-            <button value="register"><a href="/register" class="btn btn-primary">Register</a></button>
+        <div class="card" style="width: 45%">
+            <h3 style="text-align: center">Sign In</h3>
+            <button><a href="/login" class="btn btn-primary" style="background-color: #FF2233">Sign In</a></button>
+<!--            <h3>Still getting your food yourself?</h3>-->
+<!--            <button value="register"><a href="/register" class="btn btn-primary">Register</a></button>-->
         </div>
     </section>
+
+<!--    <div th:if="${#authorization.expression('isAuthenticated()')}">-->
+<!--        <th:block th:if="not ${#authentication.principal.isAdmin}">-->
+<!--            <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--        </th:block>-->
+<!--        <th:block th:if="${#authentication.principal.isAdmin}">-->
+<!--            <div th:replace="fragments/navbar-admin :: main-navbar"></div>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--    <div th:if="not ${#authorization.expression('isAuthenticated()')}">-->
+<!--        <div th:replace="fragments/navbar :: main-navbar"></div>-->
+<!--    </div>-->
+
+<!--    <section class="container">-->
+<!--        &lt;!&ndash;    <th:block th:if="not ${#authentication.principal.isAdmin}">&ndash;&gt;-->
+<!--        <div class="card">-->
+<!--            <h3 class="text-center">Still getting your food yourself?</h3>-->
+<!--            <form action="/register" method="GET">-->
+<!--                <button id="reg" class="btn btn-primary" type="submit">Register</button>-->
+<!--            </form>-->
+<!--            <h4 class="text-center">Sign in</h4>-->
+<!--            <form action="/login" method="GET">-->
+<!--                <button id="login" class="btn btn-primary" type="submit">Sign In</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        </th:block>-->
+<!--        <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">-->
+<!--            <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}">Welcome, <span sec:authentication="name"></span></h3>-->
+<!--            <div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+
+<!--    <div th:replace="fragments/footer :: main-footer"></div>-->
+
 
 </body>
 </html>
