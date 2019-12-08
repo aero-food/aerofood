@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Comparator;
-import java.util.List;
 
 @Entity
 public class MenuItem {
@@ -32,8 +31,8 @@ public class MenuItem {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
-    private List<OrderDetail> orderDetails;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
+//    private List<OrderDetail> orderDetails;
 
     public MenuItem() {
 
@@ -52,15 +51,6 @@ public class MenuItem {
         this.description = description;
         this.price = price;
         this.restaurant = restaurant;
-    }
-
-    public MenuItem(String title, String description, BigDecimal price, MenuCategory menuCategory, Restaurant restaurant, List<OrderDetail> orderDetails) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.menuCategory = menuCategory;
-        this.restaurant = restaurant;
-        this.orderDetails = orderDetails;
     }
 
     public long getId() {
@@ -125,14 +115,14 @@ public class MenuItem {
     public void setPicture_url(String picture_url) {
         this.picture_url = picture_url;
     }
-
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
+//
+//    public List<OrderDetail> getOrderDetails() {
+//        return orderDetails;
+//    }
+//
+//    public void setOrderDetails(List<OrderDetail> orderDetails) {
+//        this.orderDetails = orderDetails;
+//    }
 
     public static Comparator<MenuItem> MenuCategoryComparator = new Comparator<MenuItem>() {
 

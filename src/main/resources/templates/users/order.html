@@ -28,7 +28,6 @@
             <thead>
             <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Total</th>
             </tr>
@@ -36,9 +35,8 @@
             <tbody>
             <th:block th:each="orderDetail : ${orderDetails.getOrderDetails()}">
                 <tr>
-                    <td th:text="${orderDetail.getMenuItem().getTitle()}"></td>
-                    <td th:text="${orderDetail.getQuantity()}"></td>
-                    <td th:text="${orderDetail.getMenuItem().getPrice()}"></td>
+                    <td th:text="${orderDetail.getDescription()}"></td>
+                    <td th:text="${orderDetail.getPrice()}"></td>
                     <td th:text="${orderDetail.getTotalPerItem()}"></td>
                 </tr>
             </th:block>

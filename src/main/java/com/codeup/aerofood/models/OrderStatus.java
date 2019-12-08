@@ -1,7 +1,6 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class OrderStatus {
@@ -13,15 +12,14 @@ public class OrderStatus {
     @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderStatus")
-    private List<Orders> orders;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderStatus")
+//    private List<Orders> orders;
 
     public OrderStatus() {
     }
 
-    public OrderStatus(String status, List<Orders> orders) {
+    public OrderStatus(String status) {
         this.status = status;
-        this.orders = orders;
     }
 
     public long getId() {
@@ -40,11 +38,5 @@ public class OrderStatus {
         this.status = status;
     }
 
-    public List<Orders> getOrders() {
-        return orders;
-    }
 
-    public void setOrders(List<Orders> orders) {
-        this.orders = orders;
-    }
 }

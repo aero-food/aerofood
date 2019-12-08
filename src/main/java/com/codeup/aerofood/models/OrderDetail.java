@@ -13,8 +13,11 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, columnDefinition = "INT")
-    private Integer quantity;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
+
+    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
+    private BigDecimal price;
 
 
 //    @OneToOne
@@ -25,18 +28,23 @@ public class OrderDetail {
     @JoinColumn(name = "orders")
     private Orders orders;
 
-    @ManyToOne
-    @JoinColumn(name = "MenuItem")
-    private MenuItem menuItem;
+//    @ManyToOne
+//    @JoinColumn(name = "MenuItem")
+//    private MenuItem menuItem;
 
     public OrderDetail() {
 
     }
 
-    public OrderDetail(Integer quantity, Orders orders, MenuItem menuItem) {
-        this.quantity = quantity;
+    public OrderDetail(String description, BigDecimal price) {
+        this.description = description;
+        this.price = price;
+    }
+
+    public OrderDetail(String description, BigDecimal price, Orders orders) {
+        this.description = description;
+        this.price = price;
         this.orders = orders;
-        this.menuItem = menuItem;
     }
 
     public long getId() {
@@ -47,12 +55,20 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public String getDescription() {
+        return description;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Orders getOrders() {
@@ -63,18 +79,9 @@ public class OrderDetail {
         this.orders = orders;
     }
 
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
 
     public String getTotalPerItem(){
-        int quantity = this.getQuantity();
-        BigDecimal price = this.menuItem.getPrice();
-        BigDecimal totalPerItem =  price.multiply(new BigDecimal(quantity));
+        BigDecimal totalPerItem =  this.getPrice();
 
         DecimalFormat df = new DecimalFormat("###.##");
         return df.format(totalPerItem);

@@ -1,8 +1,10 @@
 package com.codeup.aerofood.controllers;
 
+import com.codeup.aerofood.models.OrderStatus;
 import com.codeup.aerofood.models.Orders;
 import com.codeup.aerofood.models.User;
 import com.codeup.aerofood.repositories.OrderRepository;
+import com.codeup.aerofood.repositories.OrderStatusRepository;
 import com.codeup.aerofood.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,16 +21,22 @@ import java.util.regex.Pattern;
 
 @Controller
 public class UserController {
+
     private UserRepository userDao;
-
     private OrderRepository orderDao;
-
+private OrderStatusRepository orderStatusDao;
     private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao, OrderRepository orderDao, PasswordEncoder passwordEncoder) {
+
+
+    public UserController(UserRepository userDao,
+                          OrderRepository orderDao,
+                          PasswordEncoder passwordEncoder,
+                          OrderStatusRepository orderStatusDao) {
         this.userDao = userDao;
         this.orderDao = orderDao;
         this.passwordEncoder = passwordEncoder;
+        this.orderStatusDao = orderStatusDao;
     }
 
 
@@ -51,7 +59,12 @@ public class UserController {
     public String displayMyOrders(Model viewModel) {
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Orders> orders = userDao.getOne(loggedUser.getId()).getOrders();
-        viewModel.addAttribute("orders", orders);
+        OrderStatus orderStatus;
+        for (Orders currentOrder: orders){
+            orderStatus = orderStatusDao.getOne((long)currentOrder.getOrderStatus());
+            currentOrder.setOrderStatusString(orderStatus.getStatus());
+        }
+        viewModel.addAttribute("orders", userDao.getOne(loggedUser.getId()).getOrders());
         return "users/user-orders";
     }
 
