@@ -143,8 +143,6 @@ public class RestaurantController {
             newMenuItem.setRestaurant(currentRestaurant);
             newMenuItem.setMenuCategory(menuItems[i].getMenuCategory());
             menuItemsDao.save(newMenuItem);
-//            System.out.println("newMenuItem.getTitle() = " + newMenuItem.getTitle());
-
             newMenuItemList.add(newMenuItem);
         }
         currentRestaurant.setMenu_items(newMenuItemList);
