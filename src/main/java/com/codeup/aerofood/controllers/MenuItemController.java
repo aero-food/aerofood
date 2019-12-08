@@ -23,7 +23,7 @@ public class MenuItemController {
     @GetMapping("/menuItem/index")
     public String showItem(Model viewModel) {
         viewModel.addAttribute("menuItems", menuItemDao.findMenuItemByRestaurantIsNull());
-        return "/menu_item/maintainItem";
+        return "menu_item/maintainItem";
     }
 
     //    Add menu item
@@ -56,13 +56,14 @@ public class MenuItemController {
     public String update(@PathVariable long id, @RequestParam String description,
                          @RequestParam BigDecimal price,
                          @RequestParam MenuCategory menu_category,
-                         @RequestParam String picture_url,
+//                         @RequestParam String picture_url,
                          @RequestParam String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
         oldItem.setMenuCategory(menu_category);
         oldItem.setDescription(description);
         oldItem.setPrice(price);
         oldItem.setTitle(title);
+        oldItem.setPicture_url("none");
         menuItemDao.save(oldItem);
         return "redirect:/menuItem/index";
     }

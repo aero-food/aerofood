@@ -2,6 +2,7 @@ package com.codeup.aerofood.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Restaurant {
@@ -29,8 +30,24 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
-    private List<Cuisine> cuisines;
+//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    private List<Cuisine> cuisines;
+//    @ManyToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+//    private List<Cuisine> cuisines;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "book_publisher",
+//            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
+//    private Set<Publisher> publishers;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="restaurant_cuisine",
+            joinColumns={@JoinColumn(name="restaurant_id")},
+            inverseJoinColumns={@JoinColumn(name="cuisine_id")}
+    )
+    private Set<Cuisine> cuisines;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<Orders> orders;
@@ -52,7 +69,15 @@ public class Restaurant {
         this.phone_number = phone_number;
     }
 
-    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number, List<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items) {
+    public Restaurant(String name,
+                      String thumbnail,
+                      String picture_url,
+                      String gate,
+                      String airport,
+                      String phone_number,
+                      Set<Cuisine> cuisines,
+                      List<Orders> orders,
+                      List<MenuItem> menu_items) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.picture_url = picture_url;
@@ -63,6 +88,18 @@ public class Restaurant {
         this.orders = orders;
         this.menu_items = menu_items;
     }
+
+    //    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number, List<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items) {
+//        this.name = name;
+//        this.thumbnail = thumbnail;
+//        this.picture_url = picture_url;
+//        this.gate = gate;
+//        this.airport = airport;
+//        this.phone_number = phone_number;
+//        this.cuisines = cuisines;
+//        this.orders = orders;
+//        this.menu_items = menu_items;
+//    }
 
     public long getId() {
         return id;
@@ -120,13 +157,21 @@ public class Restaurant {
         this.phone_number = phone_number;
     }
 
-    public List<Cuisine> getCuisines() {
+    public Set<Cuisine> getCuisines() {
         return cuisines;
     }
 
-    public void setCuisines(List<Cuisine> cuisines) {
+    public void setCuisines(Set<Cuisine> cuisines) {
         this.cuisines = cuisines;
     }
+
+    //    public List<Cuisine> getCuisines() {
+//        return cuisines;
+//    }
+//
+//    public void setCuisines(List<Cuisine> cuisines) {
+//            this.cuisines = cuisines;
+//    }
 
     public List<Orders> getOrders() {
         return orders;
@@ -143,6 +188,13 @@ public class Restaurant {
     public void setMenu_items(List<MenuItem> menu_items) {
         this.menu_items = menu_items;
     }
-
-
+//    public void removeCuisines(Cuisine cuisine) {
+//       int index = cuisines.indexOf(cuisine);
+//       cuisine.setRestaurant(null);
+//       //cuisines.remove(index);
+//    }
+//    public void removeComment(PostComment comment) {
+//        comments.remove(comment);
+//        comment.setPost(null);
+//    }
 }

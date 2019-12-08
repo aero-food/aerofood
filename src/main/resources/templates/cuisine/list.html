@@ -8,9 +8,9 @@
 <body>
 
 <!--Main Div-->
-<div class="container">
-    <!--Nav bar-->
-    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+
+<!--Nav bar-->
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
         <span>
             <th:block th:if="not ${#authentication.principal.isAdmin}">
                 <div th:replace="fragments/navbar :: main-navbar"></div>
@@ -19,11 +19,12 @@
                 <div th:replace="fragments/navbar-admin :: main-navbar"></div>
             </th:block>
         </span>
-    </th:block>
-    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
-        <div th:replace="fragments/navbar :: main-navbar"></div>
-    </th:block>
-    <!--    Middle section-->
+</th:block>
+<th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</th:block>
+<!--    Middle section-->
+<div class="container">
     <section class="mt-5">
 
         <div class="page-header">Cuisine Categories</div>
@@ -62,9 +63,10 @@
             </form>
         </div>
     </section>
-    <br><br><br><br><br>
-    <!--    Footer-->
-    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+
 </div>
+<div>&nbsp;</div>
+<!--    Footer-->
+<div th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>
