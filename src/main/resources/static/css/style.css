@@ -307,3 +307,9 @@ ul {
 .sub-section-header {
     font-size: 1em;
 }
+
+.navlinktext {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+
+}
