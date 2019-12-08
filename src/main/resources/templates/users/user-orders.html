@@ -47,21 +47,21 @@
                         <td th:text="${currentOrder.getDelivery_time_String()}"></td>
                         <td th:text="${currentOrder.getTotal()}"></td>
 
-                        <div th:switch="${currentOrder.getOrderStatus().getId()}">
+                        <div th:switch="${currentOrder.getOrderStatus()}">
                             <div th:case="1">
-                                <td th:text="${currentOrder.getOrderStatus().getStatus()}" style="color: white" bgcolor="blue"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white" bgcolor="blue"></td>
                             </div>
                             <div th:case="2">
-                                <td th:text="${currentOrder.getOrderStatus().getStatus()}" style="color: white"  bgcolor="yellow"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="yellow"></td>
                             </div>
                             <div th:case="3">
-                                <td th:text="${currentOrder.getOrderStatus().getStatus()}" style="color: white"  bgcolor="red"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="red"></td>
                             </div>
                             <div th:case="4">
-                                <td th:text="${currentOrder.getOrderStatus().getStatus()}" style="color: white"  bgcolor="green"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="green"></td>
                             </div>
                             <div th:case="5">
-                                <td th:text="${currentOrder.getOrderStatus().getStatus()}" style="color: white"  bgcolor="gray"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="gray"></td>
                             </div>
 
                         </div>

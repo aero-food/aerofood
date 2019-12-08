@@ -1,12 +1,10 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.text.ParseException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Orders {
@@ -24,16 +22,28 @@ public class Orders {
     @Column(columnDefinition = "DATETIME")
     private Date ordered_time;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(6,2)")
-    private Float total;
+    @Column(nullable = false, columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal total;
+
+    @Column(nullable = false, columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal tax;
+
+    @Column(nullable = false, columnDefinition = "DECIMAL(10,2)")
+    private BigDecimal subTotal;
+
+    @Column(nullable = false, columnDefinition = "INT(11) DEFAULT 0")
+    private int orderStatus;
+
+    @Column(columnDefinition = "VARCHAR(25)")
+    private String orderStatusString;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "orderStatus_id")
-    private OrderStatus orderStatus;
+//    @ManyToOne
+//    @JoinColumn(name = "orderStatus_id", columnDefinition = " int(11) DEFAULT 0")
+//    private OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
@@ -48,7 +58,7 @@ public class Orders {
 
     public Orders(String gate,
                   String delivery_time,
-                  Float total,
+                  BigDecimal total,
                   String ordered_status,
                   User user,
                   Restaurant restaurant,
@@ -62,11 +72,11 @@ public class Orders {
     public Orders(String gate,
                   String delivery_time,
                   Date ordered_time,
-                  Float total,
+                  BigDecimal total,
                   String ordered_status,
                   User user,
                   Restaurant restaurant)
-            {
+    {
         this.gate = gate;
         this.total = total;
         this.ordered_time = ordered_time;
@@ -74,8 +84,8 @@ public class Orders {
         this.restaurant = restaurant;
     }
 
-           public Orders(String gate,
-                  Float total,
+    public Orders(String gate,
+                  BigDecimal total,
                   User user){
         this.gate = gate;
         this.total = total;
@@ -83,6 +93,21 @@ public class Orders {
 
     }
 
+    public Orders(String gate,
+                  Date delivery_time,
+                  Date ordered_time,
+                  BigDecimal total,
+                  BigDecimal tax,
+                  BigDecimal subTotal,
+                  User user) {
+        this.gate = gate;
+        this.delivery_time = delivery_time;
+        this.ordered_time = ordered_time;
+        this.total = total;
+        this.tax = tax;
+        this.subTotal = subTotal;
+        this.user = user;
+    }
 
     public long getId() {
         return id;
@@ -132,13 +157,7 @@ public class Orders {
         this.ordered_time = ordered_time;
     }
 
-    public Float getTotal() {
-        return total;
-    }
 
-    public void setTotal(Float total) {
-        this.total = total;
-    }
 
     public User getUser() {
         return user;
@@ -146,6 +165,38 @@ public class Orders {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public List<OrderDetail> getOrderDetails() {
@@ -164,11 +215,11 @@ public class Orders {
         this.restaurant = restaurant;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
+    public String getOrderStatusString() {
+        return orderStatusString;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStatusString(String orderStatusString) {
+        this.orderStatusString = orderStatusString;
     }
 }
