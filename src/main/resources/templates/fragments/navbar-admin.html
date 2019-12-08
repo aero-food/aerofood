@@ -10,7 +10,7 @@
 <!--    </div>-->
     <div><span style="color: #D22234; font-size: 2em;">
                     <i class="fas fa-users-cog"></i>
-                </span><a class="nav-item" style="color: #D22234" href="">Aero-Food </a>
+                </span><a class="nav-item" style="color: #D22234" href="">AeroFood </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,12 +28,15 @@
     </div>
     <div>
         <ul id="adminNavBar2" class="navbar-nav ml-auto">
-            <li class="nav-item pull-right" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" th:method="post">
-                    <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;">Logout
-                    </button>
-                </form>
+<!--            <li class="nav-item pull-right" sec:authorize="isAuthenticated()">-->
+<!--                <form th:action="@{/logout}" th:method="post">-->
+<!--                    <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;">Logout-->
+<!--                    </button>-->
+<!--                </form>-->
+            <li sec:authorize="isAuthenticated()">
+                <a href="#" th:href="@{/logout}">Log Out</a>
             </li>
+
 
         </ul>
     </div>

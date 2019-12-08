@@ -200,9 +200,9 @@ ul {
     text-shadow: .1em .1em lightgrey;
 }
 
-.card-body {
-    color: #a8a660;
-}
+/*.card-body {*/
+/*    color: #a8a660;*/
+/*}*/
 
 .center-li {
     display: inline;
