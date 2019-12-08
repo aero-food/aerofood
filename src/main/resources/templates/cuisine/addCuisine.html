@@ -7,9 +7,9 @@
 </head>
 <body>
 
-<div class="container">
-    <!--Nav bar-->
-    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+
+<!--Nav bar-->
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
         <span>
             <th:block th:if="not ${#authentication.principal.isAdmin}">
                 <div th:replace="fragments/navbar :: main-navbar"></div>
@@ -18,10 +18,11 @@
                 <div th:replace="fragments/navbar-admin :: main-navbar"></div>
             </th:block>
         </span>
-    </th:block>
-    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
-        <div th:replace="fragments/navbar :: main-navbar"></div>
-    </th:block>
+</th:block>
+<th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</th:block>
+<div class="container">
     <!--    Middle section-->
     <section class="mt-5">
         <div class="page-header">Create a new Cuisine Category</div>
@@ -35,7 +36,9 @@
         </form>
     </section>
     <!--    Footer-->
-    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
-</div>
+    <div th:replace="fragments/footer :: main-footer"></div>
+
+
+    <!--</div>-->
 </body>
 </html>

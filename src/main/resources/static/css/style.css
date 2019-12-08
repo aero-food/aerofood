@@ -228,16 +228,25 @@ ul {
 .footer-font-size {
     font-size: 16pt;
 }
-.jumbotron{
-    background: url("/css/img/airport-board.jpg") no-repeat center center;
-    /*-webkit-background-size: 100% 100%;*/
-    /*-moz-background-size: 100% 100%;*/
-    /*-o-background-size: 100% 100%;*/
-    /*background-size: 100% 100%;*/
-    width:100%;
+/*.jumbotron{*/
+/*    background: url("/css/img/airport-board.jpg") no-repeat center center;*/
+/*    !*-webkit-background-size: 100% 100%;*!*/
+/*    !*-moz-background-size: 100% 100%;*!*/
+/*    !*-o-background-size: 100% 100%;*!*/
+/*    !*background-size: 100% 100%;*!*/
+/*    width:100%;*/
+/*    color: white;*/
+/*    font-size: 5em;*/
+/*    text-align: center;*/
+/*    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
+/*}*/
+.homeImage{
+    background: url('/img/airport1.jpeg')
+    no-repeat center center fixed;
+    background-size: cover;
+}
+.improveReadAbility {
     color: white;
-    font-size: 5em;
-    text-align: center;
     text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
 }
 .lightgreen {

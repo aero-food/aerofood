@@ -15,9 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class RestaurantController {
@@ -33,7 +31,6 @@ public class RestaurantController {
     private ShoppingCartService shoppingCartService;
 
     private MenuItemService menuItemService;
-
 
 
     public RestaurantController(RestaurantRepository restaurantDao,
@@ -84,15 +81,33 @@ public class RestaurantController {
 
     private void addRestaurantCuisine(int[] cuisines, Restaurant currentRestaurant) {
         // Get the categories
-        Cuisine cuisineType;
-        if (cuisines != null) {
-            List<Cuisine> newCuisine = new ArrayList<>();
+        Set<Cuisine> newCuisineList = new HashSet<>();
+        Set<Cuisine> oldCuisine = currentRestaurant.getCuisines();
+        Set<Restaurant> oldRestaurant;
+        Cuisine currentCuisine;
 
+        // Remove the restaurant from the cuisine list
+        for (Cuisine cuisine : currentRestaurant.getCuisines()) {
+            //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
+            oldRestaurant = cuisineDao.getOne(cuisine.getId()).getRestaurants();
+            oldRestaurant.remove(cuisine);
+            cuisine.setRestaurants(oldRestaurant);
+            cuisineDao.save(cuisine);
+        }
+
+        if (cuisines != null) {
             for (int i = 0; i < cuisines.length; i++) {
-                cuisineDao.getOne((long) cuisines[i]).setRestaurant(currentRestaurant);
-                cuisineDao.save(cuisineDao.getOne((long) cuisines[i]));
+                currentCuisine = cuisineDao.getOne((long) cuisines[i]);
+                newCuisineList.add(currentCuisine);
+                oldRestaurant = cuisineDao.getOne(currentCuisine.getId()).getRestaurants();
+                currentCuisine.setRestaurants(oldRestaurant);
+                cuisineDao.save(currentCuisine);
             }
         }
+
+        currentRestaurant.setCuisines(newCuisineList);
+        restaurantDao.save(currentRestaurant);
+
         return;
     }
 
@@ -111,8 +126,6 @@ public class RestaurantController {
         newMenuItem.setRestaurant(currentRestaurant);
         newMenuItem.setMenuCategory(currentMenuItem.getMenuCategory());
         menuItemsDao.save(newMenuItem);
-        //
-        //}
         return;
     }
 
@@ -120,9 +133,6 @@ public class RestaurantController {
         // Get the categories
         MenuItem newMenuItem;
         List<MenuItem> newMenuItemList = new ArrayList<>();
-//        System.out.println("menuItems.length = " + menuItems.length);
-        //if (menuItems != null) {
-
         for (int i = 0; i < menuItems.length; i++) {
             newMenuItem = new MenuItem(
                     menuItems[i].getTitle(),
@@ -133,33 +143,25 @@ public class RestaurantController {
             newMenuItem.setRestaurant(currentRestaurant);
             newMenuItem.setMenuCategory(menuItems[i].getMenuCategory());
             menuItemsDao.save(newMenuItem);
-            System.out.println("newMenuItem.getTitle() = " + newMenuItem.getTitle());
-
             newMenuItemList.add(newMenuItem);
-//m
         }
         currentRestaurant.setMenu_items(newMenuItemList);
-        //}
         return;
     }
 
     @GetMapping("/search")
     public String search(Model model) {
 
-        model.addAttribute("restaurants", restaurantDao.findAll());
-
+        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "search";
     }
 
     @GetMapping("/restaurants/{id}")
     public String show(@PathVariable long id, Model model) {
 
-
         model.addAttribute("restaurants", restaurantDao.getOne(id));
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
-
         model.addAttribute("cart", shoppingCartService.getItemsInCart());
-
         return "show";
     }
 
@@ -167,7 +169,6 @@ public class RestaurantController {
     public String addShow(@PathVariable long id, @PathVariable long menuItemId, Model model) {
 
         menuItemService.findById(menuItemId).ifPresent(shoppingCartService::addItem);
-
         return "redirect:/restaurants/{id}";
     }
 
@@ -175,9 +176,8 @@ public class RestaurantController {
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
 
-        viewModel.addAttribute("restaurants", restaurantDao.findAll());
+        viewModel.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "restaurant/listRestaurants";
-        // removed first slash and now works
     }
 
     //    Add
@@ -189,7 +189,7 @@ public class RestaurantController {
         List<MenuItem> currentMenuItems = menuItemsDao.findMenuItemByRestaurantIsNull();
         Collections.sort(currentMenuItems, MenuItem.MenuCategoryComparator);
         List<MenuItem> sortedCurrentList = new ArrayList<>();
-        for(MenuItem element: currentMenuItems){
+        for (MenuItem element : currentMenuItems) {
             sortedCurrentList.add(element);
         }
         vModel.addAttribute("menuItems", sortedCurrentList);
@@ -202,29 +202,46 @@ public class RestaurantController {
                          @RequestParam(value = "dish_types", required = false) int[] dish_types,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems,
                          Model viewModel) {
-        addRestaurantCuisine(dish_types, newRestaurant);
-        restaurantDao.save(newRestaurant);
-        addRestaurantMenuItems(menuItems, newRestaurant);
-        restaurantDao.save(newRestaurant);
+
+        Boolean dishTypesExists = false;
+        Boolean menuItemsExists = false;
+        if (dish_types != null) {
+            dishTypesExists = true;
+            addRestaurantCuisine(dish_types, newRestaurant);
+            restaurantDao.save(newRestaurant);
+        }
+        if (menuItems != null) {
+            menuItemsExists = true;
+            addRestaurantMenuItems(menuItems, newRestaurant);
+            restaurantDao.save(newRestaurant);
+        }
+        if (!dishTypesExists && !menuItemsExists) {
+            restaurantDao.save(newRestaurant);
+        }
         return "redirect:/restaurant/index";
     }
 
     // Update restaurant
     @GetMapping("/restaurant/{id}/edit")
     public String updateRestaurant(@PathVariable long id,
-                             Model viewModel) {
+                                   Model viewModel) {
         viewModel.addAttribute("restaurant", restaurantDao.getOne(id));
         // Cuisine type
         int index;
-        List<Cuisine> cuisineList = restaurantDao.getOne(id).getCuisines();
+        Set<Cuisine> cuisineList = restaurantDao.getOne(id).getCuisines();
         if (!cuisineList.isEmpty()) {
-            List<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
+            Set<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
             List<Cuisine> availableCategories = cuisineDao.findAll();
-            for (int i = 0; i < restaurantCuisine.size(); i++) {
-                index = availableCategories.indexOf(restaurantCuisine.get(i));
+            for (Cuisine cuisineType : restaurantCuisine) {
+                index = availableCategories.indexOf(cuisineType);
                 if (index >= 0) {
+                    //System.out.println("remove");
                     availableCategories.remove(index);
                 }
+            }
+//
+            for (Cuisine cuisine : restaurantCuisine) {
+                System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
             }
             viewModel.addAttribute("cuisineList", restaurantCuisine);
             viewModel.addAttribute("newCuisines", availableCategories);
@@ -239,7 +256,6 @@ public class RestaurantController {
         boolean exists = false;
 
         for (MenuItem currentMenuItem : newMenuItemList) {
-//            System.out.println("currentMenuItem.getTitle() = " + currentMenuItem.getTitle());
             for (int jIndex = 0; jIndex < restaurantMenuItemList.size(); jIndex++) {
                 if (currentMenuItem.getTitle().equalsIgnoreCase(restaurantMenuItemList.get(jIndex).getTitle())) {
                     exists = true;
@@ -258,8 +274,8 @@ public class RestaurantController {
         viewModel.addAttribute("dish_types", menuCategoryDao.findAll());
         viewModel.addAttribute("restaurantId", id);
 
-        return "restaurant/editRestaurant";} // just have editRestaurant? remove slash? remove from folder?
-                                            // try compliling locally and running, same error
+        return "restaurant/editRestaurant";
+    }
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,
@@ -278,12 +294,15 @@ public class RestaurantController {
         oldRestaurant.setPhone_number(phone_number);
         oldRestaurant.setPicture_url(picture_url);
         oldRestaurant.setThumbnail(thumbnail);
-        if (cuisines != null){
+        if (cuisines != null) {
+            System.out.println("cuisines");
+            System.out.println("cuisines = " + cuisines);
             addRestaurantCuisine(cuisines, oldRestaurant);
+            restaurantDao.save(oldRestaurant);
         }
-       if(menuItems != null){
-           addRestaurantMenuItems(menuItems, oldRestaurant);
-       }
+        if (menuItems != null) {
+            addRestaurantMenuItems(menuItems, oldRestaurant);
+        }
         restaurantDao.save(oldRestaurant);
         return "redirect:/restaurant/index";
     }
@@ -291,9 +310,27 @@ public class RestaurantController {
     //    Delete Restaurant
     @PostMapping("/restaurant/{id}/delete")
     public String deleteRestaurant(@PathVariable long id) {
-//        System.out.println("delete");
-//        System.out.println("id = " + id);
-        restaurantDao.deleteById(id);
+        System.out.println("delete id = " + id);
+        Restaurant currentRestaurant = restaurantDao.getOne(id);
+        Set<Restaurant> oldRestaurant;
+        // Remove the restaurant from the cuisine list
+        for (Cuisine cuisine : currentRestaurant.getCuisines()) {
+            //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
+            oldRestaurant = cuisineDao.getOne(cuisine.getId()).getRestaurants();
+            oldRestaurant.remove(cuisine);
+            cuisine.setRestaurants(oldRestaurant);
+            cuisineDao.save(cuisine);
+        }
+//        for (Cuisine cuisine : currentRestaurant.getCuisines()) {
+//            //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
+//            currentRestaurant.de
+//        }
+//        restaurantDao.getOne(id).setCuisines(null);
+//        restaurantDao.save(currentRestaurant);
+
+        currentRestaurant.setDeleted(1);
+        restaurantDao.save(currentRestaurant);
+        //restaurantDao.deleteById(id);
         return "redirect:/restaurant/index";
     }
 
@@ -314,7 +351,6 @@ public class RestaurantController {
                          @RequestParam List<BigDecimal> price,
                          @RequestParam List<MenuCategory> menu_category,
                          @RequestParam List<String> title) {
-        System.out.println("update");
         MenuItem oldItem = menuItemsDao.getOne(id);
         Restaurant restaurant = oldItem.getRestaurant();
         int index = 0;
@@ -322,7 +358,6 @@ public class RestaurantController {
             if (menuItemId.get(index) == id) {
                 break;
             }
-
         }
         oldItem.setMenuCategory(menu_category.get(index));
         oldItem.setDescription(description.get(index));
@@ -335,15 +370,10 @@ public class RestaurantController {
     //    Delete Restaurant menu item
     @PostMapping("/restaurant/{id}/deleteRestaurantMenuItem")
     public String deleteMenuItem(@PathVariable long id) {
-        System.out.println("delete");
-        System.out.println("id = " + id);
 
         MenuItem selectedMenuItem = menuItemsDao.getOne(id);
         Restaurant restaurant = selectedMenuItem.getRestaurant();
-
-//        selectedMenuItem.
         menuItemsDao.deleteById(id);
-        //return "redirect:/restaurant/index";
         return "redirect:/restaurant/" + restaurant.getId() + "/edit";
     }
 }

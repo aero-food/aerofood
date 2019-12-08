@@ -1,6 +1,7 @@
 package com.codeup.aerofood.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -12,9 +13,16 @@ public class Cuisine {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
+//    @ManyToOne
+//    @JoinColumn(name = "restaurant_id")
+//    private Restaurant restaurant;
+
+//    @ManyToMany(mappedBy = "cuisines")
+//    private List<Restaurant> restaurant;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cuisines")
+    private Set<Restaurant> restaurants;
+    //new HashSet<>();
 
     public Cuisine() {
     }
@@ -23,9 +31,9 @@ public class Cuisine {
         this.description = description;
     }
 
-    public Cuisine(String description, Restaurant restaurant) {
+    public Cuisine(String description, Set<Restaurant> restaurant) {
         this.description = description;
-        this.restaurant = restaurant;
+        this.restaurants = restaurant;
     }
 
     public long getId() {
@@ -44,11 +52,11 @@ public class Cuisine {
         this.description = description;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public Set<Restaurant> getRestaurants() {
+        return restaurants;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurants(Set<Restaurant> restaurants) {
+        this.restaurants = restaurants;
     }
 }

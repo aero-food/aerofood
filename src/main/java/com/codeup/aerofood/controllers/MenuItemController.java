@@ -41,8 +41,7 @@ public class MenuItemController {
                          Model viewModel) {
         newItem.setMenuCategory(menu_category);
         menuItemDao.save(newItem);
-//        return "redirect:/menuItem/index";
-        return "menuItem/index";
+        return "redirect:/menuItem/index";
     }
 
     // Update menu item
@@ -57,23 +56,22 @@ public class MenuItemController {
     public String update(@PathVariable long id, @RequestParam String description,
                          @RequestParam BigDecimal price,
                          @RequestParam MenuCategory menu_category,
-                         @RequestParam String picture_url,
+//                         @RequestParam String picture_url,
                          @RequestParam String title) {
         MenuItem oldItem = menuItemDao.getOne(id);
         oldItem.setMenuCategory(menu_category);
         oldItem.setDescription(description);
         oldItem.setPrice(price);
         oldItem.setTitle(title);
+        oldItem.setPicture_url("none");
         menuItemDao.save(oldItem);
-//        return "redirect:/menuItem/index";
-        return "menuItem/index";
+        return "redirect:/menuItem/index";
     }
 
     // Delete
     @PostMapping("/menuItem/{id}/deleteItem")
     public String updateItem(@PathVariable long id) {
         menuItemDao.deleteById(id);
-//        return "redirect:/menuItem/index";
-        return "menuItem/index";
+        return "redirect:/menuItem/index";
     }
 }

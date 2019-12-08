@@ -5,7 +5,8 @@
     <title>AeroFood | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body>
+<body style="height: 100vh;" class="homeImage">
+<!--<img src="../static/img/airport1.jpeg" height="170" width="296"/>-->
 <!--<body style="background-image: url('/css/img/airport-board.jpg'); no-repeat: center center; ">-->
 <!--Nav bar-->
 <div th:replace="fragments/navbar :: main-navbar"></div>
@@ -24,71 +25,34 @@
 <!--Mid Section-->
 <section class="container">
     <!--    <th:block th:if="not ${#authentication.principal.isAdmin}">-->
-    <div class="main-header">
-        <h1>AeroFood</h1>
+    <div class="main-header" style="margin-top: 2em">
+<!--        <h1>AeroFood</h1>-->
+
         <br>
-        <h3>Do you have to catch a flight and do not have enough time to get food?</h3>
         <br>
-        <p class="lead">Join AeroFood and get the food deliver at the terminal gate</p>
+        <br>
+        <br>
+        <h3 class="improveReadAbility">Do you have to catch a flight and do not have enough time to get food?</h3>
+        <br>
+        <p  class="lead improveReadAbility">Join AeroFood and get the food deliver at the terminal gate</p>
     </div>
     <!--    <p><a href="http://www.YourLinkHere.com" class="btn btn-primary btn-lg">Register today &raquo;</a></p>-->
-    <div id="homeRow">
-        <div class="img-card"><img src="/img/breakfast.jpeg" th:src="@{/img/breakfast.jpeg}"/></div>
-        <div class="img-card"><img src="/img/pizza.jpeg" th:src="@{/img/pizza.jpeg}"/></div>
-        <div class="img-card"><img src="/img/salad.jpeg" th:src="@{/img/salad.jpeg}"/></div>
-    </div>
+<!--    <div id="homeRow">-->
+<!--        <div class="img-card"><img src="/img/breakfast.jpeg" th:src="@{/img/breakfast.jpeg}"/></div>-->
+<!--        <div class="img-card"><img src="/img/pizza.jpeg" th:src="@{/img/pizza.jpeg}"/></div>-->
+<!--        <div class="img-card"><img src="/img/salad.jpeg" th:src="@{/img/salad.jpeg}"/></div>-->
+<!--    </div>-->
+    <section class="container font-type">
+        <div class="card">
+            <h3 class="text-center">Create an Account</h3>
+
+            <form action="/register" method="GET">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </form>
+        </div>
+    </section>
 </section>
 
-<section class="container font-type">
-    <div class="card">
-        <div class="row">
-            <div class="col">
-                <h3 class="text-center">Create an Account</h3>
-
-                <form action="/register" method="GET">
-                    <button class="btn btn-primary" type="submit">Register</button>
-                </form>
-            </div>
-<!--            <div class="red-line"></div>-->
-<!--            <div class="col">-->
-<!--                <h3>Already a user?</h3>-->
-<!--                <form action="/login" method="GET">-->
-<!--                    <button class="btn btn-primary" type="submit">Login</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-    </div>
-
-<!--    <div th:sec:authorize="${#authorization.expression('isAuthenticated()')}" class="card">-->
-<!--        <h3 th:sec:authorize="${#authorization.expression('isAuthenticated()')}"> Welcome, <span sec:authentication="name"></span></h3>-->
-
-<!--        <div>-->
-<!--            <span th:text="${#authentication.principal.isAdmin}"></span>-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <span th:text="${#authentication.principal.email}"></span>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <span th:text="${#authentication.principal.username}"></span>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <span th:text="${#authentication.principal.phone_number}"></span>-->
-<!--        </div>-->
-
-
-<!--        <h4 class="text-center">See Whats Available</h4>-->
-<!--        <form action="/search" method="GET">-->
-<!--            <button class="btn btn-primary" type="submit" style="margin-left: 20px">Search</button>-->
-<!--        </form>-->
-    </div>
-
-
-</section>
-
-<footer id="footer" class="footer-font-size font-type footer" style="background-color: #D22234; color: #ffffff" th:fragment="main-footer"></footer>
-
-<!--<div class="footer-bottom" th:replace="fragments/footer :: main-footer"></div>-->
-
+<div th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>

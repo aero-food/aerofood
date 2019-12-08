@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--Main Div-->
-<div class="container">
+
     <!--Nav bar-->
     <th:block th:if="${#authorization.expression('isAuthenticated()')}">
         <span>
@@ -23,6 +23,7 @@
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
     <!--    Middle section-->
+<div class="container">
     <section class="mt-5">
         <div class="page-header">Update Cuisine Description</div>
         <form th:action="@{'/cuisine/' + ${id} + '/edit'}" th:method="post" th:object="${cuisine}">
@@ -36,9 +37,12 @@
 
             </div>
         </form>
+
+
     </section>
-    <!--    Footer-->
-    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+
 </div>
+<!--    Footer-->
+<div th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>
