@@ -20,8 +20,8 @@ public class Cuisine {
 //    @ManyToMany(mappedBy = "cuisines")
 //    private List<Restaurant> restaurant;
 
-    @ManyToMany(mappedBy = "cuisines")
-    private Set<Restaurant> restaurant;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cuisines")
+    private Set<Restaurant> restaurants;
     //new HashSet<>();
 
     public Cuisine() {
@@ -31,15 +31,9 @@ public class Cuisine {
         this.description = description;
     }
 
-//    public Cuisine(String description, Restaurant restaurant) {
-//        this.description = description;
-//        this.restaurant = restaurant;
-//    }
-
-
     public Cuisine(String description, Set<Restaurant> restaurant) {
         this.description = description;
-        this.restaurant = restaurant;
+        this.restaurants = restaurant;
     }
 
     public long getId() {
@@ -58,25 +52,11 @@ public class Cuisine {
         this.description = description;
     }
 
-    public Set<Restaurant> getRestaurant() {
-        return restaurant;
+    public Set<Restaurant> getRestaurants() {
+        return restaurants;
     }
 
-    public void setRestaurant(Set<Restaurant> restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurants(Set<Restaurant> restaurants) {
+        this.restaurants = restaurants;
     }
-
-//    public void setRestaurant(Restaurant restaurant) {
-//        this.restaurant.add(restaurant);
-//    }
-//    public void setRestaurant(List<Restaurant> restaurant) {
-//        this.restaurant = restaurant;
-//    }
-//    public Restaurant getRestaurant() {
-//        return restaurant;
-//    }
-//
-//    public void setRestaurant(Restaurant restaurant) {
-//        this.restaurant = restaurant;
-//    }
 }

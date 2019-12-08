@@ -89,25 +89,24 @@ public class RestaurantController {
         // Remove the restaurant from the cuisine list
         for (Cuisine cuisine : currentRestaurant.getCuisines()) {
             //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
-            oldRestaurant = cuisineDao.getOne(cuisine.getId()).getRestaurant();
+            oldRestaurant = cuisineDao.getOne(cuisine.getId()).getRestaurants();
             oldRestaurant.remove(cuisine);
-            cuisine.setRestaurant(oldRestaurant);
+            cuisine.setRestaurants(oldRestaurant);
             cuisineDao.save(cuisine);
         }
 
         if (cuisines != null) {
             for (int i = 0; i < cuisines.length; i++) {
-                currentCuisine =  cuisineDao.getOne((long) cuisines[i]);
+                currentCuisine = cuisineDao.getOne((long) cuisines[i]);
                 newCuisineList.add(currentCuisine);
-                oldRestaurant = cuisineDao.getOne(currentCuisine.getId()).getRestaurant();
-                currentCuisine.setRestaurant(oldRestaurant);
+                oldRestaurant = cuisineDao.getOne(currentCuisine.getId()).getRestaurants();
+                currentCuisine.setRestaurants(oldRestaurant);
                 cuisineDao.save(currentCuisine);
             }
         }
 
         currentRestaurant.setCuisines(newCuisineList);
         restaurantDao.save(currentRestaurant);
-
 
         return;
     }
@@ -155,8 +154,7 @@ public class RestaurantController {
     @GetMapping("/search")
     public String search(Model model) {
 
-        model.addAttribute("restaurants", restaurantDao.findAll());
-
+        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "search";
     }
 
@@ -180,7 +178,7 @@ public class RestaurantController {
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
 
-        viewModel.addAttribute("restaurants", restaurantDao.findAll());
+        viewModel.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "restaurant/listRestaurants";
     }
 
@@ -236,7 +234,7 @@ public class RestaurantController {
         if (!cuisineList.isEmpty()) {
             Set<Cuisine> restaurantCuisine = restaurantDao.getOne(id).getCuisines();
             List<Cuisine> availableCategories = cuisineDao.findAll();
-            for(Cuisine cuisineType : restaurantCuisine){
+            for (Cuisine cuisineType : restaurantCuisine) {
                 index = availableCategories.indexOf(cuisineType);
                 if (index >= 0) {
                     //System.out.println("remove");
@@ -244,7 +242,7 @@ public class RestaurantController {
                 }
             }
 //
-            for(Cuisine cuisine: restaurantCuisine){
+            for (Cuisine cuisine : restaurantCuisine) {
                 System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
             }
             viewModel.addAttribute("cuisineList", restaurantCuisine);
@@ -314,7 +312,27 @@ public class RestaurantController {
     //    Delete Restaurant
     @PostMapping("/restaurant/{id}/delete")
     public String deleteRestaurant(@PathVariable long id) {
-        restaurantDao.deleteById(id);
+        System.out.println("delete id = " + id);
+        Restaurant currentRestaurant = restaurantDao.getOne(id);
+        Set<Restaurant> oldRestaurant;
+        // Remove the restaurant from the cuisine list
+        for (Cuisine cuisine : currentRestaurant.getCuisines()) {
+            //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
+            oldRestaurant = cuisineDao.getOne(cuisine.getId()).getRestaurants();
+            oldRestaurant.remove(cuisine);
+            cuisine.setRestaurants(oldRestaurant);
+            cuisineDao.save(cuisine);
+        }
+//        for (Cuisine cuisine : currentRestaurant.getCuisines()) {
+//            //System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
+//            currentRestaurant.de
+//        }
+//        restaurantDao.getOne(id).setCuisines(null);
+//        restaurantDao.save(currentRestaurant);
+
+        currentRestaurant.setDeleted(1);
+        restaurantDao.save(currentRestaurant);
+        //restaurantDao.deleteById(id);
         return "redirect:/restaurant/index";
     }
 

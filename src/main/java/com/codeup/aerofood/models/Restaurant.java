@@ -30,6 +30,9 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
 
+    @Column(nullable = false, columnDefinition = "INT(1) DEFAULT 0")
+    private int deleted;
+
 //    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 //    private List<Cuisine> cuisines;
 //    @ManyToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -41,7 +44,7 @@ public class Restaurant {
 //            inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
 //    private Set<Publisher> publishers;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
     @JoinTable(
             name="restaurant_cuisine",
             joinColumns={@JoinColumn(name="restaurant_id")},
@@ -89,17 +92,6 @@ public class Restaurant {
         this.menu_items = menu_items;
     }
 
-    //    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number, List<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items) {
-//        this.name = name;
-//        this.thumbnail = thumbnail;
-//        this.picture_url = picture_url;
-//        this.gate = gate;
-//        this.airport = airport;
-//        this.phone_number = phone_number;
-//        this.cuisines = cuisines;
-//        this.orders = orders;
-//        this.menu_items = menu_items;
-//    }
 
     public long getId() {
         return id;
@@ -157,6 +149,14 @@ public class Restaurant {
         this.phone_number = phone_number;
     }
 
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
     public Set<Cuisine> getCuisines() {
         return cuisines;
     }
@@ -164,14 +164,6 @@ public class Restaurant {
     public void setCuisines(Set<Cuisine> cuisines) {
         this.cuisines = cuisines;
     }
-
-    //    public List<Cuisine> getCuisines() {
-//        return cuisines;
-//    }
-//
-//    public void setCuisines(List<Cuisine> cuisines) {
-//            this.cuisines = cuisines;
-//    }
 
     public List<Orders> getOrders() {
         return orders;
@@ -188,13 +180,5 @@ public class Restaurant {
     public void setMenu_items(List<MenuItem> menu_items) {
         this.menu_items = menu_items;
     }
-//    public void removeCuisines(Cuisine cuisine) {
-//       int index = cuisines.indexOf(cuisine);
-//       cuisine.setRestaurant(null);
-//       //cuisines.remove(index);
-//    }
-//    public void removeComment(PostComment comment) {
-//        comments.remove(comment);
-//        comment.setPost(null);
-//    }
+
 }
