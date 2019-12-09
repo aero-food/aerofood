@@ -148,7 +148,10 @@ ul {
     justify-content: center;
 }
 
-
+#restaurant-update label{
+    margin-top: .5em;
+    font-size: 1em;
+}
 /*Classes*/
 .adminNavBar{
     display: flex;
@@ -228,18 +231,7 @@ ul {
 .footer-font-size {
     font-size: 16pt;
 }
-/*.jumbotron{*/
-/*    background: url("/css/img/airport-board.jpg") no-repeat center center;*/
-/*    !*-webkit-background-size: 100% 100%;*!*/
-/*    !*-moz-background-size: 100% 100%;*!*/
-/*    !*-o-background-size: 100% 100%;*!*/
-/*    !*background-size: 100% 100%;*!*/
-/*    width:100%;*/
-/*    color: white;*/
-/*    font-size: 5em;*/
-/*    text-align: center;*/
-/*    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
-/*}*/
+
 .homeImage{
     background: url('/img/home-background.jpg')
     no-repeat center center fixed;
@@ -282,12 +274,23 @@ ul {
 .page-header {
     /*font-size: 1.75em;*/
     text-align: center;
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: .5em;
 }
 .push-spaces
 {
     height: 70vh;
+}
+
+.admin-page-header {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+}
+.white-letter{
+    color: white !important;
+    font-size: 1.2em;
 }
 .red-line {
     border-left: 4px solid #D22234;
@@ -302,12 +305,22 @@ ul {
 
 .section-header {
     font-size: 1.5em;
+    font-weight: bold;
+    /*margin-top: 1em;*/
+    /*margin-bottom: 1em;*/
 }
 
 .sub-section-header {
     font-size: 1em;
 }
 
+th{
+    font-size: 1.2em;
+}
+
+td>label{
+    font-size:1em;
+}
 label {
     color: #000000;
     font-size: 18pt;
@@ -322,3 +335,4 @@ label {
     font-weight: bolder;
 
 }
+
