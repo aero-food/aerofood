@@ -5,6 +5,24 @@
     <meta charset="UTF-8">
     <title>AeroFood | Search</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        .card {
+            display: flex;
+            align-content: center;
+            padding: .25em;
+            margin-top: 1em;
+            margin-right: 2em;
+            margin-bottom: 1em;
+            margin-left: 2em;
+            /*height: 400px;*/
+            box-shadow: .2em .2em .2em .2em #888888;
+            /*height: 10em;*/
+        }
+        .card-body {
+            padding: .5em;
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <div id="mainDiv">
@@ -21,19 +39,19 @@
     <div th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
-    <div class="restaurant-list-container">
-        <div class="page-header">Restaurant Search</div>
-        <div class="row" id="restaurantList">
+    <div class="restaurant-list-container container">
+        <h1 class="page-header" style="font-size: 48px">Restaurant Search</h1>
+        <div class="d-flex " id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
-                <div class="menu-tile">
+                <div class="menu-tile card">
                     <a th:href="@{'/restaurants/' + ${restaurant.id}}">
-                        <div id="outer" style="width:400px;height:240px; overflow:hidden;">
+<!--                        <div id="outer" style="width:400px;height:240px; overflow:hidden;">-->
                             <div id="inner">
-                                <img th:src="${restaurant.getPicture_url()}" alt="" height="240">
+                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">
                             </div>
-                        </div>
-                        <div class="restaurant-info">
-                            <span th:text="${restaurant.name}"></span>&nbsp;(Gate: <span
+<!--                        </div>-->
+                        <div class="restaurant-info card-body">
+                            <span th:text="${restaurant.name}" style="font-size: 24px"></span>&nbsp;(Gate: <span
                                 th:text=" ${restaurant.gate}"></span>)
                             </span>
                         </div>
@@ -43,8 +61,7 @@
                                 <th:block th:if="${itrStat.index <= itrStat.size - 2}">
                                     ,
                                 </th:block>
-                                <!--                                                    <td th:text="${itrStat.index}">0</td>-->
-                                <!--                                                    <td th:text="${itrStat.size}">10</td>-->
+
                             </th:block>
                         </div>
                     </a>
@@ -55,7 +72,7 @@
     <br>
     <br><br><br><br><br>
     <!--    Footer-->
-    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
+<!--    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>-->
 </div>
 
 </body>
