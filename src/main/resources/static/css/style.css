@@ -200,9 +200,9 @@ ul {
     text-shadow: .1em .1em lightgrey;
 }
 
-.card-body {
-    color: #a8a660;
-}
+/*.card-body {*/
+/*    color: #a8a660;*/
+/*}*/
 
 .center-li {
     display: inline;
@@ -315,4 +315,10 @@ label {
 
 .registration {
     font-size: 18pt;
+}
+
+.navlinktext {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+
 }
