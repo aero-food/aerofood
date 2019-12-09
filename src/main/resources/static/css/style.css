@@ -245,6 +245,12 @@ ul {
     no-repeat center center fixed;
     background-size: cover;
 }
+.backImage{
+    background: url('/img/home-background.jpg')
+    no-repeat center center fixed;
+    background-size: cover;
+    opacity: .5;
+}
 .improveReadAbility {
     color: white;
     text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
