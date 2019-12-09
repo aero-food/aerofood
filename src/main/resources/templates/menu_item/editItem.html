@@ -9,21 +9,21 @@
 
 <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
 <!--Nav bar-->
-<div th:if="${#authorization.expression('isAuthenticated()')}">
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
     <th:block th:if="${#authentication.principal.isAdmin}">
         <div th:replace="fragments/navbar-admin :: main-navbar"></div>
     </th:block>
-</div>
-<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+</th:block>
+<th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
-</div>
+</th:block>
 <section class="container">
 
     <form th:action="@{'/menuItem/' + ${menuItem.id} + '/editItem'}" th:method="post" th:object="${menuItem}">
-        <div class="page-header">Update Menu Item</div>
+        <div class="admin-page-header">Update Menu Item</div>
         <form th:action="@{/menuItem/addItem}" th:method="post" th:object="${menuItem}" class="form-group">
             <label for="title">Add a menu item</label>
             <br>
