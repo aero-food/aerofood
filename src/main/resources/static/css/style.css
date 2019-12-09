@@ -197,7 +197,7 @@ ul {
 }
 .card-title {
     /*color: #3F3C3C;*/
-    text-shadow: .1em .1em lightgrey;
+    /*text-shadow: .1em .1em lightgrey;*/
 }
 
 /*.card-body {*/
@@ -241,7 +241,7 @@ ul {
 /*    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
 /*}*/
 .homeImage{
-    background: url('/img/airport1.jpeg')
+    background: url('/img/home-background.jpg')
     no-repeat center center fixed;
     background-size: cover;
 }
