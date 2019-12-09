@@ -37,12 +37,12 @@
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
 
-<h2 th:text="${restaurants.getName()}" class="display-4 font-weight-bolder text-center" style="margin-top: 2em;"></h2>
+<h2 th:text="${restaurants.getName()}" class="display-4 font-weight-bolder text-center" style="margin-top: 3em;"></h2>
         <div class="container">
-            <div id="outer" style="width:350px;height:240px; overflow:hidden;">
+<!--            <div id="outer" style="width:350px;height:240px; overflow:hidden;">-->
+            <div id="outer" style="height:300px; overflow: hidden">
                 <div id="inner">
-                    <img th:src="${restaurants.getPicture_url()}" alt="" height="240">
-<!--                    <h1 th:text="${restaurants.getName()}" class="display-3"></h1>-->
+                    <img th:src="${restaurants.getPicture_url()}" alt="">
                 </div>
             </div>
         </div>
