@@ -23,7 +23,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #C6C7C9">
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
@@ -57,16 +57,16 @@
 
 <div class="card d-flex flex-column mr-auto ml-auto">
     <div class="card-body">
-    <h3> Total in Cart = <span th:text="${total}"></span></h3>
+    <h4> Total in Cart = <span th:text="${total}"></span></h4>
 
-    <h3> Total With Tax = <span th:text="${totalTax}"></span></h3>
+    <h4> Total With Tax = <span th:text="${totalTax}"></span></h4>
         </div>
 
-    <form  th:action="@{'/shoppingCart/checkout'}" method="GET">
-        <h4 class="remove-margin">Enter your Gate</h4>
+    <form style="padding: 1em" th:action="@{'/shoppingCart/checkout'}" method="GET">
+        <h4>Enter your Gate</h4>
         <input  id="checkout_address" name="checkout_address" type="text" />
         <br/>
-        <div>
+        <div class="m-2">
             <script
                     th:method="POST"
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -85,3 +85,5 @@
 </div>
 </body>
 </html>
+
+<!--   #C6C7C9  -->

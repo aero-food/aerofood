@@ -25,8 +25,8 @@
 <br>
 <br>
 <div>
-    <div >
-        <h1><span class="uk-text-capitalize" th:text ="${#authentication.principal.username}"></span>, Thank you for you Order!</h1>
+    <div class="card">
+        <h1><span class="text-capitalize card-title" th:text ="${#authentication.principal.username}"></span>, Thank you for you Order!</h1>
         <h3>Your Order Number is: #<span th:text="${order_num}"></span></h3>
         <h3>Your Order will be delivered to Gate <span th:text="${gate}"></span></h3>
     </div>

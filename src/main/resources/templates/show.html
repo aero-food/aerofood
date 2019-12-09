@@ -37,6 +37,7 @@
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
 
+<h2 th:text="${restaurants.getName()}" class="display-4 font-weight-bolder text-center" style="margin-top: 2em;"></h2>
         <div class="container">
             <div id="outer" style="width:350px;height:240px; overflow:hidden;">
                 <div id="inner">
@@ -46,13 +47,12 @@
             </div>
         </div>
 
-<h2 th:text="${restaurants.getName()}" class="display-4 font-weight-bolder text-center"></h2>
 
 <div class="d-flex flex-row mb-2">
-    <a class="ml-2 btn btn-warning" href="/search" role="button">Back</a>
+    <a class="ml-2 btn btn-primary" style="color: white; font-size: larger; font-weight: bold" href="/search" role="button">Back</a>
 <!--    <a class="ml-auto mr-2" href="/shoppingCart">Proceed to Checkout</a>-->
 
-    <a class="btn btn-success ml-auto mr-2" href="/shoppingCart" role="button">Proceed to Checkout</a>
+    <a class="btn btn-success ml-auto mr-2" href="/shoppingCart" style="color: white; font-size: larger; font-weight: bold" role="button">Proceed to Checkout</a>
 
 </div>
 
@@ -68,12 +68,15 @@
 
                 <h3 class="card-title"><span th:text="${menu.title}"></span></h3>
                 <p class="card-text"><span th:text="${menu.description}"></span></p>
-                <p class="ml-auto"> $<span th:text="${menu.price}"></span></p>
-
+                    <ul class="d-flex" style="padding-left: 0">
+                        <li class="mr-auto"> $<span th:text="${menu.price}"></span></li>
 
                         <form method="POST" th:action="@{'/restaurants/' + ${menu.restaurant.id} + '/' +  ${menu.id}}">
                             <input type="submit" value="ADD TO CART" class="btn btn-success" />
                         </form>
+                    </ul>
+
+
 
                 </div>
          </div>
