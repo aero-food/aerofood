@@ -308,6 +308,15 @@ ul {
     font-size: 1em;
 }
 
+label {
+    color: #000000;
+    font-size: 18pt;
+}
+
+.registration {
+    font-size: 18pt;
+}
+
 .navlinktext {
     font-family: 'Montserrat', sans-serif;
     font-weight: bolder;
