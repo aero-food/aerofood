@@ -243,10 +243,14 @@ ul {
     background-size: cover;
 }
 .backImage{
-    background: url('/img/home-background.jpg')
+    background: url('/img/air-travel.jpg')
     no-repeat center center fixed;
     background-size: cover;
-    opacity: .5;
+}
+.successImage{
+    background: url('/img/terminal-seats.jpg')
+    no-repeat center center fixed;
+    background-size: cover;
 }
 
 .improveReadAbility {
