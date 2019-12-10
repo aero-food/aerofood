@@ -358,8 +358,8 @@ label {
 
 #restaurantList {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: flex-start;
     overflow: auto;
 }
 
@@ -367,8 +367,8 @@ label {
 @media screen and (min-width: 768px) {
     #restaurantList {
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+        flex-direction: column;
+        justify-content: flex-start;
         overflow: auto;
     }
 }
