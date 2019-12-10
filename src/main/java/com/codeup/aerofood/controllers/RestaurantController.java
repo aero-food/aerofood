@@ -152,6 +152,7 @@ public class RestaurantController {
     @GetMapping("/search")
     public String search(Model model) {
 
+        model.addAttribute("page_name", "Search Restaurants");
         model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "search";
     }
