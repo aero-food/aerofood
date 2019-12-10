@@ -23,7 +23,7 @@
         }
     </style>
 </head>
-<body class="homeImage">
+<body class="backImage">
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
@@ -51,9 +51,9 @@
 
                 <div class="d-flex flex-row">
 
-                <h3 class="ml-2" th:text="${product.getKey().getTitle()}"></h3>
+                <h5 style="margin-left: 6em;" th:text="${product.getKey().getTitle()}"></h5>
 
-                <p class="ml-auto">$<span th:text="${product.getKey().getPrice()}"></span></p>
+                <p class="ml-auto" style="margin-right: 6em;">$<span th:text="${product.getKey().getPrice()}"></span></p>
                 </div>
             </div>
 
