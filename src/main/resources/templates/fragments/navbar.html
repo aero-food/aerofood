@@ -18,19 +18,13 @@
 
     <a class="brand" href="/"><img src="img/AeroFood-nav.png" th:src="@{../img/AeroFood-nav.png}"/></a>
 
-<!--    #FF2D32-->
-
-
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
 
     <div class="collapse navbar-collapse collapse show" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a sec:authorize="isAuthenticated()" class="nav-link navlinktext" href="/search" style="color: white">My Orders<span class="sr-only"></span></a>
+                <a sec:authorize="isAuthenticated()" class="nav-link navlinktext" href="/my-orders" style="color: white">History<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link navlinktext" href="/search" style="color: white">Restaurants</a>
