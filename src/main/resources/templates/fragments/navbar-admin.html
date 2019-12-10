@@ -2,39 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<nav class="navbar font-type nav-font-size navbar-expand-lg fixed-top" th:fragment="main-navbar"
-     style="z-index: 3; position: fixed; top: 0px; left: 0px; width: 100%; background-color: #FF2D32;"
+<nav class="navbar font-type admin-font navbar-expand-lg fixed-top" th:fragment="main-navbar"
+     style="z-index: 3; position: fixed; top: 0px; left: 0px; width: 100%; background-color: white;"
      id="navbarSupportedContentAdmin">
-<!--    <div class="nav-item" sec:authorize="isAuthenticated()">-->
-<!--                -->
-<!--    </div>-->
-    <div><span style="color: white;">
+    <div><span class="admin-font">
                     <i class="fas fa-users-cog"></i>
-                </span><a class="nav-item white-letter"  href="">AeroFood </a>
+                </span><a class="nav-item " href=""><span class="admin-font">AeroFood</span> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-    <div class="collapse navbar-collapse">
-        <ul id="middleNav" class="navbar-nav" style="border: 0px; margin: 0px; width: 100%; color: white;">
-            <li class="nav-item navlinktext " ><span><a class="white-letter" href="/search">Restaurants</a></span></li>
-            <li class="nav-item navlinktext " ><span><a class="white-letter" href="/cuisine/index">Cuisine Categories</a></span></li>
-            <li class="nav-item navlinktext " ><span><a class="white-letter" href="/menuCategory/index">Menu Item Categories</a></span></li>
-            <li class="nav-item navlinktext " ><span><a class="white-letter" href="/menuItem/index">Menu Items</a></span></li>
-            <li class="nav-item navlinktext " ><span><a class="white-letter" href="/restaurant/index">Update Restaurants</a></span></li>
+    <div class="collapse navbar-collapse ">
+        <ul id="middleNav" class="navbar-nav" style="border: 0px; margin: 0px; width: 100%;">
+            <li class="nav-item navlinktext "><a href="/search"><span class="admin-font">Preview</span></a></li>
+            <li class="nav-item navlinktext"><a href="/cuisine/index"><span class="admin-font">Cuisine Categories</span></a></li>
+            <li class="nav-item navlinktext"><a href="/menuCategory/index"><span class="admin-font">Menu Item Categories</span></a></li>
+            <li class="nav-item navlinktext"><a href="/menuItem/index"><span class="admin-font">Menu Items</span></a></li>
+            <li class="nav-item navlinktext"><a href="/restaurant/index"><span class="admin-font">Update Restaurants</span></a></li>
 
         </ul>
     </div>
     <div>
-        <ul id="adminNavBar2" class="navbar-nav ml-auto navlinktext " style="color: white">
-<!--            <li class="nav-item pull-right" sec:authorize="isAuthenticated()">-->
-<!--                <form th:action="@{/logout}" th:method="post">-->
-<!--                    <button style="background-color: white; border: 0px; width: 80px; margin: 0; padding: 0;">Logout-->
-<!--                    </button>-->
-<!--                </form>-->
+        <ul id="adminNavBar2" class="navbar-nav ml-auto navlinktext " >
             <li sec:authorize="isAuthenticated()">
-                <a class="white-letter" href="#" th:href="@{/logout}">Log Out</a>
+                <a  href="#" th:href="@{/logout}"><span class="admin-font">Log Out</span></a>
             </li>
 
 

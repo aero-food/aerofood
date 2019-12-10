@@ -149,6 +149,11 @@ ul {
 }
 
 /*Classes*/
+
+.admin-font{
+    font-size: 1.2em;
+    color: #FF2D32;
+}
 .adminNavBar {
     display: flex;
     flex-direction: row;
@@ -335,6 +340,16 @@ th {
     font-size: 1.2em;
 }
 
+#addRestaurantForm label {
+    margin-top: .25em;
+    font-size: 1em;
+}
+
+#addRestaurantForm th {
+    margin-top: .25em;
+    font-size: 1em;
+}
+
 td > label {
     font-size: 1em;
 }
@@ -378,7 +393,7 @@ label {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2em;
+        grid-gap: .2em;
         overflow: auto;
     }
 }
@@ -388,7 +403,8 @@ label {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2em;
+        grid-gap: .2em;
         overflow: auto;
     }
 }
+

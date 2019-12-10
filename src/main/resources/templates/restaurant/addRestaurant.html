@@ -21,76 +21,84 @@
 </th:block>
 <section class="container">
     <div class="admin-page-header">Add a Restaurant</div>
-    <form th:action="@{/restaurant/add}" th:method="post" th:object="${restaurant}" class="form-group">
-        <label for="name">Name</label>
-        <br>
-        <input id="name" th:field="${restaurant.name}" class="form-control" placeholder="Restaurant Name" th:required="required"/>
-        <br>
-        <label for="phone_number">Phone Number</label>
-        <br>
-        <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control" placeholder="Phone Number" th:required="required"/>
-        <br>
-        <label for="picture">Picture</label>
-        <br>
-        <input id="picture" th:field="${restaurant.picture_url}" class="form-control" placeholder="picture" th:required="required"/>
-        <br>
-        <label for="airport">Airport</label>
-        <br>
-        <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="Airport" th:required="required"/>
-        <br>
-        <label for="name">Gate</label>
-        <br>
-        <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="Gate" th:required="required"/>
-        <br>
-        <label for="thumbnail">Thumbnail</label>
-        <br>
-        <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control" th:required="required"/>
-        <br>
-        <div>Cuisines</div>
-        <div>
-            <th:block th:each="cuisine : ${dish_types}">
-                <input type="checkbox" th:field="*{cuisines}" name="categories" th:value="${cuisine.id}"/>
-                <label th:text="${cuisine.description}"></label>
-            </th:block>
-        </div>
-        <div>Menu Items</div>
-        <div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Dish Type</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Add</th>
-                </tr>
-                </thead>
-                <th:block th:each="menuItem : ${menuItems}" >
-                    <tr>
-                        <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
-                        <td>
-                            <label th:text="${menuItem.title}"></label>
-                        </td>
-                        <td>
-                            <label th:text="${menuItem.description}"></label>
-                        </td>
-                        <td>
-                            <label th:text="${menuItem.getPriceString()}"></label>
-                        </td>
-                        <td>
-                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
-                        </td>
-                    </tr>
+    <div class="card" style="margin: auto;">
+        <form th:action="@{/restaurant/add}" th:method="post" th:object="${restaurant}" class="form-group" id="addRestaurantForm">
+            <div class="row">
+                <div class="col-6">
+                    <label for="name">Name</label>
+                    <input id="name" th:field="${restaurant.name}" class="form-control" placeholder="Restaurant Name"
+                           th:required="required"/>
+                </div>
+                <div class="col-6">
+                    <label for="phone_number">Phone Number</label>
+                    <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
+                           placeholder="Phone Number"
+                           th:required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6"><label for="picture">Picture</label>
+                    <input id="picture" th:field="${restaurant.picture_url}" class="form-control" placeholder="picture"
+                           th:required="required"/></div>
+                <div class="col-6"><label for="airport">Airport</label>
+                    <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="Airport"
+                           th:required="required"/></div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6"><label for="name">Gate</label>
+                    <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="Gate"
+                           th:required="required"/>
+                </div>
+                <div class="col-6"><label for="thumbnail">Thumbnail</label>
+                    <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control"
+                           th:required="required"/>
+                </div>
+            </div>
+            <div class="section-header card-title text-white bg-secondary p-2 text-center">Cuisines</div>
+            <div>
+                <th:block th:each="cuisine : ${dish_types}">
+                    <input type="checkbox" th:field="*{cuisines}" name="categories" th:value="${cuisine.id}"/>
+                    <label th:text="${cuisine.description}"></label>
                 </th:block>
-            </table>
-        </div>
-<!--        <input type="hidden" id="totalCategories" value="0">-->
-<!--        <input type="hidden" id="totalMenuItems" value="0">-->
-        <input type="submit" class="btn btn-success btn-sm" />
+            </div>
+            <div class="section-header card-title text-white bg-secondary p-2 text-center">Menu Items</div>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Dish Type</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Add</th>
+                    </tr>
+                    </thead>
+                    <th:block th:each="menuItem : ${menuItems}">
+                        <tr>
+                            <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
+                            <td>
+                                <label th:text="${menuItem.title}"></label>
+                            </td>
+                            <td>
+                                <label th:text="${menuItem.description}"></label>
+                            </td>
+                            <td>
+                                <label th:text="${menuItem.getPriceString()}"></label>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
+                            </td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+            <input type="submit" class="btn btn-success btn-sm"/>
 
-    </form>
+        </form>
+    </div>
 </section>
+<br>
 <!--    Footer-->
-<!--<div class="mt-5" th:replace="fragments/footer :: main-footer"></div>-->
+<div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>
