@@ -40,7 +40,7 @@
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
     <div class="restaurant-list-container container">
-        <h1 class="page-header" style="font-size: 48px">Restaurant Search</h1>
+        <h1 class="page-header" style="font-size: 48px" ><span th:if="${page_name != null}" th:text="${page_name}">Search Restaurant</span></h1>
         <div  id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile card">
