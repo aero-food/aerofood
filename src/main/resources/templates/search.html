@@ -41,7 +41,7 @@
     </div>
     <div class="restaurant-list-container container" style="margin: auto;">
         <h1 class="page-header" style="font-size: 48px;">Restaurants</h1>
-        <div class="d-flex " id="restaurantList">
+        <div  id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile card">
                     <a th:href="@{'/restaurants/' + ${restaurant.id}}">
