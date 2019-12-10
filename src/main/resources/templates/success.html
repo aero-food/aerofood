@@ -4,8 +4,26 @@
     <meta charset="UTF-8"/>
     <title>AeroFood</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        .card {
+            display: flex;
+            align-content: center;
+            padding: .25em;
+            margin-top: 1em;
+            margin-right: 2em;
+            margin-bottom: 1em;
+            margin-left: 2em;
+            /*height: 400px;*/
+            box-shadow: .2em .2em .2em .2em #888888;
+            /*height: 10em;*/
+        }
+        .card-body {
+            padding: .5em;
+            color: black;
+        }
+    </style>
 </head>
-<body>
+<body class="homeImage">
 <!--Nav bar-->
 <div th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
@@ -18,17 +36,16 @@
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <div>
-    <div class="card">
-        <h1><span class="text-capitalize card-title" th:text ="${#authentication.principal.username}"></span>, Thank you for you Order!</h1>
-        <h3>Your Order Number is: #<span th:text="${order_num}"></span></h3>
-        <h3>Your Order will be delivered to Gate <span th:text="${gate}"></span></h3>
+    <div class="card" STYLE="margin-top: 12em">
+        <h1 class="text-center">Order Complete</h1>
+        <div class="card-body">
+            <h3><span class="text-capitalize" th:text ="${#authentication.principal.username}"></span>, Thank you for you Order!</h3>
+            <h4>Your Order Number is: #<span th:text="${order_num}"></span></h4>
+            <h4>Your Order will be delivered to Gate <span th:text="${gate}"></span></h4>
+        </div>
+
     </div>
 </div>
 

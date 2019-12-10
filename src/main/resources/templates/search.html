@@ -14,7 +14,7 @@
             margin-right: 2em;
             margin-bottom: 1em;
             margin-left: 2em;
-            /*height: 400px;*/
+            height: 350px;
             box-shadow: .2em .2em .2em .2em #888888;
             /*height: 10em;*/
         }
@@ -39,8 +39,8 @@
     <div th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
-    <div class="restaurant-list-container container">
-        <h1 class="page-header" style="font-size: 48px">Restaurant Search</h1>
+    <div class="restaurant-list-container container" style="margin: auto;">
+        <h1 class="page-header" style="font-size: 48px;">Restaurants</h1>
         <div  id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile card">

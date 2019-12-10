@@ -13,13 +13,16 @@
 
     <div class="main-header d-flex flex-column card" style="margin-top: 15em; margin-bottom: 2em">
 
-<!--        <h2 class="improveReadAbility">Do you have to catch a flight and do not have enough time to get food?</h2>-->
 
-        <h2 class="card-title mt-1">Need to catch a flight, but dont have time to grab a bite?</h2>
+        <h2 class="card-title mt-1" style="font-size: 24pt">Need to catch a flight, but dont have time to grab a bite?</h2>
 
-<!--        <p sec:authorize="isAnonymous()" class="card-body">Join AeroFood and get the food deliver at the terminal gate</p>-->
 
-        <h4 sec:authorize="isAnonymous()" class="card-body">Don't wait join AeroFood and get the food delivered to your gate.</h4>
+        <div sec:authorize="isAnonymous()" class="card-body">
+            <p style="font-size: 18pt">Don't wait join AeroFood!</p>
+            <p style="font-size: 18pt">Get the food delivered to your gate.</p>
+
+        </div>
+
 
         <div sec:authorize="isAnonymous()" class="nav-item text-center">
             <a class="nav-link navlinktext text-center" href="/register" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign Up</a>
@@ -31,31 +34,6 @@
 
     </div>
 
-<!--    <section sec:authorize="isAnonymous()" class="container font-type">-->
-<!--        <div  class="card">-->
-<!--            <h3 class="text-center">Create an Account</h3>-->
-
-<!--            <form action="/register" method="GET">-->
-<!--                <button class="btn btn-primary" type="submit">Register</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </section>-->
-
-<!--    <div sec:authorize="isAuthenticated()" class="text-center">-->
-
-<!--    <div sec:authorize="isAuthenticated()" class="d-flex flex-column">-->
-
-<!--        <div class="nav-item text-center">-->
-<!--            <a class="nav-link navlinktext text-center" href="/search" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 50vw; margin-right: auto; margin-left: auto;">Search available restaurants</a>-->
-<!--        </div>-->
-
-<!--        <div >Search available restaurants</div>-->
-
-<!--        <form action="/search" method="GET">-->
-<!--            <button class="btn btn-primary" type="submit">Search</button>-->
-<!--        </form>-->
-
-    </div>
 </section>
 
 <div th:replace="fragments/footer :: main-footer"></div>
