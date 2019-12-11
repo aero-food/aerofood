@@ -14,7 +14,7 @@
             margin-right: 2em;
             margin-bottom: 1em;
             margin-left: 2em;
-            /*height: 400px;*/
+            height: 350px;
             box-shadow: .2em .2em .2em .2em #888888;
             /*height: 10em;*/
         }
@@ -39,15 +39,16 @@
     <div th:if="not ${#authorization.expression('isAuthenticated()')}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
-    <div class="restaurant-list-container container">
-        <h1 class="page-header" style="font-size: 48px">Restaurant Search</h1>
+    <div class="restaurant-list-container container" style="margin: auto;">
+        <h1 class="page-header" style="font-size: 48px;">Restaurants</h1>
+        <h1 class="page-header" style="font-size: 24px;">Location: San Antonio Airport</h1>
         <div  id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile card">
                     <a th:href="@{'/restaurants/' + ${restaurant.id}}">
 <!--                        <div id="outer" style="width:400px;height:240px; overflow:hidden;">-->
                             <div id="inner">
-                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">
+                                <img th:src="${restaurant.getThumbnail()}" alt=""  width="300" height="240">
                             </div>
 <!--                        </div>-->
                         <div class="restaurant-info card-body">
