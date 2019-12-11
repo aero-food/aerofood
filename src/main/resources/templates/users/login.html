@@ -25,6 +25,7 @@
 
         <form th:action="@{/login}" method="post">
             <div class="form-group"></div>
+            <h1 class="page-header" style="font-size: 48px;">Login</h1>
             <label for="username">Username</label><br>
             <input id="username" name="username" type="text" placeholder="username" class="form-control" style="border-radius: 5px; height: 60px; font-size: 20pt;"/><br>
 
@@ -35,14 +36,11 @@
 
             <input type="submit" value="Log In" class="btn btn-lg" style="font-size:15pt; margin-left: 11.5em; color: #FFFFFF; background-color: #FF2D32"/>
         </form>
+
+        <p class="text-center login" style="margin-top: .25em;">Don't have an account?</p>
+        <a class="nav-link navlinktext text-center" href="/register" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 10vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign Up</a>
+
     </div>
-</div>
-<div class="container" style="display: flex; justify-content: center; margin-bottom: 57px">
-    <div class="card" style="width: 35%;">
-        <p class="text-center login">Don't have an account?</p>
-        <a class="nav-link navlinktext text-center" href="/register" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign Up</a>
-    </div>
-</div>
 </div>
 </body>
 </html>
