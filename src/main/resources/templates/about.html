@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <title>AeroFood | About</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+
+        .card {
+            display: flex;
+            align-content: center;
+            padding: .25em;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            /*height: 400px;*/
+            box-shadow: .2em .2em .2em .2em #888888;
+            /*height: 20em;*/
+        }
+    </style>
 </head>
 
 <body>
@@ -17,45 +32,57 @@
 
 
 
-    <div class="row container" style="margin-left: auto; margin-right: auto">
-        <div class="d-flex justify-content-between" style="width: 100vw; margin: auto;">
+<!--    <div class="row container" style="margin-left: auto; margin-right: auto">-->
+
+<!--    <div class="container" style="margin-left: auto; margin-right: auto">-->
+    <div class="container">
+
+<!--        <div class="d-flex justify-content-between" style="width: 100vw; margin: auto;">-->
+        <div class="row justify-content-center align-items-center h-100 w-100">
 
 
-        <div class="card col-md-4" style="margin: auto">
+<!--        <div class="card col-md-4" style="margin: auto; border-radius: 15px">-->
+        <div class="card col-10 col-sm-8 col-md-6 col-lg-4 mb-3">
+            <div style="width:350px;">
+
             <h1 class="text-center card-title">Laura Vela</h1>
             <a href="https://alumni.codeup.com/students/702"><img style="width:340px; height:350px; border-radius: 15px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/LauraG.jpg" alt="Laura"></a>
             <div class="row d-flex justify-content-around" style="margin-top: .5em">
                 <a href="https://alumni.codeup.com/students/702"><img src="../static/img/codeupfullcolorchevron.png" th:src="@{img/codeupfullcolorchevron.png}" height="56px" style="margin-top: .25em;"/></a>
                 <a href="https://github.com/gloriaLVela"><i class="fab fa-github-square" style="font-size: 48pt"></i></a>
                 <a href="https://www.linkedin.com/in/gloria-laura-vela/"><i class="fab fa-linkedin about-icons" style="font-size: 48pt"></i></a>
-                <a href="gloria.laura.vela@gmail.com"><i class="fa fa-envelope about-icons" style="font-size: 48pt"></i></a>
+            </div>
             </div>
         </div>
-        <div class="card col-md-4" style="margin: auto">
+<!--        <div class="card col-md-4" style="margin: auto; margin-left: 2em; margin-right: 2em; border-radius: 15px">-->
+            <div class="card col-10 col-sm-8 col-md-6 col-lg-4 mb-3">
+                <div style="width:350px;">
+
             <h1 class="text-center card-title">Mark Strange</h1>
             <a href="https://alumni.codeup.com/students/716"><img style="width:340px; height:350px; border-radius: 15px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/MarkS.jpg" alt="Mark"></a>
             <div class="row d-flex justify-content-around" style="margin-top: .5em">
                 <a href="https://alumni.codeup.com/students/716"><img src="../static/img/codeupfullcolorchevron.png" th:src="@{img/codeupfullcolorchevron.png}" height="56px" style="margin-top: .25em;"/></a>
                 <a href="https://github.com/strangemark-88"><i class="fab fa-github-square" style="font-size: 48pt"></i></a>
                 <a href="https://www.linkedin.com/in/mark-strange/"><i class="fab fa-linkedin about-icons" style="font-size: 48pt"></i></a>
-                <a href="strange.mark88@gmail.com"><i class="fa fa-envelope about-icons" style="font-size: 48pt"></i></a>
+            </div>
             </div>
         </div>
 
-        <div class="card col-md-4" style="margin: auto">
+<!--        <div class="card col-md-4" style="margin: auto; border-radius: 15px">-->
+            <div class="card col-10 col-sm-8 col-md-6 col-lg-4 mb-3">
+                <div  style="width:350px;">
             <h1 class="text-center card-title">Alex Ahrens</h1>
             <a href ="https://alumni.codeup.com/students/705"><img style="width:340px; height:350px; border-radius: 15px" class="center" src="https://s3.amazonaws.com/alumni.codeup.com/AlexA.jpg" alt="Alex"></a>
             <div class="row d-flex justify-content-around" style="margin-top: .5em">
                 <a href="https://alumni.codeup.com/students/705"><img src="../static/img/codeupfullcolorchevron.png" th:src="@{img/codeupfullcolorchevron.png}" height="56px" style="margin-top: .25em;"/></a>
                 <a href="https://github.com/Alexander-Ahrens"><i class="fab fa-github-square" style="font-size: 48pt"></i></a>
                 <a href="https://www.linkedin.com/in/alexander-ahrens/"><i class="fab fa-linkedin about-icons" style="font-size: 48pt"></i></a>
-                <a href="alexander.m.ahrens@gmail.com"><i class="fa fa-envelope about-icons" style="font-size: 48pt"></i></a>
             </div>
+        </div>
         </div>
     </div>
     </div>
 </div>
-<!--<div th:replace="fragments/footer :: main-footer"></div>-->
 
 </body>
 </html>

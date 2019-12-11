@@ -97,6 +97,24 @@ public class ShoppingCartService {
 
         return finalPrice;
     }
+    public BigDecimal getTax() {
+
+        double total = 0;
+
+        for (MenuItem key : orderItems.keySet()) {
+//            total += Double.valueOf(key.getPrice());
+            total += Double.valueOf((key.getPrice().toString()));
+
+        }
+
+        System.out.println(total);
+
+        total = (total * .0825);
+
+        BigDecimal finalPrice= new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+
+        return finalPrice;
+    }
 
     public void checkout(String gate) {
 

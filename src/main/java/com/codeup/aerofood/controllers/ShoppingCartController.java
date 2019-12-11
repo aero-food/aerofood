@@ -30,6 +30,8 @@ public class ShoppingCartController {
 
         model.addAttribute("total", shoppingCartService.getTotal());
 
+        model.addAttribute("tax", shoppingCartService.getTax());
+
         model.addAttribute("totalTax", shoppingCartService.getTotalWithTax());
 
         model.addAttribute("totalStripe", shoppingCartService.getTotalWithTax().toString().replace(".", ""));

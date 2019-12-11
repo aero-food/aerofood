@@ -148,6 +148,12 @@ ul {
 }
 
 /*Classes*/
+
+.admin-font{
+    font-size: 1.5em;
+    color: #FF2D32;
+    /*font-weight: bolder !important;*/
+}
 .adminNavBar {
     display: flex;
     flex-direction: row;
@@ -242,6 +248,10 @@ ul {
     background: url('/img/home-background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
+.homeImageSAT {
+    background: url('/img/SAAirport-2.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
 .backImage{
     background: url('/img/air-travel.jpg')
     no-repeat center center fixed;
@@ -311,6 +321,9 @@ ul {
     margin-bottom: .5em;
 }
 
+.white-text {
+    color: white !important;
+}
 .white-letter {
     color: white !important;
     font-size: 1.2em;
@@ -342,6 +355,16 @@ ul {
 
 th {
     font-size: 1.2em;
+}
+
+#addRestaurantForm label {
+    margin-top: .25em;
+    font-size: 1em;
+}
+
+#addRestaurantForm th {
+    margin-top: .25em;
+    font-size: 1em;
 }
 
 td > label {
@@ -387,7 +410,7 @@ label {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2em;
+        grid-gap: .2em;
         overflow: auto;
     }
 }
@@ -397,7 +420,8 @@ label {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 2em;
+        grid-gap: .2em;
         overflow: auto;
     }
 }
+

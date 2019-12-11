@@ -40,13 +40,13 @@
                     <td>
                         <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/edit'}" method="get"
                               th:object="${menuCategory}">
-                            <input class="btn btn-warning btn-sm" type="submit" value="Update Item">
+                            <input class="btn btn-warning white-text" type="submit" value="Update Item">
                         </form>
                     </td>
                     <td>
                         <form th:action="@{'/menuCategory/' + ${menuCategory.id} + '/delete'}" method="post"
                               th:object="${menuCategory}">
-                            <input class="btn btn-danger btn-sm" type="submit" value="Delete Item">
+                            <input class="btn btn-danger" type="submit" value="Delete Item">
                         </form>
                     </td>
                 </tr>
@@ -54,14 +54,11 @@
         </table>
         <div>
             <form th:action="@{/menuCategory/add}" method="get">
-                <input class="btn btn-success btn-sm" type="submit" value="Add Item">
+                <input class="btn btn-success" type="submit" value="Add Item">
             </form>
         </div>
     </section>
 
 </div>
-<div>&nbsp;</div>
-<!--    Footer-->
-<div  th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>
