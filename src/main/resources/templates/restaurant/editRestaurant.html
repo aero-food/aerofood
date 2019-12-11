@@ -66,7 +66,7 @@
                     </div>
 
                     <input type="hidden" th:field="*{id}">
-                    <input class="btn btn-warning p-2" type="submit" id="submitRestaurantUpdate"
+                    <input class="btn btn-warning p-2 white-text" type="submit" id="submitRestaurantUpdate"
                            value="Update Restaurant">
                 </div>
             </div>
@@ -106,7 +106,7 @@
                         </td>
                         <td>
                             <input th:id="'btnUpdate' + ${menuItem.getId()}" class="btn btn-success" type="submit"
-                                   value="Add">
+                                   value="Add Menu Item">
                             <!--                            <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>-->
                         </td>
                     </form>
@@ -160,7 +160,7 @@
                                    name="price" class="form-control" th:required="required"/>
                         </td>
                         <td>
-                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-warning" type="submit"
+                            <input th:id="'btnUpdate' + ${menuItem.id}" class="btn btn-warning white-text" type="submit"
                                    value="Update">
                         </td>
                     </form>
@@ -176,7 +176,5 @@
         </table>
     </div>
 </section>
-<!--    Footer-->
-<div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>

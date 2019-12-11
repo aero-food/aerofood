@@ -150,8 +150,9 @@ ul {
 /*Classes*/
 
 .admin-font{
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #FF2D32;
+    /*font-weight: bolder !important;*/
 }
 .adminNavBar {
     display: flex;
@@ -316,6 +317,9 @@ ul {
     margin-bottom: .5em;
 }
 
+.white-text {
+    color: white !important;
+}
 .white-letter {
     color: white !important;
     font-size: 1.2em;

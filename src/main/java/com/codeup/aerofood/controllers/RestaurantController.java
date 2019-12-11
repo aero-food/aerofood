@@ -156,6 +156,13 @@ public class RestaurantController {
         return "search";
     }
 
+    @GetMapping("/preview")
+    public String preview(Model model) {
+        model.addAttribute("page_name", "Preview");
+        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
+        return "search";
+    }
+
     @GetMapping("/restaurants/{id}")
     public String show(@PathVariable long id, Model model) {
 
