@@ -25,14 +25,15 @@
     </style>
 </head>
 <body>
-<div th:if="${#authorization.expression('isAuthenticated()')}">
+<!--Navbar-->
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
     <th:block th:if="not ${#authentication.principal.isAdmin}">
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </th:block>
     <th:block th:if="${#authentication.principal.isAdmin}">
         <div th:replace="fragments/navbar-admin :: main-navbar"></div>
     </th:block>
-</div>
+</th:block>
 <div th:if="not ${#authorization.expression('isAuthenticated()')}">
     <div th:replace="fragments/navbar :: main-navbar"></div>
 </div>
@@ -54,9 +55,6 @@
     <a class="btn btn-success ml-auto mr-2" href="/shoppingCart" style="color: white; font-size: larger; font-weight: bold; width: 20vw" role="button">Proceed to Checkout</a>
 
 </div>
-
-
-
 
 <div class="container">
     <div class="d-flex flex-column">
