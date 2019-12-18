@@ -6,21 +6,21 @@
 </head>
 <body>
 <div id="mainDiv">
-    <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
     <!--Nav bar-->
-    <div>
-        <div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block>
+        <th:block th:if="${#authorization.expression('isAuthenticated()')}">
             <th:block th:if="not ${#authentication.principal.isAdmin}">
                 <div th:replace="fragments/navbar :: main-navbar"></div>
             </th:block>
             <th:block th:if="${#authentication.principal.isAdmin}">
                 <div th:replace="fragments/navbar-admin :: main-navbar"></div>
             </th:block>
-        </div>
-        <div th:if="not ${#authorization.expression('isAuthenticated()')}">
+        </th:block>
+        <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
             <div th:replace="fragments/navbar :: main-navbar"></div>
-        </div>
-    </div>
+        </th:block>
+    </th:block>
+    <!--    Order details-->
     <div class="container">
         <div class="page-header">Order list</div>
         <div class="container">
@@ -36,7 +36,6 @@
                 </thead>
                 <tbody>
                 <div th:each="currentOrder : ${orders}" id="orderList">
-
                     <tr>
                         <td>
                             <a th:href="@{'order/' + ${currentOrder.id}}">
@@ -49,19 +48,24 @@
 
                         <div th:switch="${currentOrder.getOrderStatus()}">
                             <div th:case="1">
-                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white" bgcolor="blue"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"
+                                    bgcolor="blue"></td>
                             </div>
                             <div th:case="2">
-                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="yellow"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"
+                                    bgcolor="yellow"></td>
                             </div>
                             <div th:case="3">
-                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="red"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"
+                                    bgcolor="red"></td>
                             </div>
                             <div th:case="4">
-                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="green"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"
+                                    bgcolor="green"></td>
                             </div>
                             <div th:case="5">
-                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"  bgcolor="gray"></td>
+                                <td th:text="${currentOrder.getOrderStatusString()}" style="color: white"
+                                    bgcolor="gray"></td>
                             </div>
 
                         </div>
@@ -72,10 +76,7 @@
             </table>
         </div>
         </section>
-
     </div>
-
-    <div th:replace="fragments/footer :: main-footer"></div>
 </div>
 </body>
 </html>

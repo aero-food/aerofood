@@ -154,14 +154,14 @@ public class RestaurantController {
 
         model.addAttribute("page_name", "Search Restaurants");
         model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-        return "search";
+        return "restaurant/search";
     }
 
     @GetMapping("/preview")
     public String preview(Model model) {
         model.addAttribute("page_name", "Preview");
         model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-        return "search";
+        return "restaurant/search";
     }
 
     @GetMapping("/restaurants/{id}")
@@ -170,7 +170,7 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurantDao.getOne(id));
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
         model.addAttribute("cart", shoppingCartService.getItemsInCart());
-        return "show";
+        return "restaurant/show";
     }
 
     @PostMapping("/restaurants/{id}/{menuItemId}")

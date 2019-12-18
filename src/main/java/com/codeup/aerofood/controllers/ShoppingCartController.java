@@ -38,7 +38,7 @@ public class ShoppingCartController {
 
         shoppingCartService.getTotal();
 
-        return "shoppingCart";
+        return "orders/shoppingCart";
     }
 
     @GetMapping("/shoppingCart/checkout")
@@ -50,7 +50,7 @@ public class ShoppingCartController {
         model.addAttribute("order_num", 1);
         model.addAttribute("gate", checkout_address);
 
-        return "success";
+        return "orders/success";
     }
 
 }
