@@ -5,7 +5,7 @@
     <title>AeroFood | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body style="height: 100vh;" class="homeImage">
+<body style="height: 100vh;" class="homeImageSAT">
 
 <div th:replace="fragments/navbar :: main-navbar"></div>
 
@@ -14,11 +14,11 @@
     <div class="main-header d-flex flex-column card" style="margin-top: 15em; margin-bottom: 2em">
 
 
-        <h2 class="card-title mt-1" style="font-size: 24pt">Need to catch a flight, but dont have time to grab a bite?</h2>
+        <h2 class="card-title mt-1" style="font-size: 24pt">Need to catch a flight, but don't have time to grab a bite?</h2>
 
 
         <div sec:authorize="isAnonymous()" class="card-body">
-            <p style="font-size: 18pt">Don't wait join AeroFood!</p>
+            <p style="font-size: 18pt">Don't wait, join AeroFood!</p>
             <p style="font-size: 18pt">Get the food delivered to your gate.</p>
 
         </div>
@@ -36,6 +36,6 @@
 
 </section>
 
-<div th:replace="fragments/footer :: main-footer"></div>
+<!--<div th:replace="fragments/footer :: main-footer"></div>-->
 </body>
 </html>

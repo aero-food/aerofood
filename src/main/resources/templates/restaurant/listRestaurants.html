@@ -31,7 +31,6 @@
             <th>Gate</th>
             <th>Update</th>
             <th>Delete</th>
-
         </tr>
         </thead>
         <div th:each="restaurant : ${restaurants}">
@@ -48,13 +47,13 @@
                 <td>
                     <form th:action="@{'/restaurant/' + ${restaurant.id} + '/edit'}" method="get"
                           th:object="${restaurant}">
-                        <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                        <input class="btn btn-warning white-text" type="submit" value="Update Restaurant">
                     </form>
                 </td>
                 <td>
                     <form th:action="@{'/restaurant/' + ${restaurant.id} + '/delete'}" method="post"
                           th:object="${restaurant}">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                        <input class="btn btn-danger" type="submit" value="Delete Restaurant">
                     </form>
                 </td>
             </tr>
@@ -62,11 +61,9 @@
     </table>
     <div>
         <form th:action="@{/restaurant/add}" method="get">
-            <input class="btn btn-success btn-sm" type="submit" value="Add">
+            <input class="btn btn-success" type="submit" value="Add Restaurant">
         </form>
     </div>
 </section>
-<!--    Footer-->
-<div class="mt-5" th:replace="fragments/footer :: main-footer"></div>
 </body>
 </html>
