@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>AeroFood | Search</title>
@@ -18,6 +17,7 @@
             box-shadow: .2em .2em .2em .2em #888888;
             /*height: 325px;*/
         }
+
         .card-body {
             padding: .5em;
             color: black;
@@ -40,23 +40,34 @@
         <div th:replace="fragments/navbar :: main-navbar"></div>
     </div>
     <div class="restaurant-list-container container" style="margin: auto;">
-        <h1 class="page-header" style="font-size: 48px;">Restaurants</h1>
+        <!--        Page header-->
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <h1 class="page-header" style="font-size: 48px;">Preview</h1>
+            </th:block>
+        </div>
+        <div th:if="not ${#authorization.expression('isAuthenticated()')}">
+            <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
+        </div>
+        <!--        <h1 class="page-header" style="font-size: 48px;" th:text="${page_name}"></h1>-->
+        <!--        Airport location-->
         <h1 class="page-header" style="font-size: 24px;">Location: San Antonio Airport</h1>
-        <div  id="restaurantList">
+        <div id="restaurantList">
             <div th:each="restaurant : ${restaurants}">
                 <div class="menu-tile card">
                     <a th:href="@{'/restaurants/' + ${restaurant.id}}">
-<!--                        <div id="outer" style="width:400px;height:240px; overflow:hidden;">-->
-<!--                            <div id="inner">-->
-<!--                                <img th:src="${restaurant.getThumbnail()}" alt=""  width="300" height="240">-->
-                            <div id="inner" class="card-body d-flex flex-column">
-                                <img th:src="${restaurant.getPicture_url()}" alt="" style="width: 100%; max-width:300px;"    >
-<!--                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">-->
-                            </div>
-<!--                        </div>-->
+                        <div id="inner" class="card-body d-flex flex-column">
+                            <img th:src="${restaurant.getPicture_url()}" alt="" style="width: 100%; max-width:300px;">
+                            <!--                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">-->
+                        </div>
+                        <!--                        </div>-->
                         <div class="restaurant-info card-footer">
-                            <span th:text="${restaurant.name}" style="font-size: 24px" class="bottom"></span>&nbsp;(Gate: <span
-                                th:text=" ${restaurant.gate}"></span>)
+                            <span th:text="${restaurant.name}" style="font-size: 24px" class="bottom"></span>&nbsp;(Gate:
+                            <span
+                                    th:text=" ${restaurant.gate}"></span>)
                             </span>
                         </div>
                         <div class="cuisine-type">
@@ -73,10 +84,6 @@
             </div>
         </div>
     </div>
-    <br>
-    <br><br><br><br><br>
-    <!--    Footer-->
-<!--    <div class="mt-5" th:replace="fragments/footer :: main-footer"></div>-->
 </div>
 
 </body>

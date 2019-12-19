@@ -157,12 +157,12 @@ public class RestaurantController {
         return "restaurant/search";
     }
 
-    @GetMapping("/preview")
-    public String preview(Model model) {
-        model.addAttribute("page_name", "Preview");
-        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-        return "restaurant/search";
-    }
+//    @GetMapping("/preview")
+//    public String preview(Model model) {
+//        model.addAttribute("page_name", "Preview");
+//        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
+//        return "restaurant/search";
+//    }
 
     @GetMapping("/restaurants/{id}")
     public String show(@PathVariable long id, Model model) {
@@ -247,7 +247,6 @@ public class RestaurantController {
                     availableCategories.remove(index);
                 }
             }
-//
             for (Cuisine cuisine : restaurantCuisine) {
                 System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
             }

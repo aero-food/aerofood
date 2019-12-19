@@ -24,9 +24,8 @@ public class UserController {
 
     private UserRepository userDao;
     private OrderRepository orderDao;
-private OrderStatusRepository orderStatusDao;
+    private OrderStatusRepository orderStatusDao;
     private PasswordEncoder passwordEncoder;
-
 
 
     public UserController(UserRepository userDao,
@@ -60,8 +59,8 @@ private OrderStatusRepository orderStatusDao;
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Orders> orders = userDao.getOne(loggedUser.getId()).getOrders();
         OrderStatus orderStatus;
-        for (Orders currentOrder: orders){
-            orderStatus = orderStatusDao.getOne((long)currentOrder.getOrderStatus());
+        for (Orders currentOrder : orders) {
+            orderStatus = orderStatusDao.getOne((long) currentOrder.getOrderStatus());
             currentOrder.setOrderStatusString(orderStatus.getStatus());
         }
         viewModel.addAttribute("orders", userDao.getOne(loggedUser.getId()).getOrders());
