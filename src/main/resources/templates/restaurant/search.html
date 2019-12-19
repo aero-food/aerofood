@@ -41,18 +41,17 @@
     </div>
     <div class="restaurant-list-container container" style="margin: auto;">
         <!--        Page header-->
-        <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <th:block th:if="${#authorization.expression('isAuthenticated()')}">
             <th:block th:if="not ${#authentication.principal.isAdmin}">
                 <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
             </th:block>
             <th:block th:if="${#authentication.principal.isAdmin}">
                 <h1 class="page-header" style="font-size: 48px;">Preview</h1>
             </th:block>
-        </div>
-        <div th:if="not ${#authorization.expression('isAuthenticated()')}">
+        </th:block>
+        <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
             <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
-        </div>
-        <!--        <h1 class="page-header" style="font-size: 48px;" th:text="${page_name}"></h1>-->
+        </th:block>
         <!--        Airport location-->
         <h1 class="page-header" style="font-size: 24px;">Location: San Antonio Airport</h1>
         <div id="restaurantList">

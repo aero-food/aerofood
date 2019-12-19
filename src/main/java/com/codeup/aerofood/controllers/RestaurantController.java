@@ -146,23 +146,16 @@ public class RestaurantController {
             newMenuItemList.add(newMenuItem);
         }
         currentRestaurant.setMenu_items(newMenuItemList);
+
         return;
     }
 
     @GetMapping("/search")
     public String search(Model model) {
-
         model.addAttribute("page_name", "Search Restaurants");
         model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "restaurant/search";
     }
-
-//    @GetMapping("/preview")
-//    public String preview(Model model) {
-//        model.addAttribute("page_name", "Preview");
-//        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-//        return "restaurant/search";
-//    }
 
     @GetMapping("/restaurants/{id}")
     public String show(@PathVariable long id, Model model) {
@@ -213,19 +206,21 @@ public class RestaurantController {
 
         Boolean dishTypesExists = false;
         Boolean menuItemsExists = false;
+        restaurantDao.save(newRestaurant);
         if (dish_types != null) {
-            dishTypesExists = true;
+//            dishTypesExists = true;
             addRestaurantCuisine(dish_types, newRestaurant);
+
             restaurantDao.save(newRestaurant);
         }
         if (menuItems != null) {
-            menuItemsExists = true;
+//            menuItemsExists = true;
             addRestaurantMenuItems(menuItems, newRestaurant);
             restaurantDao.save(newRestaurant);
         }
-        if (!dishTypesExists && !menuItemsExists) {
-            restaurantDao.save(newRestaurant);
-        }
+//        if (!dishTypesExists && !menuItemsExists) {
+//            restaurantDao.save(newRestaurant);
+//        }
         return "redirect:/restaurant/index";
     }
 
