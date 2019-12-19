@@ -1,24 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="'Ooops, ' + ${error}"></title>
+    <title th:text=" ${error}"></title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body>
 
 <div th:replace="fragments/navbar :: main-navbar"></div>
 
 <h1 class="page_title">Error</h1>
 <body>
 <th:block th:switch="${error}">
-    <div th:case="'Not Found'">
+    <th:block th:case="'Not Found'">
         <h1>Page not found!!</h1>
-    </div>
-    <div th:case="'Forbidden'">
+    </th:block>
+    <th:block th:case="'Forbidden'">
         <h1>You don't have permission to view this page.</h1>
-    </div>
+    </th:block>
 </th:block>
 <h1 th:text="' Ooops, ' + ${error}"></h1>
-</iframe>
+<a class="brand" href="/">Home</a>
+
 </body>
 </html>

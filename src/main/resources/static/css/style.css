@@ -1,6 +1,6 @@
-nav {
-    font-size: 1.5rem;
-}
+/*************************************/
+/*        Tag name                   */
+/*************************************/
 
 
 body {
@@ -15,6 +15,7 @@ button {
     margin-right: 200px;
     font-family: 'Source Sans Pro', sans-serif;
 }
+
 
 /* unvisited link */
 a:link {
@@ -43,6 +44,7 @@ a:active {
 button {
     margin-left: 200px;
     margin-right: 200px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 img {
@@ -52,10 +54,28 @@ img {
     /*width: 40%;*/
 }
 
+label {
+    color: #000000;
+    font-size: 1.5em;
+    /*18pt;*/
+}
+
 li {
     display: inline;
     list-style-type: none;
     margin: .25em;
+}
+
+nav {
+    font-size: 1.5rem;
+}
+
+td > label {
+    font-size: 1em;
+}
+
+th {
+    font-size: 1.2em;
 }
 
 ul {
@@ -64,8 +84,19 @@ ul {
     align-content: space-around;
     list-style: none;
 }
+/*************************************/
+/*        Element ID                 */
+/*************************************/
 
-/*Element ID*/
+#addRestaurantForm label {
+    margin-top: .25em;
+    font-size: 1em;
+}
+
+#addRestaurantForm th {
+    margin-top: .25em;
+    font-size: 1em;
+}
 
 #buttons {
     display: flex;
@@ -80,16 +111,15 @@ ul {
     height: 5em;
 }
 
-
-#login {
-    margin-left: 36.417em;
-}
-
 #homeRow {
     margin-top: 4em;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+#login {
+    margin-left: 36.417em;
 }
 
 #mainDiv {
@@ -100,7 +130,6 @@ ul {
     /*flex-direction: column;*/
 }
 
-
 #middleNav {
     display: flex !important;
     flex-direction: row;
@@ -108,10 +137,6 @@ ul {
 }
 
 #navbarSupportedContentAdmin {
-    /*margin-left: 1.5em;*/
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*justify-content: space-around;*/
     font-size: 1em;
     display: grid;
     grid-template-columns: 15% 75% 10%;
@@ -125,13 +150,6 @@ ul {
     margin: 10em;
 }
 
-#rest-title {
-    font-size: 4.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-
 #reg {
     margin-left: 35.5em;
 }
@@ -142,18 +160,37 @@ ul {
     justify-content: center;
 }
 
+
 #restaurant-update label {
     margin-top: .5em;
     font-size: 1em;
 }
 
-/*Classes*/
+
+#restaurantList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+/*************************************/
+/*        Classes                    */
+/*************************************/
 
 .admin-font{
     font-size: 1.5em;
     color: #FF2D32;
     /*font-weight: bolder !important;*/
 }
+
+.admin-page-header {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+}
+
 .adminNavBar {
     display: flex;
     flex-direction: row;
@@ -189,6 +226,22 @@ ul {
     /*height: 20em;*/
 }
 
+.card-title {
+    /*color: #3F3C3C;*/
+    /*text-shadow: .1em .1em lightgrey;*/
+}
+
+.center-li {
+    display: inline;
+    list-style-type: none;
+    margin: .5em;
+}
+
+.cuisine-type {
+    font-size: smaller;
+    color: #888888;
+}
+
 .img-card {
     /*display: flex;*/
     width: 33.333em;
@@ -205,32 +258,6 @@ ul {
     /*!*height: 400px;*!*/
     /*!*box-shadow: .2em .2em .2em .2em #888888;*!*/
     /*height: 20em;*/
-}
-
-.card-title {
-    /*color: #3F3C3C;*/
-    /*text-shadow: .1em .1em lightgrey;*/
-}
-
-/*.card-body {*/
-/*    color: #a8a660;*/
-/*}*/
-
-.center-li {
-    display: inline;
-    list-style-type: none;
-    margin: .5em;
-}
-
-.cuisine-type {
-    font-size: smaller;
-    color: #888888;
-}
-
-.mid-section {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
 }
 
 .font-type {
@@ -272,6 +299,16 @@ ul {
     color: #dadfbc;
 }
 
+.main-header {
+    /*font-size: 2em;*/
+    text-align: center;
+    margin-top: 5em;
+    /*color: white;*/
+    /*font-size: 5em;*/
+    /*text-align: center;*/
+    /*text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
+
+}
 .menu-tile {
     max-width: 25em;
     /*300px;*/
@@ -279,6 +316,11 @@ ul {
     border: 1em;
 }
 
+.mid-section {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
 .nav-font-size {
     font-size: 2.5em;
     /*22pt;*/
@@ -292,17 +334,6 @@ ul {
     color: #e88e01;
 }
 
-.main-header {
-    /*font-size: 2em;*/
-    text-align: center;
-    margin-top: 5em;
-    /*color: white;*/
-    /*font-size: 5em;*/
-    /*text-align: center;*/
-    /*text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);*/
-
-}
-
 .page-header {
     /*font-size: 1.75em;*/
     text-align: center;
@@ -314,20 +345,6 @@ ul {
     height: 70vh;
 }
 
-.admin-page-header {
-    font-size: 3em;
-    text-align: center;
-    margin-top: 1.5em;
-    margin-bottom: .5em;
-}
-
-.white-text {
-    color: white !important;
-}
-.white-letter {
-    color: white !important;
-    font-size: 1.2em;
-}
 
 .red-line {
     border-left: 4px solid #D22234;
@@ -342,6 +359,7 @@ ul {
     margin-right: 5em;
 }
 
+
 .section-header {
     font-size: 1.5em;
     font-weight: bold;
@@ -353,28 +371,14 @@ ul {
     font-size: 1em;
 }
 
-th {
+
+.white-letter {
+    color: white !important;
     font-size: 1.2em;
 }
 
-#addRestaurantForm label {
-    margin-top: .25em;
-    font-size: 1em;
-}
-
-#addRestaurantForm th {
-    margin-top: .25em;
-    font-size: 1em;
-}
-
-td > label {
-    font-size: 1em;
-}
-
-label {
-    color: #000000;
-    font-size: 1.5em;
-    /*18pt;*/
+.white-text {
+    color: white !important;
 }
 
 .registration {
@@ -388,14 +392,10 @@ label {
 
 }
 
-#restaurantList {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow: auto;
-}
+/******************************************/
+/* Small devices (tablets, 768px and up)  */
+/******************************************/
 
-/* Small devices (tablets, 768px and up) */
 @media screen and (min-width: 768px) {
     #restaurantList {
         display: flex;
@@ -405,22 +405,28 @@ label {
     }
 }
 
-/* Medium devices (desktops, 992px and up) */
+/********************************************/
+/* Medium devices (desktops, 992px and up)  */
+/********************************************/
+
 @media screen and (min-width: 992px) {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: .2em;
+        grid-gap: .1em;
         overflow: auto;
     }
 }
 
+/*************************************************/
 /* Large devices (large desktops, 1200px and up) */
+/*************************************************/
+
 @media screen and (min-width: 1200px) {
     #restaurantList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: .2em;
+        grid-gap: .1em;
         overflow: auto;
     }
 }

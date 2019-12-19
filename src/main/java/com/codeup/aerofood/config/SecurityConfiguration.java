@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/search", "/about") // anyone can see
                 .permitAll()
-
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()

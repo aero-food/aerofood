@@ -146,21 +146,15 @@ public class RestaurantController {
             newMenuItemList.add(newMenuItem);
         }
         currentRestaurant.setMenu_items(newMenuItemList);
+
         return;
     }
 
     @GetMapping("/search")
     public String search(Model model) {
-
+        model.addAttribute("page_name", "Search Restaurants");
         model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-        return "search";
-    }
-
-    @GetMapping("/preview")
-    public String preview(Model model) {
-        model.addAttribute("page_name", "Preview");
-        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
-        return "search";
+        return "restaurant/search";
     }
 
     @GetMapping("/restaurants/{id}")
@@ -169,7 +163,7 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurantDao.getOne(id));
         model.addAttribute("menu", restaurantDao.getOne(id).getMenu_items());
         model.addAttribute("cart", shoppingCartService.getItemsInCart());
-        return "show";
+        return "restaurant/show";
     }
 
     @PostMapping("/restaurants/{id}/{menuItemId}")
@@ -212,19 +206,21 @@ public class RestaurantController {
 
         Boolean dishTypesExists = false;
         Boolean menuItemsExists = false;
+        restaurantDao.save(newRestaurant);
         if (dish_types != null) {
-            dishTypesExists = true;
+//            dishTypesExists = true;
             addRestaurantCuisine(dish_types, newRestaurant);
+
             restaurantDao.save(newRestaurant);
         }
         if (menuItems != null) {
-            menuItemsExists = true;
+//            menuItemsExists = true;
             addRestaurantMenuItems(menuItems, newRestaurant);
             restaurantDao.save(newRestaurant);
         }
-        if (!dishTypesExists && !menuItemsExists) {
-            restaurantDao.save(newRestaurant);
-        }
+//        if (!dishTypesExists && !menuItemsExists) {
+//            restaurantDao.save(newRestaurant);
+//        }
         return "redirect:/restaurant/index";
     }
 
@@ -246,7 +242,6 @@ public class RestaurantController {
                     availableCategories.remove(index);
                 }
             }
-//
             for (Cuisine cuisine : restaurantCuisine) {
                 System.out.println("cuisine.getDescription() = " + cuisine.getDescription());
             }

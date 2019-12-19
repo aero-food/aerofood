@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>AeroFood | Cart</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        .card {
+            display: flex;
+            align-content: center;
+            padding: .25em;
+            margin-top: 5em;
+            margin-right: 2em;
+            margin-bottom: 1em;
+            margin-left: 2em;
+            /*height: 400px;*/
+            box-shadow: .2em .2em .2em .2em #888888;
+            /*height: 10em;*/
+        }
+
+        .card-body {
+            padding: .5em;
+            color: black;
+        }
+    </style>
+</head>
+<body class="backImage">
+<!--Nav bar-->
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <th:block th:if="not ${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <th:block th:if="${#authentication.principal.isAdmin}">
+        <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+    </th:block>
+</div>
+<div th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</div>
+<div class="container">
+    <div class="d-flex flex-column" style="margin-top: 9em;">
+        <div class="card d-flex flex-column">
+            <h1 class="text-center card-title" style="font-size: 36pt; margin-bottom: .5em;">Shopping Cart</h1>
+            <h2 class="text-center">Items in cart</h2>
+            <div th:each="product : ${items.entrySet()}">
+                <div class="d-flex flex-row">
+                    <h5 style="margin-left: 12em;" th:text="${product.getKey().getTitle()}"></h5>
+
+                    <p class="ml-auto" style="margin-right: 16em;">$<span
+                            th:text="${product.getKey().getPrice()}"></span></p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column mr-auto ml-auto">
+                <div class="card-body text-center">
+                     <h4> Pre-tax total = $<span th:text="${total}"></span></h4>
+
+                    <h4> Tax = $<span th:text="${tax}"></span></h4>
+
+                    <h4> Total with tax = $<span th:text="${totalTax}"></span></h4>
+                </div>
+
+                <form class="d-flex flex-column mr-auto ml-auto" style="padding: 1em"
+                      th:action="@{'/shoppingCart/checkout'}" method="GET">
+                    <h4 class="text-center">Enter your Gate</h4>
+                    <input class="mr-auto ml-auto" id="checkout_address" name="checkout_address" type="text"/>
+                    <br/>
+                    <div class="m-2">
+                        <script
+                                th:method="POST"
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="pk_test_j75Rf78ZCFhDGGrirhsEM0I300mcaSFYtv"
+                                th:attr="data-amount=${totalStripe}"
+                                data-name="AeroFood"
+                                data-description='Meal Delivery'
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-locale="auto"
+                                data-zip-code="true">
+                        </script>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
+<!--   #C6C7C9  -->

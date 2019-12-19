@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="form-group">
                     Description:
-                    <input th:field="*{description}" class="form-control"/>
+                    <input th:field="*{description}" class="form-control" placeholder="description" th:required="required"/>
                 </div>
                 <input type="hidden" th:field="*{id}">
                 <input class="btn btn-warning white-text" type="submit" value="Update">

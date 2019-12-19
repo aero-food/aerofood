@@ -30,10 +30,10 @@
                 <div class="form-group" id="restaurant-update">
                     <div class="row">
                         <div class="col-6"><label for="name">Name:&nbsp; </label>
-                            <input id="name" th:field="${restaurant.name}" class="form-control"
+                            <input id="name" th:field="${restaurant.name}" class="form-control" placeholder="Restaurant name"
                                    th:required="required"/></div>
                         <div class="col-6"><label for="phone_number">Phone Number: </label>
-                            <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
+                            <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control" placeholder="(999) 999-9999"
                                    th:required="required"/></div>
                     </div>
                     <div class="row">
@@ -41,13 +41,13 @@
                             <input id="picture" th:field="${restaurant.picture_url}" class="form-control"
                                    th:required="required"/></div>
                         <div class="col-6"><label for="airport">Airport: </label>
-                            <input id="airport" th:field="${restaurant.airport}" class="form-control"
+                            <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="airport"
                                    th:required="required"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6"><label for="name">Gate: </label>
-                            <input id="gate" th:field="${restaurant.gate}" class="form-control" th:required="required"/>
+                            <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="gate" th:required="required"/>
                         </div>
                         <div class="col-6"><label for="thumbnail">Thumbnail: </label>
                             <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control"
