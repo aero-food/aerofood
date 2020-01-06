@@ -122,6 +122,8 @@ ul {
     margin-left: 36.417em;
 }
 
+
+
 #mainDiv {
     display: grid;
     grid-template-rows: 10% 89% 1%;
@@ -217,6 +219,19 @@ ul {
     display: flex;
     align-content: center;
     padding: .25em;
+    margin: 1em;
+    /*margin-top: 1em;*/
+    /*margin-right: 5em;*/
+    /*margin-bottom: 5em;*/
+    /*margin-left: 5em;*/
+    /*height: 400px;*/
+    /*box-shadow: .2em .2em .2em .2em #888888;*/
+    /*height: 20em;*/
+}
+.card2 {
+    display: flex;
+    align-content: center;
+    padding: .25em;
     margin-top: 7em;
     margin-right: 5em;
     margin-bottom: 5em;
@@ -226,10 +241,6 @@ ul {
     /*height: 20em;*/
 }
 
-.card-title {
-    /*color: #3F3C3C;*/
-    /*text-shadow: .1em .1em lightgrey;*/
-}
 
 .center-li {
     display: inline;
@@ -284,12 +295,29 @@ ul {
     no-repeat center center fixed;
     background-size: cover;
 }
+
+.credit_photo {
+    position: absolute;
+    bottom: 0;
+}
 .successImage{
     background: url('/img/terminal-seats.jpg')
     no-repeat center center fixed;
     background-size: cover;
 }
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /*background-color: red;*/
+    color: white;
+    text-align: left;
+}
+.inner-card {
+    border-color: white;
+}
 .improveReadAbility {
     color: white;
     text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
@@ -336,7 +364,7 @@ ul {
 }
 
 .page-header {
-    /*font-size: 1.75em;*/
+    font-size: 1.75em;
     text-align: center;
     margin-top: 1em;
     margin-bottom: .5em;
