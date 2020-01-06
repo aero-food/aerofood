@@ -322,7 +322,8 @@ ul {
     overflow: auto;
 }
 .nav-font-size {
-    font-size: 2.5em;
+    font-size: 1.75em;
+    /*font-size: 2.5em;*/
     /*22pt;*/
 }
 /*Here*/
@@ -403,6 +404,9 @@ ul {
         justify-content: flex-start;
         overflow: auto;
     }
+    #aeroFoodImg{
+        max-width:3em;
+    }
 }
 
 /********************************************/
@@ -416,6 +420,10 @@ ul {
         grid-gap: .1em;
         overflow: auto;
     }
+
+    #aeroFoodImg{
+        max-width:3em;
+    }
 }
 
 /*************************************************/
@@ -428,6 +436,21 @@ ul {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: .1em;
         overflow: auto;
+    }
+    #aeroFoodImg{
+        max-width:3em;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    #restaurantList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: .1em;
+        overflow: auto;
+    }
+    #aeroFoodImg{
+        max-width:15em;
     }
 }
 
