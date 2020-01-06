@@ -4,38 +4,56 @@
     <meta charset="UTF-8"/>
     <title>AeroFood | Home</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        #coverImg {
+            background: url(/img/main-airport.jpeg) no-repeat center center fixed;
+            object-fit: cover;
+            object-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body style="height: 100vh;" class="homeImageSAT">
-
-<div th:replace="fragments/navbar :: main-navbar"></div>
-
-<section class="container d-flex flex-column">
-
-    <div class="main-header d-flex flex-column card" style="margin-top: 15em; margin-bottom: 2em">
-
-
-        <h2 class="card-title mt-1" style="font-size: 2em">Need to catch a flight, but don't have time to grab a bite?</h2>
-
-
-        <div sec:authorize="isAnonymous()" class="card-body">
-            <p style="font-size: 18pt">Don't wait, join AeroFood!</p>
-            <p style="font-size: 18pt">Get the food delivered to your gate.</p>
-
-        </div>
-
-
-        <div sec:authorize="isAnonymous()" class="nav-item text-center">
-            <a class="nav-link navlinktext text-center" href="/register" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign Up</a>
-        </div>
-
-                <div sec:authorize="isAuthenticated()" class="nav-item text-center">
-                    <a class="nav-link navlinktext text-center" href="/search" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Search available restaurants</a>
+<body style="margin: auto;width: 100%; height: 100vh;" id="coverImg">
+<div class="container"
+     style="height: 100%; display: flex; flex-direction: column; align-items:flex-start;  justify-content:space-evenly;">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+    <div style="   display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;">
+        <div class="card">
+            <div class="card inner-card">
+                <div style="font-size: 2em;">Need to catch a flight, but don't have time to grab a
+                    bite?
                 </div>
+                <div sec:authorize="isAnonymous()" class="card-body">
+                    <p style="font-size: 18pt">Don't wait, join AeroFood!</p>
+                    <p style="font-size: 18pt">Get the food delivered to your gate.</p>
 
+                </div>
+                <!--  Register button-->
+                <div sec:authorize="isAnonymous()" class="nav-item text-center">
+
+                    <a class="nav-link navlinktext text-center" href="/register"
+                       style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign
+                        Up</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-</section>
-
-<!--<div th:replace="fragments/footer :: main-footer"></div>-->
+    <div id="creditPhoto" class="credit_photo footer">
+        <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+           href="https://unsplash.com/@bel2000a?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+           target="_blank" rel="noopener noreferrer"
+           title="Download free do whatever you want high-resolution photos from Belinda Fewings"><span
+                style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                  style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                                                                  viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                style="display:inline-block;padding:2px 3px">Belinda Fewings</span></a>
+    </div>
+</div>
 </body>
 </html>
