@@ -24,8 +24,8 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String gate;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
-    private String airport;
+//    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
+//    private String airport;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
@@ -44,6 +44,8 @@ public class Restaurant {
 //            inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
 //    private Set<Publisher> publishers;
 
+
+
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
     @JoinTable(
             name="restaurant_cuisine",
@@ -58,12 +60,15 @@ public class Restaurant {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name="airport_id")
+    private Airport airport;
 
     public Restaurant() {
 
     }
 
-    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number) {
+    public Restaurant(String name, String thumbnail, String picture_url, String gate, Airport airport, String phone_number) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.picture_url = picture_url;
@@ -72,26 +77,18 @@ public class Restaurant {
         this.phone_number = phone_number;
     }
 
-    public Restaurant(String name,
-                      String thumbnail,
-                      String picture_url,
-                      String gate,
-                      String airport,
-                      String phone_number,
-                      Set<Cuisine> cuisines,
-                      List<Orders> orders,
-                      List<MenuItem> menu_items) {
+    public Restaurant(String name, String thumbnail, String picture_url, String gate, String phone_number, int deleted, Set<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items, Airport airport) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.picture_url = picture_url;
         this.gate = gate;
-        this.airport = airport;
         this.phone_number = phone_number;
+        this.deleted = deleted;
         this.cuisines = cuisines;
         this.orders = orders;
         this.menu_items = menu_items;
+        this.airport = airport;
     }
-
 
     public long getId() {
         return id;
@@ -133,13 +130,20 @@ public class Restaurant {
         this.gate = gate;
     }
 
-    public String getAirport() {
+    public Airport getAirport() {
         return airport;
     }
 
-    public void setAirport(String airport) {
+    public void setAirport(Airport airport) {
         this.airport = airport;
     }
+    //    public String getAirport() {
+//        return airport;
+//    }
+//
+//    public void setAirport(String airport) {
+//        this.airport = airport;
+//    }
 
     public String getPhone_number() {
         return phone_number;

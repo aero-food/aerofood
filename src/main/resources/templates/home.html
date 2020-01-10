@@ -16,7 +16,7 @@
 <body style="margin: auto;width: 100%; height: 100vh;" id="coverImg">
 <div class="container"
      style="height: 100%; display: flex; flex-direction: column; align-items:flex-start;  justify-content:space-evenly;">
-    <div th:replace="fragments/navbar :: main-navbar"></div>
+    <div th:replace="fragments/navbar-home :: main-navbar"></div>
     <div style="   display: flex;
         align-items: center;
         justify-content: center;
@@ -29,17 +29,11 @@
                     bite?
                 </div>
                 <div sec:authorize="isAnonymous()" class="card-body">
-                    <p style="font-size: 18pt">Don't wait, join AeroFood!</p>
+<!--                    <p style="font-size: 18pt">Don't wait, join AeroFood!</p>-->
                     <p style="font-size: 18pt">Get the food delivered to your gate.</p>
 
                 </div>
-                <!--  Register button-->
-                <div sec:authorize="isAnonymous()" class="nav-item text-center">
 
-                    <a class="nav-link navlinktext text-center" href="/register"
-                       style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign
-                        Up</a>
-                </div>
             </div>
         </div>
     </div>

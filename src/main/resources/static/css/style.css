@@ -179,7 +179,9 @@ ul {
 /*************************************/
 /*        Classes                    */
 /*************************************/
-
+.red{
+   background-color:  #A93432;
+}
 .admin-font{
     font-size: 1.5em;
     color: #FF2D32;
@@ -350,7 +352,7 @@ ul {
     overflow: auto;
 }
 .nav-font-size {
-    font-size: 1.75em;
+    font-size: 1.2em;
     /*font-size: 2.5em;*/
     /*22pt;*/
 }
