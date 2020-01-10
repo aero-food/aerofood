@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Update posts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<!--Main Div-->
+
+    <!--Nav bar-->
+    <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+    </th:block>
+    <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+    </th:block>
+    <!--    Middle section-->
+<div class="container">
+    <section class="mt-5">
+        <div class="admin-page-header">Update Cuisine Description</div>
+        <form th:action="@{'/airport/' + ${id} + '/edit'}" th:method="post" th:object="${airport}">
+            <div class="container">
+                <div class="form-group">
+                    Description:
+                    <input th:field="*{name}" class="form-control" placeholder="description" th:required="required"/>
+                </div>
+                <input type="hidden" th:field="*{id}">
+                <input class="btn btn-warning white-text" type="submit" value="Update">
+
+            </div>
+        </form>
+
+
+    </section>
+
+</div>
+
+</body>
+</html>

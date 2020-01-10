@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Show posts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+
+
+<!--Nav bar-->
+<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+        <span>
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar :: main-navbar"></div>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
+            </th:block>
+        </span>
+</th:block>
+<th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+</th:block>
+<div class="container">
+    <!--    Middle section-->
+    <section class="mt-5">
+        <div class="admin-page-header">Add an Airport</div>
+        <form th:action="@{/airport/add}" th:method="post" th:object="${airport}" class="form-group">
+            <label for="airport">Airport</label>
+            <br>
+            <input id="airport" th:field="${airport.name}" class="form-control"  placeholder="description" th:required="required"/>
+            <br>
+            <input class="btn btn-success" type="submit"/>
+        </form>
+    </section>
+
+</div>
+</body>
+</html>

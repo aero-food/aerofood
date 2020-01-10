@@ -281,7 +281,7 @@ public class RestaurantController {
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,
-                         @RequestParam String airport,
+//                         @RequestParam String airport,
                          @RequestParam String gate,
                          @RequestParam String name,
                          @RequestParam String phone_number,
@@ -290,7 +290,7 @@ public class RestaurantController {
                          @RequestParam(value = "cuisines", required = false) int[] cuisines,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems) {
         Restaurant oldRestaurant = restaurantDao.getOne(id);
-        oldRestaurant.setAirport(airport);
+//        oldRestaurant.setAirport(airport);
         oldRestaurant.setGate(gate);
         oldRestaurant.setName(name);
         oldRestaurant.setPhone_number(phone_number);
