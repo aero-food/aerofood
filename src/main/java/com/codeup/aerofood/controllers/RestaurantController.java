@@ -1,13 +1,7 @@
 package com.codeup.aerofood.controllers;
 
-import com.codeup.aerofood.models.Cuisine;
-import com.codeup.aerofood.models.MenuCategory;
-import com.codeup.aerofood.models.MenuItem;
-import com.codeup.aerofood.models.Restaurant;
-import com.codeup.aerofood.repositories.CuisineRepository;
-import com.codeup.aerofood.repositories.MenuCategoryRepository;
-import com.codeup.aerofood.repositories.MenuItemRepository;
-import com.codeup.aerofood.repositories.RestaurantRepository;
+import com.codeup.aerofood.models.*;
+import com.codeup.aerofood.repositories.*;
 import com.codeup.aerofood.services.MenuItemService;
 import com.codeup.aerofood.services.ShoppingCartService;
 import org.springframework.stereotype.Controller;
@@ -27,22 +21,19 @@ public class RestaurantController {
     private MenuCategoryRepository menuCategoryDao;
 
     private MenuItemRepository menuItemsDao;
+    private AirportRepository airportDao;
 
     private ShoppingCartService shoppingCartService;
 
     private MenuItemService menuItemService;
 
 
-    public RestaurantController(RestaurantRepository restaurantDao,
-                                CuisineRepository cuisineDao,
-                                MenuCategoryRepository menuCategoryDao,
-                                MenuItemRepository menuItemsDao,
-                                ShoppingCartService shoppingCartService,
-                                MenuItemService menuItemService) {
+    public RestaurantController(RestaurantRepository restaurantDao, CuisineRepository cuisineDao, MenuCategoryRepository menuCategoryDao, MenuItemRepository menuItemsDao, AirportRepository airportDao, ShoppingCartService shoppingCartService, MenuItemService menuItemService) {
         this.restaurantDao = restaurantDao;
         this.cuisineDao = cuisineDao;
         this.menuCategoryDao = menuCategoryDao;
         this.menuItemsDao = menuItemsDao;
+        this.airportDao = airportDao;
         this.shoppingCartService = shoppingCartService;
         this.menuItemService = menuItemService;
     }
@@ -151,9 +142,18 @@ public class RestaurantController {
     }
 
     @GetMapping("/search")
-    public String search(Model model) {
-        model.addAttribute("page_name", "Search Restaurants");
-        model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
+    public String search(@RequestParam (required = false) Long airport,
+                         Model model) {
+
+        if (airport != null) {
+            System.out.println("airport = " + airport);
+            Airport currentAirport = airportDao.getOne(airport);
+            model.addAttribute("page_name", "Search Restaurants");
+            model.addAttribute("restaurants", currentAirport.getRestaurants());
+        } else {
+            model.addAttribute("page_name", "Search Restaurants");
+            model.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
+        }
         return "restaurant/search";
     }
 
@@ -176,7 +176,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/index")
     public String showCuisine(Model viewModel) {
-
+        System.out.println("/restaurant/index");
         viewModel.addAttribute("restaurants", restaurantDao.findAllByDeletedEquals(0));
         return "restaurant/listRestaurants";
     }
@@ -193,6 +193,8 @@ public class RestaurantController {
         for (MenuItem element : currentMenuItems) {
             sortedCurrentList.add(element);
         }
+        vModel.addAttribute("airports", airportDao.findAll());
+        vModel.addAttribute("selectedAirport", airportDao.findAll().get(0));
         vModel.addAttribute("menuItems", sortedCurrentList);
 
         return "restaurant/addRestaurant";
@@ -218,9 +220,6 @@ public class RestaurantController {
             addRestaurantMenuItems(menuItems, newRestaurant);
             restaurantDao.save(newRestaurant);
         }
-//        if (!dishTypesExists && !menuItemsExists) {
-//            restaurantDao.save(newRestaurant);
-//        }
         return "redirect:/restaurant/index";
     }
 
@@ -269,6 +268,8 @@ public class RestaurantController {
             exists = false;
         }
 
+        viewModel.addAttribute("airports", airportDao.findAll());
+        viewModel.addAttribute("selectedAirport", airportDao.findAll().get(0));
         viewModel.addAttribute("menuItems", restaurantDao.getOne(id).getMenu_items());
         viewModel.addAttribute("newMenuItemList", selectThisMenuItem);
 
@@ -281,7 +282,7 @@ public class RestaurantController {
 
     @PostMapping("/restaurant/{id}/edit")
     public String update(@PathVariable long id,
-//                         @RequestParam String airport,
+                         @RequestParam Long airport,
                          @RequestParam String gate,
                          @RequestParam String name,
                          @RequestParam String phone_number,
@@ -290,7 +291,7 @@ public class RestaurantController {
                          @RequestParam(value = "cuisines", required = false) int[] cuisines,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems) {
         Restaurant oldRestaurant = restaurantDao.getOne(id);
-//        oldRestaurant.setAirport(airport);
+       oldRestaurant.setAirport(airportDao.getOne(airport));
         oldRestaurant.setGate(gate);
         oldRestaurant.setName(name);
         oldRestaurant.setPhone_number(phone_number);

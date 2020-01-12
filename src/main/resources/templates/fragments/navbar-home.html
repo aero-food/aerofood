@@ -4,7 +4,7 @@
 
 <!--image logo-->
 <nav class="navbar navbar-nav navbar-toggleable-sm font-type nav-font-size navbar-expand-lg fixed-top pos-f-t"
-     th:fragment="main-navbar" style="background-color: #941F35;">
+     th:fragment="main-navbar" style="background-color: #FF2D32;">
     <a class="brand" href="/"><img  id="aeroFoodImg" src="/img/logo-transparent.png" th:src="@{../img/logo-transparent.png}" /></a>
 
     <!-- Collapse button -->
@@ -27,14 +27,14 @@
 <!--                   style="color: white">History<span class="sr-only"></span></a>-->
 <!--            </li>-->
             <li class="nav-item">
-                <a class="nav-link navlinktext improveReadAbility" style="color: #ffffff" href="/about">About</a>
+                <a class="nav-link navlinktext" style="color: #ffffff" href="/about">About</a>
             </li>
             <li class="nav-item pull-right">
-                <a sec:authorize="isAnonymous()" class="nav-link navlinktext improveReadAbility" href="/login" style="color: white">Sign
+                <a sec:authorize="isAnonymous()" class="nav-link navlinktext" href="/login" style="color: white">Sign
                     In</a>
             </li>
             <li class="nav-item pull-right">
-                <a sec:authorize="isAnonymous()" class="nav-link navlinktext improveReadAbility" href="/register" style="color: white">Sign
+                <a sec:authorize="isAnonymous()" class="nav-link navlinktext" href="/register" style="color: white">Sign
                     Up</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item improveReadAbility">

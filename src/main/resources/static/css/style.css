@@ -126,10 +126,11 @@ ul {
 
 #mainDiv {
     display: grid;
-    grid-template-rows: 10% 89% 1%;
+    grid-template-columns: 3fr;
+    /*grid-template-rows: 10% 89% 1%;*/
     max-height: 100vh;
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
 }
 
 #middleNav {
@@ -389,7 +390,6 @@ ul {
     margin-left: 5em;
     margin-right: 5em;
 }
-
 
 .section-header {
     font-size: 1.5em;

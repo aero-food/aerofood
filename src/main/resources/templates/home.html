@@ -25,15 +25,26 @@
         text-align: center;">
         <div class="card">
             <div class="card inner-card">
+                <form  th:action="@{/search}"  th:method="get"  class="form-group">
+                    <input type="hidden" id="airportId">
                 <div style="font-size: 2em;">Need to catch a flight, but don't have time to grab a
                     bite?
                 </div>
                 <div sec:authorize="isAnonymous()" class="card-body">
 <!--                    <p style="font-size: 18pt">Don't wait, join AeroFood!</p>-->
                     <p style="font-size: 18pt">Get the food delivered to your gate.</p>
-
+                    <div ><label for="airport">Select Airport</label>
+                        <!--                    <label for="airport">Select Company</label>-->
+                        <select class="form-control" id="airport" name="airport">
+                            <option value="">Select Airport</option>
+                            <option th:each="airport : ${airports}"
+                                    th:value="${airport.id}"
+                                    th:text="${airport.name}"></option>
+                        </select>
+                        <input type="submit" class="btn-primary btn-danger" value="Go">
+                    </div>
                 </div>
-
+                </form>
             </div>
         </div>
     </div>

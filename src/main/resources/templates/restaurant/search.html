@@ -26,8 +26,7 @@
 </head>
 <body>
 <div id="mainDiv">
-    <div
-            style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
 
         <!--Nav bar-->
         <th:block th:if="${#authorization.expression('isAuthenticated()')}">
@@ -42,7 +41,7 @@
             <div th:replace="fragments/navbar :: main-navbar"></div>
         </th:block>
 
-
+        <div style="margin-top: 5em;">&nbsp;</div>
         <!--        Page header-->
         <th:block th:if="${#authorization.expression('isAuthenticated()')}">
             <th:block th:if="not ${#authentication.principal.isAdmin}">
@@ -65,26 +64,25 @@
                     <div class="menu-tile card">
                         <a th:href="@{'/restaurants/' + ${restaurant.id}}">
                             <div id="inner" class="card-body d-flex flex-column">
-                                <img th:src="${restaurant.getPicture_url()}" alt=""
+                                 <img src="${restaurant.getPicture_url()}" th:src="${restaurant.getPicture_url()}" alt=""
                                      style="width: 100%; max-width:300px;">
-                                <!--                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">-->
                             </div>
                             <!--                        </div>-->
                             <div class="restaurant-info card-footer">
-                                <span th:text="${restaurant.name}" style="font-size: 24px" class="bottom"></span>&nbsp;(Gate:
+                                <span th:text="${restaurant.name}" style="font-size: 1em" class="bottom"></span>&nbsp;(Gate:
                                 <span
                                         th:text=" ${restaurant.gate}"></span>)
                                 </span>
                             </div>
-                            <div class="cuisine-type">
-                                <th:block th:each="cuisine,itrStat : ${restaurant.getCuisines()}">
-                                    <span th:text="${cuisine.getDescription()}"></span>
-                                    <th:block th:if="${itrStat.index <= itrStat.size - 2}">
-                                        ,
-                                    </th:block>
+<!--                            <div class="cuisine-type">-->
+<!--                                <th:block th:each="cuisine,itrStat : ${restaurant.getCuisines()}">-->
+<!--                                    <span th:text="${cuisine.getDescription()}"></span>-->
+<!--                                    <th:block th:if="${itrStat.index <= itrStat.size - 2}">-->
+<!--                                        ,-->
+<!--                                    </th:block>-->
 
-                                </th:block>
-                            </div>
+<!--                                </th:block>-->
+<!--                            </div>-->
                         </a>
                     </div>
                 </div>
