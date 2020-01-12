@@ -41,8 +41,13 @@
                             <input id="picture" th:field="${restaurant.picture_url}" class="form-control"
                                    th:required="required"/></div>
                         <div class="col-6"><label for="airport">Airport: </label>
-                            <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="airport"
-                                   th:required="required"/>
+                            <select class="form-control" id="airport" name="airport">
+                                <option value="">Select Airport</option>
+                                <option th:each="airport : ${airports}"
+                                        th:selected="${airport.id} == ${selectedAirport.getId()} ? true : false"
+                                        th:value="${airport.id}"
+                                        th:text="${airport.name}"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
