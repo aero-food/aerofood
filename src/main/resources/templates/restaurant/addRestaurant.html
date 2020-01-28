@@ -49,11 +49,6 @@
                             <span>  <input hidden th:name="photoURL" id="photoURL" value=""></span>
                             <input class="btn form-control btn-primary" type="BUTTON" value="Upload Picture"
                                    id="pickPhoto">
-                            <br>
-                            <br>
-<!--                            <label for="picture_credit"></label>-->
-<!--                            <input class="form-control" type="text" th:field="*{picture_credit}"-->
-<!--                                   id="picture_credit">-->
                         </div>
                     </div>
                     <div class="col-6"><label for="airport">Airport</label>
@@ -69,9 +64,9 @@
                 </div>
                 <div class="row mb-1">
                     <div class="col-6"><label for="picture_credit">Picture credit</label>
-                        <input class="form-control" type="text" th:field="*{picture_credit}"
-                               id="picture_credit">
-                    </div>
+                    <input class="form-control" type="text" th:field="*{picture_credit}"
+                           id="picture_credit" name="picture_credit">
+                </div>
                     <div class="col-6"><label for="name">Gate</label>
                         <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="Gate"
                                th:required="required"/>

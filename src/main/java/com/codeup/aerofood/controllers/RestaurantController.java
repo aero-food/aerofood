@@ -289,8 +289,8 @@ public class RestaurantController {
                          @RequestParam String gate,
                          @RequestParam String name,
                          @RequestParam String phone_number,
-                         @RequestParam String picture_url,
-//                         @RequestParam String thumbnail,
+                         @RequestParam String photoURL,
+                         @RequestParam String picture_credit,
                          @RequestParam(value = "cuisines", required = false) int[] cuisines,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems) {
         Restaurant oldRestaurant = restaurantDao.getOne(id);
@@ -298,7 +298,8 @@ public class RestaurantController {
         oldRestaurant.setGate(gate);
         oldRestaurant.setName(name);
         oldRestaurant.setPhone_number(phone_number);
-        oldRestaurant.setPicture_url(picture_url);
+        oldRestaurant.setPicture_url(photoURL);
+        oldRestaurant.setPicture_credit(picture_credit);
 //        oldRestaurant.setThumbnail(thumbnail);
         if (cuisines != null) {
             System.out.println("cuisines");

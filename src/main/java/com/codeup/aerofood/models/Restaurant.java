@@ -21,7 +21,7 @@ public class Restaurant {
     @Column(columnDefinition = "VARCHAR(2000)")
     private String picture_url;
 
-    @Column(columnDefinition = "Varchar(255)")
+    @Column(columnDefinition = "Varchar(2000)")
     private String picture_credit;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(3)")
