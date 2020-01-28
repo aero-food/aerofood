@@ -4,43 +4,63 @@
     <meta charset="UTF-8"/>
     <title>Log In</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        #coverImg {
+            background: url(/img/login.jpeg) no-repeat center center fixed;
+            object-fit: cover;
+            object-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body>
-<div th:replace="fragments/navbar :: main-navbar"></div>
-
-<div class="container">
-<!--    <h1 class="page-header" style="color: #D22234; Margin-Bottom: 60px; font-size: 36pt;"><a href="/"><img-->
-<!--            src="../../static/img/AeroFood-nav.png" th:src="@{../img/AeroFood-nav.png}" style="border-radius: 15px" height="107" width="350"/></a></h1>-->
-</div>
-
-<div class="container" style="display: flex; justify-content: center; margin-top: 12em;">
-    <div class="card" style="width: 50%; margin-bottom: -34px; margin-top: -20px">
-<!--        <div class="page-header" style="margin-top: 15px; color: #D22234"><a class="nav-link navlinktext text-center" href="/" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 10vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Home</a></div>-->
-        <th:block th:if="${param.error}">
-            Invalid Username and Password.
-        </th:block>
-        <th:block th:if="${param.logout}">
-            You have been logged out.
-        </th:block>
-
-        <form th:action="@{/login}" method="post">
-            <div class="form-group">
-            <h1 class="page-header" style="font-size: 48px;">Login</h1>
-            <label for="username">Username</label><br>
-            <input id="username" name="username" type="text" placeholder="username" class="form-control" style="border-radius: 5px; height: 60px; font-size: 20pt;"/><br>
-
-
-            <label for="password">Password</label><br>
-            <input id="password" name="password" type="password" class="form-control" style="border-radius: 5px; height: 60px; font-size: 20pt;"/><br>
-
-
-            <input type="submit" value="Log In" class="btn btn-lg" style="font-size:15pt; margin-left: 11.5em; color: #FFFFFF; background-color: #FF2D32"/>
+<body style="margin: auto;width: 100%; height: 100vh;" id="coverImg">
+<div class="container"
+     style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-evenly;">
+    <!--    Navbar-->
+    <div th:replace="fragments/navbar :: main-navbar"></div>
+    <div class="page-header improveReadAbility" style="width:100%; margin-top: 3em;">Login</div>
+    <div style="   display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;">
+        <div class="card" style="width: 50%;">
+            <th:block th:if="${param.error}">
+                Invalid Username and Password.
+            </th:block>
+            <th:block th:if="${param.logout}">
+                You have been logged out.
+            </th:block>
+            <div class="card inner-card" style="display: flex; flex-direction: column; justify-content: space-around">
+                <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="username" style="width:100%; text-align: left;">Username</label><br>
+                        <input id="username" name="username" type="text" placeholder="username"
+                               class="form-control"/><br>
+                        <label for="password" style="width:100%; text-align: left;">Password</label><br>
+                        <input id="password" name="password" type="password" class="form-control"/><br>
+                        <input type="submit" value="Log In" class="btn btn-lg"
+                               style="color: #FFFFFF; background-color: #FF2D32"/>
+                    </div>
+                </form>
+                <p class="text-center login">Don't have an account?</p>
+                <a class="nav-link navlinktext text-center" href="/register"
+                   style="background-color: #FF2D32; color: white; border-radius: 15px; width: 10vw; margin-right: auto; margin-left: auto; ">Sign
+                    Up</a>
             </div>
-        </form>
-
-        <p class="text-center login" style="margin-top: .25em;">Don't have an account?</p>
-        <a class="nav-link navlinktext text-center" href="/register" style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 10vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign Up</a>
-
+        </div>
+    </div>
+    <div id="creditPhoto" class="credit_photo footer">
+        <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+           href="https://unsplash.com/@foodfaithfit?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+           target="_blank" rel="noopener noreferrer"
+           title="Download free do whatever you want high-resolution photos from Taylor Kiser"><span
+                style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                  style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                                                                  viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                style="display:inline-block;padding:2px 3px">Taylor Kiser</span></a>
     </div>
 </div>
 </body>

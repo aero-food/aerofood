@@ -26,64 +26,69 @@
 </head>
 <body>
 <div id="mainDiv">
-    <!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
-    <!--Nav bar-->
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <th:block th:if="not ${#authentication.principal.isAdmin}">
-            <div th:replace="fragments/navbar :: main-navbar"></div>
-        </th:block>
-        <th:block th:if="${#authentication.principal.isAdmin}">
-            <div th:replace="fragments/navbar-admin :: main-navbar"></div>
-        </th:block>
-    </div>
-    <div th:if="not ${#authorization.expression('isAuthenticated()')}">
-        <div th:replace="fragments/navbar :: main-navbar"></div>
-    </div>
-    <div class="restaurant-list-container container" style="margin: auto;">
-        <!--        Page header-->
+    <div style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
+
+        <!--Nav bar-->
         <th:block th:if="${#authorization.expression('isAuthenticated()')}">
             <th:block th:if="not ${#authentication.principal.isAdmin}">
-                <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
+                <div th:replace="fragments/navbar :: main-navbar"></div>
             </th:block>
             <th:block th:if="${#authentication.principal.isAdmin}">
-                <h1 class="page-header" style="font-size: 48px;">Preview</h1>
+                <div th:replace="fragments/navbar-admin :: main-navbar"></div>
             </th:block>
         </th:block>
         <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
-            <h1 class="page-header" style="font-size: 48px;">Search Restaurants</h1>
+            <div th:replace="fragments/navbar :: main-navbar"></div>
         </th:block>
-        <!--        Airport location-->
-        <h1 class="page-header" style="font-size: 24px;">Location: San Antonio Airport</h1>
-        <div id="restaurantList">
-            <div th:each="restaurant : ${restaurants}">
-                <div class="menu-tile card">
-                    <a th:href="@{'/restaurants/' + ${restaurant.id}}">
-                        <div id="inner" class="card-body d-flex flex-column">
-                            <img th:src="${restaurant.getPicture_url()}" alt="" style="width: 100%; max-width:300px;">
-                            <!--                                <img th:src="${restaurant.getPicture_url()}" alt=""  width="300" height="240">-->
-                        </div>
-                        <!--                        </div>-->
-                        <div class="restaurant-info card-footer">
-                            <span th:text="${restaurant.name}" style="font-size: 24px" class="bottom"></span>&nbsp;(Gate:
-                            <span
-                                    th:text=" ${restaurant.gate}"></span>)
-                            </span>
-                        </div>
-                        <div class="cuisine-type">
-                            <th:block th:each="cuisine,itrStat : ${restaurant.getCuisines()}">
-                                <span th:text="${cuisine.getDescription()}"></span>
-                                <th:block th:if="${itrStat.index <= itrStat.size - 2}">
-                                    ,
-                                </th:block>
 
-                            </th:block>
-                        </div>
-                    </a>
+        <div style="margin-top: 5em;">&nbsp;</div>
+        <!--        Page header-->
+        <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+            <th:block th:if="not ${#authentication.principal.isAdmin}">
+                <h1 class="page-header">Search Restaurants</h1>
+            </th:block>
+            <th:block th:if="${#authentication.principal.isAdmin}">
+                <h1 class="page-header">Preview</h1>
+            </th:block>
+        </th:block>
+        <th:block th:if="not ${#authorization.expression('isAuthenticated()')}">
+            <h1 class="page-header">Search Restaurants</h1>
+        </th:block>
+
+        <!--        Airport location-->
+        <h1 class="page-header">Location: San Antonio Airport</h1>
+        <!--        Restaurant list-->
+        <div class="restaurant-list-container container" style="margin: auto; width: 100%;  overflow:auto">
+            <div id="restaurantList">
+                <div th:each="restaurant : ${restaurants}">
+                    <div class="menu-tile card">
+                        <a th:href="@{'/restaurants/' + ${restaurant.id}}">
+                            <div id="inner" class="card-body d-flex flex-column">
+                                 <img src="${restaurant.getPicture_url()}" th:src="${restaurant.getPicture_url()}" alt=""
+                                     style="width: 100%; max-width:300px;">
+                            </div>
+                            <!--                        </div>-->
+                            <div class="restaurant-info card-footer">
+                                <span th:text="${restaurant.name}" style="font-size: 1em" class="bottom"></span>&nbsp;(Gate:
+                                <span
+                                        th:text=" ${restaurant.gate}"></span>)
+                                </span>
+                            </div>
+<!--                            <div class="cuisine-type">-->
+<!--                                <th:block th:each="cuisine,itrStat : ${restaurant.getCuisines()}">-->
+<!--                                    <span th:text="${cuisine.getDescription()}"></span>-->
+<!--                                    <th:block th:if="${itrStat.index <= itrStat.size - 2}">-->
+<!--                                        ,-->
+<!--                                    </th:block>-->
+
+<!--                                </th:block>-->
+<!--                            </div>-->
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -122,12 +122,15 @@ ul {
     margin-left: 36.417em;
 }
 
+
+
 #mainDiv {
     display: grid;
-    grid-template-rows: 10% 89% 1%;
+    grid-template-columns: 3fr;
+    /*grid-template-rows: 10% 89% 1%;*/
     max-height: 100vh;
-    /*display: flex;*/
-    /*flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
 }
 
 #middleNav {
@@ -177,7 +180,9 @@ ul {
 /*************************************/
 /*        Classes                    */
 /*************************************/
-
+.red{
+   background-color:  #A93432;
+}
 .admin-font{
     font-size: 1.5em;
     color: #FF2D32;
@@ -217,6 +222,19 @@ ul {
     display: flex;
     align-content: center;
     padding: .25em;
+    margin: 1em;
+    /*margin-top: 1em;*/
+    /*margin-right: 5em;*/
+    /*margin-bottom: 5em;*/
+    /*margin-left: 5em;*/
+    /*height: 400px;*/
+    /*box-shadow: .2em .2em .2em .2em #888888;*/
+    /*height: 20em;*/
+}
+.card2 {
+    display: flex;
+    align-content: center;
+    padding: .25em;
     margin-top: 7em;
     margin-right: 5em;
     margin-bottom: 5em;
@@ -226,10 +244,6 @@ ul {
     /*height: 20em;*/
 }
 
-.card-title {
-    /*color: #3F3C3C;*/
-    /*text-shadow: .1em .1em lightgrey;*/
-}
 
 .center-li {
     display: inline;
@@ -284,12 +298,29 @@ ul {
     no-repeat center center fixed;
     background-size: cover;
 }
+
+.credit_photo {
+    position: absolute;
+    bottom: 0;
+}
 .successImage{
     background: url('/img/terminal-seats.jpg')
     no-repeat center center fixed;
     background-size: cover;
 }
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /*background-color: red;*/
+    color: white;
+    text-align: left;
+}
+.inner-card {
+    border-color: white;
+}
 .improveReadAbility {
     color: white;
     text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
@@ -322,7 +353,8 @@ ul {
     overflow: auto;
 }
 .nav-font-size {
-    font-size: 2.5em;
+    font-size: 1.2em;
+    /*font-size: 2.5em;*/
     /*22pt;*/
 }
 /*Here*/
@@ -335,9 +367,9 @@ ul {
 }
 
 .page-header {
-    /*font-size: 1.75em;*/
+    font-size: 2.5em;
     text-align: center;
-    margin-top: 1em;
+    margin-top: .5em;
     margin-bottom: .5em;
 }
 
@@ -358,7 +390,6 @@ ul {
     margin-left: 5em;
     margin-right: 5em;
 }
-
 
 .section-header {
     font-size: 1.5em;
@@ -403,6 +434,9 @@ ul {
         justify-content: flex-start;
         overflow: auto;
     }
+    #aeroFoodImg{
+        max-width:3em;
+    }
 }
 
 /********************************************/
@@ -416,6 +450,10 @@ ul {
         grid-gap: .1em;
         overflow: auto;
     }
+
+    #aeroFoodImg{
+        max-width:3em;
+    }
 }
 
 /*************************************************/
@@ -428,6 +466,21 @@ ul {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: .1em;
         overflow: auto;
+    }
+    #aeroFoodImg{
+        max-width:3em;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    #restaurantList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: .1em;
+        overflow: auto;
+    }
+    #aeroFoodImg{
+        max-width:15em;
     }
 }
 

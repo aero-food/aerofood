@@ -15,17 +15,17 @@ public class Restaurant {
     @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
-    private String thumbnail;
+//    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
+//    private String thumbnail;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "VARCHAR(2000)")
     private String picture_url;
+
+    @Column(columnDefinition = "Varchar(2000)")
+    private String picture_credit;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(3)")
     private String gate;
-
-    @Column(nullable = false, columnDefinition = "VARCHAR(3)")
-    private String airport;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(25)")
     private String phone_number;
@@ -33,16 +33,7 @@ public class Restaurant {
     @Column(nullable = false, columnDefinition = "INT(1) DEFAULT 0")
     private int deleted;
 
-//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//    private List<Cuisine> cuisines;
-//    @ManyToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//    private List<Cuisine> cuisines;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "book_publisher",
-//            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "publisher_id", referencedColumnName = "id"))
-//    private Set<Publisher> publishers;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
     @JoinTable(
@@ -58,40 +49,36 @@ public class Restaurant {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private List<MenuItem> menu_items;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name="airport_id")
+    private Airport airport;
 
     public Restaurant() {
 
     }
 
-    public Restaurant(String name, String thumbnail, String picture_url, String gate, String airport, String phone_number) {
+    public Restaurant(String name,  String picture_url, String gate, Airport airport, String phone_number) {
         this.name = name;
-        this.thumbnail = thumbnail;
+//        this.thumbnail = thumbnail;
         this.picture_url = picture_url;
         this.gate = gate;
         this.airport = airport;
         this.phone_number = phone_number;
     }
 
-    public Restaurant(String name,
-                      String thumbnail,
-                      String picture_url,
-                      String gate,
-                      String airport,
-                      String phone_number,
-                      Set<Cuisine> cuisines,
-                      List<Orders> orders,
-                      List<MenuItem> menu_items) {
+    public Restaurant(String name, String picture_url, String gate, String phone_number, int deleted, String picture_credit, Set<Cuisine> cuisines, List<Orders> orders, List<MenuItem> menu_items, Airport airport) {
         this.name = name;
-        this.thumbnail = thumbnail;
+//        this.thumbnail = thumbnail;
         this.picture_url = picture_url;
         this.gate = gate;
-        this.airport = airport;
         this.phone_number = phone_number;
+        this.deleted = deleted;
+        this.picture_credit = picture_credit;
         this.cuisines = cuisines;
         this.orders = orders;
         this.menu_items = menu_items;
+        this.airport = airport;
     }
-
 
     public long getId() {
         return id;
@@ -109,13 +96,13 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
+//    public String getThumbnail() {
+//        return thumbnail;
+//    }
+//
+//    public void setThumbnail(String thumbnail) {
+//        this.thumbnail = thumbnail;
+//    }
 
     public String getPicture_url() {
         return picture_url;
@@ -133,11 +120,11 @@ public class Restaurant {
         this.gate = gate;
     }
 
-    public String getAirport() {
+    public Airport getAirport() {
         return airport;
     }
 
-    public void setAirport(String airport) {
+    public void setAirport(Airport airport) {
         this.airport = airport;
     }
 
@@ -181,4 +168,11 @@ public class Restaurant {
         this.menu_items = menu_items;
     }
 
+    public String getPicture_credit() {
+        return picture_credit;
+    }
+
+    public void setPicture_credit(String picture_credit) {
+        this.picture_credit = picture_credit;
+    }
 }

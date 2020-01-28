@@ -22,80 +22,138 @@
 <section class="container">
     <div class="admin-page-header">Add a Restaurant</div>
     <div class="card" style="margin: auto;">
-        <form th:action="@{/restaurant/add}" th:method="post" th:object="${restaurant}" class="form-group" id="addRestaurantForm">
-            <div class="row">
-                <div class="col-6">
-                    <label for="name">Name</label>
-                    <input id="name" th:field="${restaurant.name}" class="form-control" placeholder="Restaurant Name"
-                           th:required="required"/>
+        <div class="card inner-card">
+            <form th:action="@{/restaurant/add}" th:method="post" th:object="${restaurant}" class="form-group"
+                  id="addRestaurantForm">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="name">Name</label>
+                        <input id="name" th:field="${restaurant.name}" class="form-control"
+                               placeholder="Restaurant Name"
+                               th:required="required"/>
+                    </div>
+                    <div class="col-6">
+                        <label for="phone_number">Phone Number</label>
+                        <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
+                               placeholder="(999) 999-9999"
+                               th:required="required"/>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <label for="phone_number">Phone Number</label>
-                    <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
-                           placeholder="(999) 999-9999"
-                           th:required="required"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6"><label for="picture">Picture</label>
-                    <input id="picture" th:field="${restaurant.picture_url}" class="form-control" placeholder="picture"
-                           th:required="required"/></div>
-                <div class="col-6"><label for="airport">Airport</label>
-                    <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="Airport"
-                           th:required="required"/></div>
-            </div>
-            <div class="row mb-1">
-                <div class="col-6"><label for="name">Gate</label>
-                    <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="Gate"
-                           th:required="required"/>
-                </div>
-                <div class="col-6"><label for="thumbnail">Thumbnail</label>
-                    <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control"
-                           th:required="required"/>
-                </div>
-            </div>
-            <div class="section-header card-title text-white bg-secondary p-2 text-center">Cuisines</div>
-            <div>
-                <th:block th:each="cuisine : ${dish_types}">
-                    <input type="checkbox" th:field="*{cuisines}" name="categories" th:value="${cuisine.id}"/>
-                    <label th:text="${cuisine.description}"></label>
-                </th:block>
-            </div>
-            <div class="section-header card-title text-white bg-secondary p-2 text-center">Menu Items</div>
-            <div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Dish Type</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Add</th>
-                    </tr>
-                    </thead>
-                    <th:block th:each="menuItem : ${menuItems}">
-                        <tr>
-                            <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
-                            <td>
-                                <label th:text="${menuItem.title}"></label>
-                            </td>
-                            <td>
-                                <label th:text="${menuItem.description}"></label>
-                            </td>
-                            <td>
-                                <label th:text="${menuItem.getPriceString()}"></label>
-                            </td>
-                            <td>
-                                <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
-                            </td>
-                        </tr>
-                    </th:block>
-                </table>
-            </div>
-            <input type="submit" class="btn btn-success"/>
 
-        </form>
+                <div class="row">
+                    <div class="col-6"><label>Picture</label>
+                        <div class="form-group">
+                            <div style="width: 100%; max-height: 600px; overflow: hidden;">
+                                <img class="center center" style=" object-fit: scale-down; object-position: center; background-size: cover; width:100%;" src="*{picture_url}" th:src="*{picture_url}" id="imgPicture" name="imgPicture"/>
+                            </div>
+                            <span>  <input hidden th:name="photoURL" id="photoURL" value=""></span>
+                            <input class="btn form-control btn-primary" type="BUTTON" value="Upload Picture"
+                                   id="pickPhoto">
+                        </div>
+                    </div>
+                    <div class="col-6"><label for="airport">Airport</label>
+                        <!--                    <label for="airport">Select Company</label>-->
+                        <select class="form-control" id="airport" name="airport">
+                            <option value="">Select Airport</option>
+                            <option th:each="airport : ${airports}"
+                                    th:selected="${airport.id} == ${selectedAirport.getId()} ? true : false"
+                                    th:value="${airport.id}"
+                                    th:text="${airport.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-6"><label for="picture_credit">Picture credit</label>
+                    <input class="form-control" type="text" th:field="*{picture_credit}"
+                           id="picture_credit" name="picture_credit">
+                </div>
+                    <div class="col-6"><label for="name">Gate</label>
+                        <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="Gate"
+                               th:required="required"/>
+                    </div>
+
+                </div>
+                <div class="section-header card-title text-white bg-secondary p-2 text-center">Cuisines</div>
+                <div>
+                    <th:block th:each="cuisine : ${dish_types}">
+                        <input type="checkbox" th:field="*{cuisines}" name="categories" th:value="${cuisine.id}"/>
+                        <label th:text="${cuisine.description}"></label>
+                    </th:block>
+                </div>
+                <div class="section-header card-title text-white bg-secondary p-2 text-center">Menu Items</div>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Dish Type</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Add</th>
+                        </tr>
+                        </thead>
+                        <th:block th:each="menuItem : ${menuItems}">
+                            <tr>
+                                <td><label th:text="${menuItem.getMenuCategory().getDescription()}"></label></td>
+                                <td>
+                                    <label th:text="${menuItem.title}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${menuItem.description}"></label>
+                                </td>
+                                <td>
+                                    <label th:text="${menuItem.getPriceString()}"></label>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="selectedMenuItems" th:value="${menuItem.id}"/>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+                <input type="submit" class="btn btn-success"/>
+            </form>
+        </div>
     </div>
 </section>
+
+<!--FileStack API -->
+<script>
+    const client = filestack.init(filestackKey);
+    var watermarkHandle = '';
+
+    const getUserId = () => {
+        return new Promise((resolve) => {
+            resolve({
+                postId: $('userId').innerText
+            })
+        });
+    };
+
+    $('#pickPhoto').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getUserId().then((response) => {
+            const userId = response.userId;
+            const apikey = filestackKey;
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                maxSize: 10 * 1024 * 1024,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    document.getElementById("photoURL").value = watermarkHandle;
+                    document.getElementById("imgPicture").src = watermarkHandle;
+                    // console.log(document.getElementById("photoURL").value);
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+</script>
 </body>
 </html>

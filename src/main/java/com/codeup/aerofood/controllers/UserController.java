@@ -41,8 +41,9 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerUser(Model viewModel) {
+        System.out.println("register");
         viewModel.addAttribute("user", new User());
-        return "sign-up";
+        return "users/sign-up";
     }
 
     @PostMapping("/login")
@@ -78,7 +79,7 @@ public class UserController {
         String regexUS = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
         String regexInternational = "^\\+(?:[0-9] ?){6,14}[0-9]$";
         String regexEmail = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-
+//        System.out.println("sign-up");
         String hash = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(hash);
 

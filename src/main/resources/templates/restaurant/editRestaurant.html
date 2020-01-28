@@ -30,28 +30,55 @@
                 <div class="form-group" id="restaurant-update">
                     <div class="row">
                         <div class="col-6"><label for="name">Name:&nbsp; </label>
-                            <input id="name" th:field="${restaurant.name}" class="form-control" placeholder="Restaurant name"
+                            <input id="name" th:field="${restaurant.name}" class="form-control"
+                                   placeholder="Restaurant name"
                                    th:required="required"/></div>
                         <div class="col-6"><label for="phone_number">Phone Number: </label>
-                            <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control" placeholder="(999) 999-9999"
+                            <input id="phone_number" th:field="${restaurant.phone_number}" class="form-control"
+                                   placeholder="(999) 999-9999"
                                    th:required="required"/></div>
                     </div>
+                    <td>
+
+                    </td>
                     <div class="row">
-                        <div class="col-6"><label for="picture">Picture: </label>
-                            <input id="picture" th:field="${restaurant.picture_url}" class="form-control"
-                                   th:required="required"/></div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div style="width: 100%; max-height: 600px; overflow: hidden;">
+                                    <img class="center center"
+                                         style=" object-fit: scale-down; object-position: center; background-size: cover; width:100%;"
+                                         src="${restaurant.picture_url}" th:src="${restaurant.picture_url}" id="imgPicture"
+                                         name="imgPicture"/>
+                                </div>
+                                <span>  <input hidden th:name="photoURL" id="photoURL" value=""></span>
+                                <input class="btn form-control btn-primary" type="BUTTON" value="Upload Picture"
+                                       id="pickPhoto">
+                            </div>
+
+<!--                            <label for="picture">Picture: </label>-->
+<!--                            <input id="picture" th:field="${restaurant.picture_url}" class="form-control"-->
+<!--                                   th:required="required"/>-->
+
+                        </div>
                         <div class="col-6"><label for="airport">Airport: </label>
-                            <input id="airport" th:field="${restaurant.airport}" class="form-control" placeholder="airport"
+                            <select class="form-control" id="airport" name="airport">
+                                <option value="">Select Airport</option>
+                                <option th:each="airport : ${airports}"
+                                        th:selected="${airport.id} == ${selectedAirport.getId()} ? true : false"
+                                        th:value="${airport.id}"
+                                        th:text="${airport.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"><label for="picture_credit">Picture credit</label>
+                            <input class="form-control" type="text" th:field="*{picture_credit}"
+                                   id="picture_credit" name="picture_credit">
+                        </div>
+                        <div class="col-6"><label for="name">Gate: </label>
+                            <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="gate"
                                    th:required="required"/>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6"><label for="name">Gate: </label>
-                            <input id="gate" th:field="${restaurant.gate}" class="form-control" placeholder="gate" th:required="required"/>
-                        </div>
-                        <div class="col-6"><label for="thumbnail">Thumbnail: </label>
-                            <input id="thumbnail" th:field="${restaurant.thumbnail}" class="form-control"
-                                   th:required="required"/></div>
                     </div>
                     <div class="sub-section-header p-1">Cuisines</div>
                     <div>
@@ -86,9 +113,6 @@
             </tr>
             <th:block th:each="menuItem : ${newMenuItemList}">
                 <tr>
-                    <!--                  <div th:text="${menuItem.getMenuCategory().getDescription()} != ${currentMenuCategory} ? ${menuItem.getMenuCategory().getDescription()} : ' ' " />-->
-                    <!--                  <th:set var="currentMenuCategory" value="${menuItem.getMenuCategory().getDescription()}"/>-->
-
                     <form th:action="@{'/restaurant/' + ${menuItem.getId()} + '/addRestaurantMenuItem'}"
                           th:method="post"
                           th:object="${menuItem}" class="form-group">
@@ -98,6 +122,12 @@
                                    class="form-control" th:required="required" th:name="restaurantId" type="hidden"/>
                             <label th:text="${menuItem.getTitle()}"></label>
                         </td>
+
+<!--                        <td>-->
+<!--                            <label for="picture_credit">Picture credit</label>-->
+<!--                            <input class="form-control" type="text" th:field="*{picture_credit}"-->
+<!--                                   id="picture_credit" name="picture_credit">-->
+<!--                        </td>-->
                         <td>
                             <label th:text="${menuItem.getDescription()}"></label>
                         </td>
@@ -176,5 +206,43 @@
         </table>
     </div>
 </section>
+    <!--FileStack API -->
+    <script>
+    const client = filestack.init(filestackKey);
+    var watermarkHandle = '';
+
+    const getUserId = () => {
+        return new Promise((resolve) => {
+            resolve({
+                postId: $('userId').innerText
+            })
+        });
+    };
+
+    $('#pickPhoto').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getUserId().then((response) => {
+            const userId = response.userId;
+            const apikey = filestackKey;
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                maxSize: 10 * 1024 * 1024,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    document.getElementById("photoURL").value = watermarkHandle;
+                    document.getElementById("imgPicture").src = watermarkHandle;
+                    // console.log(document.getElementById("photoURL").value);
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+</script>
 </body>
 </html>
