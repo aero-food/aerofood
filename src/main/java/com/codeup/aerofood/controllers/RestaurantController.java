@@ -204,10 +204,13 @@ public class RestaurantController {
     public String create(@ModelAttribute Restaurant newRestaurant,
                          @RequestParam(value = "dish_types", required = false) int[] dish_types,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems,
+                         @RequestParam(name = "photoURL",
+                                 required = false) String photoURL,
                          Model viewModel) {
 
         Boolean dishTypesExists = false;
         Boolean menuItemsExists = false;
+        newRestaurant.setPicture_url(photoURL);
         restaurantDao.save(newRestaurant);
         if (dish_types != null) {
 //            dishTypesExists = true;
@@ -287,7 +290,7 @@ public class RestaurantController {
                          @RequestParam String name,
                          @RequestParam String phone_number,
                          @RequestParam String picture_url,
-                         @RequestParam String thumbnail,
+//                         @RequestParam String thumbnail,
                          @RequestParam(value = "cuisines", required = false) int[] cuisines,
                          @RequestParam(value = "selectedMenuItems", required = false) MenuItem[] menuItems) {
         Restaurant oldRestaurant = restaurantDao.getOne(id);
@@ -296,7 +299,7 @@ public class RestaurantController {
         oldRestaurant.setName(name);
         oldRestaurant.setPhone_number(phone_number);
         oldRestaurant.setPicture_url(picture_url);
-        oldRestaurant.setThumbnail(thumbnail);
+//        oldRestaurant.setThumbnail(thumbnail);
         if (cuisines != null) {
             System.out.println("cuisines");
             System.out.println("cuisines = " + cuisines);

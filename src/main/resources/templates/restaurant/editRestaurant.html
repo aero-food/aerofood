@@ -181,5 +181,44 @@
         </table>
     </div>
 </section>
+<script>
+    <!--FileStack API -->
+    <script>
+    const client = filestack.init(filestackKey);
+    var watermarkHandle = '';
+
+    const getUserId = () => {
+        return new Promise((resolve) => {
+            resolve({
+                postId: $('userId').innerText
+            })
+        });
+    };
+
+    $('#pickPhoto').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getUserId().then((response) => {
+            const userId = response.userId;
+            const apikey = filestackKey;
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                maxSize: 10 * 1024 * 1024,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    document.getElementById("photoURL").value = watermarkHandle;
+                    document.getElementById("imgPicture").src = watermarkHandle;
+                    // console.log(document.getElementById("photoURL").value);
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+</script>
 </body>
 </html>

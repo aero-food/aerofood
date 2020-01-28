@@ -31,9 +31,6 @@ public class MenuItem {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuItem")
-//    private List<OrderDetail> orderDetails;
-
     public MenuItem() {
 
     }
